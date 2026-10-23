@@ -62,7 +62,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lnav-links{display:flex;gap:6px;align-items:center}
 .lnav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:8px 10px}
 .lnav-links a:hover{color:var(--teal)}
-@media (max-width:760px){.lnav-links a{display:none}}
+.lnav-links a.btn-primary{color:var(--teal-ink);padding:8px 14px}
+.lnav-links a.btn-primary:hover{color:var(--teal-ink)}
+@media (max-width:760px){.lnav-links a:not(.btn){display:none}}
 
 .hero{padding-block:56px 40px}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
@@ -145,6 +147,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .price{display:flex;align-items:baseline;gap:10px;margin:12px 0 4px}
 .price b{font:800 56px/1 var(--f-display)}
 .price span{color:var(--muted);font-weight:600}
+.price-gst{font-size:13px;color:var(--muted);margin-bottom:8px}
+.price-after{margin-top:12px;text-align:center;font-size:14px;color:var(--muted)}
+.linkbtn{border:0;background:none;padding:0;color:var(--teal);font-weight:700;text-decoration:underline}
+a.btn{text-decoration:none}
+.lnav .btn{white-space:nowrap}
+.price-wrap>*{min-width:0}
+.price-card .btn{text-align:center;flex-wrap:wrap}
+@media (max-width:480px){.price-card{padding:26px 20px}.price b{font-size:46px}}
+@media (max-width:480px){.hero h1 em{white-space:normal}.lnav .btn-sm{padding:8px 11px}.lnav .brand{font-size:15px}}
 .price-card ul{list-style:none;padding:0;margin:20px 0 24px;display:grid;gap:10px}
 .price-card li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
 .tick{flex:none;width:20px;height:20px;border-radius:50%;background:var(--good-soft);color:var(--good);display:grid;place-items:center;font-size:12px;font-weight:800;margin-top:2px}
@@ -459,7 +470,7 @@ body.noscroll{overflow:hidden}
     <div class="lnav-links">
       <a href="#how">How it works</a><a href="#stations">Stations</a><a href="#access">Access</a>
       <button class="btn btn-ghost btn-sm" data-go="signin">Sign in</button>
-      <button class="btn btn-primary btn-sm" data-go="signup">Get access</button>
+      <a class="btn btn-primary btn-sm" href="https://buy.stripe.com/5kQ14g8CebBRedfcQs00004" target="_blank" rel="noopener">Get access</a>
     </div>
   </div></nav>
 
@@ -469,11 +480,11 @@ body.noscroll{overflow:hidden}
       <h1 style="margin-top:14px">Ten stations, ten minutes each. <em>Rehearse every one</em> before exam day.</h1>
       <p class="hero-lede">A practice simulator for internationally qualified nurses. Read candidate instructions the way they appear at the reading station, perform against the 8-minute clock with the six-minute bell, then mark yourself against a station rubric.</p>
       <div class="hero-cta">
-        <button class="btn btn-primary" data-go="signup">Get lifetime access →</button>
+        <a class="btn btn-primary" href="https://buy.stripe.com/5kQ14g8CebBRedfcQs00004" target="_blank" rel="noopener">Get lifetime access · A$164.99 →</a>
         <button class="btn btn-ghost" data-go="signin">I already have an account</button>
         <button class="btn btn-ghost" id="heroDemo">Preview the course</button>
       </div>
-      <p class="hero-note">One-time payment. No subscription, no renewals.</p>
+      <p class="hero-note">A$164.99 including 10% GST. One-time payment. No subscription, no renewals.</p>
     </div>
     <div class="monitor" aria-label="Animated patient monitor showing a deteriorating patient">
       <div class="mon-top"><span>Bed 4 · Orthopaedic ward · X/X 10:14</span><span class="live">Live</span></div>
@@ -532,7 +543,8 @@ body.noscroll{overflow:hidden}
     <div class="price-card">
       <span class="price-tag">One-time access</span>
       <div class="eyebrow">AHPRA RN OSCE App</div>
-      <div class="price"><b id="priceVal">A$149</b><span>once</span></div>
+      <div class="price"><b id="priceVal">A$164.99</b><span>once</span></div>
+      <p class="price-gst">Including 10% GST (A$15.00)</p>
       <p style="color:var(--muted)">Full access to every lesson and station.</p>
       <ul>
         <li><span class="tick">✓</span>4 exam-format lessons from the 2026 Candidate Handbook</li>
@@ -542,7 +554,8 @@ body.noscroll{overflow:hidden}
         <li><span class="tick">✓</span>Guides to the SAGO observation chart, NIMC, S8 drug register, ISBAR handover form, ARC BLS chart, blood product checks, Braden, Waterlow, VIP score and IV order charts</li>
         <li><span class="tick">✓</span>Station timer with six-minute bell</li>
       </ul>
-      <button class="btn btn-primary" style="width:100%;justify-content:center" data-go="signup">Get lifetime access</button>
+      <a class="btn btn-primary" style="width:100%;justify-content:center" href="https://buy.stripe.com/5kQ14g8CebBRedfcQs00004" target="_blank" rel="noopener">Pay securely with Stripe · A$164.99</a>
+      <p class="price-after">Already paid? <button type="button" class="linkbtn" data-go="signup">Create your account</button></p>
     </div>
   </div></section>
 
