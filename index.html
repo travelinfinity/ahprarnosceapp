@@ -11,6 +11,8 @@
   --teal:#0E7279; --teal-ink:#FFFFFF; --teal-soft:#DCEFED; --signal:#D9412F; --signal-soft:#FCE7E3;
   --amber:#B87410; --amber-soft:#FBF0DC; --good:#1D8350; --good-soft:#DFF3E8;
   --screen:#0E1D24; --screen-2:#152A33; --screen-fg:#E6F1F1; --screen-dim:#8FA8AD; --ecg:#3EE08F;
+  --grad2:#0E7279; --grad3:#0E7279; --gold:#0E7279;
+  --d-assess:#0E7279; --d-care:#D9412F; --d-eval:#B87410; --d-found:#1D8350;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -20,11 +22,15 @@
   --paper:#0A161B; --surface:#0F2129; --sunk:#132A33; --ink:#E4EFEE; --muted:#93A8AD; --line:#21373F;
   --teal:#3DB4B3; --teal-ink:#05201F; --teal-soft:#123A3E; --signal:#FF6E5E; --signal-soft:#3A1B18;
   --amber:#E6A940; --amber-soft:#33270F; --good:#4CC488; --good-soft:#123222;
+  
+  --grad2:#3DB4B3; --grad3:#3DB4B3; --gold:#3DB4B3; --d-assess:#3DB4B3; --d-care:#FF6E5E; --d-eval:#E6A940; --d-found:#4CC488;
   --screen:#071116; --screen-2:#0E1E25; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0A161B; --surface:#0F2129; --sunk:#132A33; --ink:#E4EFEE; --muted:#93A8AD; --line:#21373F;
   --teal:#3DB4B3; --teal-ink:#05201F; --teal-soft:#123A3E; --signal:#FF6E5E; --signal-soft:#3A1B18;
   --amber:#E6A940; --amber-soft:#33270F; --good:#4CC488; --good-soft:#123222;
+  
+  --grad2:#3DB4B3; --grad3:#3DB4B3; --gold:#3DB4B3; --d-assess:#3DB4B3; --d-care:#FF6E5E; --d-eval:#E6A940; --d-found:#4CC488;
   --screen:#071116; --screen-2:#0E1E25; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}
 
 html,body{height:100%}
@@ -416,6 +422,106 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
 #lb img{background:#fff;max-width:none;width:100%;max-width:900px;transition:width .2s}
 #lb.z2 img{width:200%;max-width:1800px}
 @media (max-width:700px){.vid-row{grid-template-columns:1fr!important}.vid-row video{max-width:360px;margin:0 auto}}
+
+/* ============ Station navigation ============ */
+/* rail */
+.rail{background:var(--surface)}
+.rail-prog{padding:16px}
+.rail-prog .card{border-radius:14px;padding:14px 16px;color:#fff;background:linear-gradient(135deg,var(--teal),color-mix(in srgb,var(--teal) 45%,var(--grad2)))}
+.rail-prog .row{font-size:13px}
+.rail-prog .bar{background:rgba(255,255,255,.25);height:8px}
+.rail-prog .bar i{background:linear-gradient(90deg,#fff,#FFE27A)}
+.rail-prog .sub{display:block;font-size:12px;opacity:.9;margin-top:8px}
+.rail-search{padding:0 16px 10px}
+.rail-search input{width:100%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:10px 14px 10px 38px;font:500 14px var(--f-body);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2355696F' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='m11 11 3.5 3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:14px 50%}
+.rail-search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.rail-list{padding:2px 10px 30px}
+.rsec{margin-top:6px}
+.rsec-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:10px 8px;border-radius:10px;color:var(--ink);text-align:left}
+.rsec-h:hover{background:var(--sunk)}
+.rsec-ic{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--sc) 14%,transparent);color:var(--sc)}
+.rsec-ic svg{width:16px;height:16px}
+.rsec-t{flex:1;min-width:0;font:800 12px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.rsec-n{font:700 11px var(--f-mono);color:var(--muted);background:var(--sunk);border-radius:99px;padding:3px 8px}
+.rsec-ch{flex:none;width:16px;height:16px;color:var(--muted);transition:transform .2s}
+.rsec.closed .rsec-ch{transform:rotate(-90deg)}
+.rsec.closed .rsec-b{display:none}
+.rsec-b{display:grid;gap:4px;padding:2px 0 6px}
+.rail-item{--st:var(--teal);border:1.5px solid transparent;border-left-width:1.5px;border-radius:12px;padding:8px 10px;gap:12px}
+.rail-item:hover{background:color-mix(in srgb,var(--st) 7%,var(--surface))}
+.rail-item.on{background:color-mix(in srgb,var(--st) 12%,var(--surface));border-color:color-mix(in srgb,var(--st) 45%,transparent);font-weight:700}
+.rail-code{width:40px;height:40px;border-radius:11px;background:color-mix(in srgb,var(--st) 14%,var(--surface));color:var(--st);font:800 15px/1 var(--f-display);display:grid;place-items:center;text-align:center}
+.rail-code small{display:block;font:700 8px/1 var(--f-body);letter-spacing:.08em;margin-bottom:2px;opacity:.85}
+.rail-item.on .rail-code{background:var(--st);color:#fff}
+.rail-item.done .rail-code{background:var(--good);color:#fff}
+.rail-item .kick{display:block;font:700 10.5px/1.2 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--st);margin-bottom:2px}
+.rail-item .t{flex:1;line-height:1.3}
+.rail-item .mini{display:block;height:4px;border-radius:99px;background:var(--sunk);margin-top:6px;overflow:hidden}
+.rail-item .mini i{display:block;height:100%;background:var(--st)}
+.rail-item.done .mini i{background:var(--good)}
+.rail-empty{padding:18px 10px;color:var(--muted);font-size:14px}
+.dtag{display:inline-block;font:700 10px/1 var(--f-body);letter-spacing:.04em;padding:3px 6px;border-radius:5px;margin-left:4px;vertical-align:1px;color:#fff;background:var(--dc)}
+
+/* lesson header banner */
+.lhead{--st:var(--teal);background:linear-gradient(135deg,color-mix(in srgb,var(--st) 88%,#fff),var(--st) 45%,color-mix(in srgb,var(--st) 62%,#1A0B4A));color:#fff;border-radius:20px;padding:24px 26px;position:relative;overflow:hidden;box-shadow:0 18px 40px -22px var(--st)}
+.lhead::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12)}
+.lhead > *{position:relative;z-index:1}
+.lhead .eyebrow{color:#fff;opacity:.92;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lhead .stnum{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#fff;color:var(--st);font:800 17px/1 var(--f-display);letter-spacing:0}
+.lhead p{color:rgba(255,255,255,.9)}
+.lhead .chip{background:rgba(255,255,255,.18);color:#fff}
+.lhead .chip.teal{background:#fff;color:var(--st)}
+.fmt{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.fmt span{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.18);border-radius:99px;padding:6px 12px;font:700 12px var(--f-mono)}
+
+/* station jump strip */
+.ststrip{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:2px 2px 8px;margin:-6px 0 16px;scrollbar-width:thin}
+.ststrip > span{flex:none;font:700 11px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.sts{flex:none;width:36px;height:36px;border-radius:10px;border:1.5px solid color-mix(in srgb,var(--st) 40%,var(--line));background:var(--surface);color:var(--st);font:800 14px var(--f-display);position:relative}
+.sts:hover{background:color-mix(in srgb,var(--st) 10%,var(--surface))}
+.sts.on{background:var(--st);color:#fff;border-color:var(--st);transform:translateY(-2px);box-shadow:0 8px 16px -8px var(--st)}
+.sts.done::after{content:"✓";position:absolute;right:-5px;top:-5px;width:16px;height:16px;border-radius:50%;background:var(--good);color:#fff;font:800 9px/16px var(--f-body)}
+.sts-sep{flex:none;width:1px;height:24px;background:var(--line);margin:0 4px}
+
+/* phased pager */
+.pager.phased{gap:10px;align-items:stretch}
+.ph{flex:none;display:grid;gap:6px;border-radius:14px;padding:8px;background:color-mix(in srgb,var(--pc) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--pc) 25%,var(--line))}
+.ph-l{font:800 10.5px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--pc);padding:2px 4px}
+.ph-row{display:flex;gap:6px}
+.ph .pg.on{border-color:var(--pc)}
+.ph .pg.on i{background:var(--pc);color:#fff}
+.page-title{background:linear-gradient(90deg,var(--ink),color-mix(in srgb,var(--ink) 40%,var(--teal)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.block{border-radius:16px}
+.mock-grid div b{color:var(--teal)}
+.mock-grid div.cur{border-color:var(--teal);background:var(--teal-soft)}
+
+
+/* original look for navigation pieces */
+.rail-prog{padding:18px 18px 14px}
+.rail-prog .card{background:none;color:var(--ink);padding:0;border-radius:0}
+.rail-prog .bar{background:var(--sunk)}
+.rail-prog .bar i{background:linear-gradient(90deg,var(--teal),var(--good))}
+.rail-prog .sub{color:var(--muted);opacity:1}
+.rsec-ic{background:var(--teal-soft);color:var(--teal)}
+.rail-item{border-radius:8px}
+.rail-code{border-radius:8px;background:var(--sunk);color:var(--muted)}
+.rail-item .kick{color:var(--teal)}
+.rail-item.on{background:var(--teal-soft);border-color:transparent;border-left:3px solid var(--teal)}
+.dtag{background:transparent!important;color:var(--dc)!important;border:1px solid currentColor}
+.lhead{background:none;color:var(--ink);border-radius:0;padding:0;box-shadow:none}
+.lhead::after{display:none}
+.lhead .eyebrow{color:var(--teal);opacity:1}
+.lhead .stnum{background:var(--teal);color:var(--teal-ink);border-radius:8px}
+.lhead p{color:var(--muted)}
+.lhead .chip{background:var(--sunk);color:var(--muted)}
+.fmt span{background:var(--teal-soft);color:var(--teal)}
+.sts{border-radius:8px;border-color:var(--line);color:var(--ink)}
+.sts.on{box-shadow:none;transform:none}
+.ph{background:var(--surface);border-color:var(--line);border-radius:10px}
+.ph-l{color:var(--muted)}
+@media (min-width:700px){.pager.phased{flex-wrap:wrap;overflow:visible}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dtag{color:#130C33}}
+:root[data-theme="dark"] .dtag{color:#130C33}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -461,7 +567,7 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
   </div></div></header>
 
   <section class="circuit"><div class="wrap">
-    <div class="circuit-cap"><span><b>The circuit.</b> Stations are lettered A–J at Adelaide Health Simulation and numbered 1–10 at RANZCOG Melbourne.</span><span class="mono" id="circuitNow">Station A · reading</span></div>
+    <div class="circuit-cap"><span><b>The circuit.</b> Ten stations, numbered 1–10 here (RANZCOG Melbourne uses 1–10; Adelaide Health Simulation letters them A–J).</span><span class="mono" id="circuitNow">Station 1 · reading</span></div>
     <div class="circuit-row" id="circuitRow"></div>
   </div></section>
 
@@ -576,7 +682,8 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
   </div>
   <div class="shell">
     <aside class="rail" id="rail">
-      <div class="rail-prog"><div class="row"><span>Course progress</span><span id="progText">0%</span></div><div class="bar"><i id="progBar"></i></div></div>
+      <div class="rail-prog"><div class="card"><div class="row"><span>Your progress</span><span id="progText">0%</span></div><div class="bar"><i id="progBar"></i></div><span class="sub" id="progSub"></span></div></div>
+      <div class="rail-search"><input id="railSearch" type="search" placeholder="Search stations or skills…" aria-label="Search stations or skills"></div>
       <nav class="rail-list" id="railList"></nav>
     </aside>
     <div class="scrim" id="scrim" hidden></div>
@@ -664,7 +771,7 @@ const INFO_LESSONS=[
   {t:"Station domains", h:`
     <h2 class="page-title">The three domains of care</h2><p class="page-sub">How the handbook groups station focus, and where each practice station in this app sits.</p>
     <div class="block" style="overflow-x:auto"><table class="obs" style="font-family:var(--f-body);min-width:520px"><thead><tr><th style="color:var(--muted);border-color:var(--line)">Nursing assessment & care planning</th><th style="color:var(--muted);border-color:var(--line)">Care delivery</th><th style="color:var(--muted);border-color:var(--line)">Evaluation of care</th></tr></thead>
-    <tbody><tr>${["Vital signs · S1<br>Focused nursing assessment · S8<br>Risk assessment · S9","Medication administration · S4<br>Basic life support · S2<br>Aseptic technique / ANTT · S10<br>Pain assessment & management · S7<br>IV fluids · S5<br>Blood transfusion · S3","Interdisciplinary communication (ISBAR) · S6"].map(c=>`<td style="border-color:var(--line);text-align:left;vertical-align:top;line-height:1.9">${c}</td>`).join("")}</tr></tbody></table></div>
+    <tbody><tr>${["Vital signs · Station 1<br>Focused nursing assessment · Station 8<br>Risk assessment · Station 9","Medication administration · Station 4<br>Basic life support · Station 2<br>Aseptic technique / ANTT · Station 10<br>Pain assessment & management · Station 7<br>IV fluids · Station 5<br>Blood transfusion · Station 3","Interdisciplinary communication (ISBAR) · Station 6"].map(c=>`<td style="border-color:var(--line);text-align:left;vertical-align:top;line-height:1.9">${c}</td>`).join("")}</tr></tbody></table></div>
     <div class="block"><h3>Skills listed in the handbook</h3><div class="chips">${["Physiological observations","Vital signs","Calculating drug dosages","Subcut / IM injection","ANTT","In-hospital resuscitation","Safe sharps disposal","Medication administration","Wound care","Hand hygiene","Therapeutic communication & consent","Infection control","Patient identification","IV therapy","Risk management"].map(s=>`<span class="chip teal">${s}</span>`).join("")}</div></div>
     <div class="block"><h3>Communication is marked in every station</h3><p>Examiners watch how you explain care, involve the patient in decisions, gain informed consent, listen, manage an anxious patient or relative, give discharge instructions, show compassion, and document clearly.</p></div>
     <p class="src">${SRC}, pp. 10–11.</p>`},
@@ -1110,14 +1217,21 @@ const VIDEO_LESSON={id:"v1",code:"VID",kind:"info",title:"Demo video library",su
         {q:"In the transfusion demo, what is the first action when the reaction starts?",o:["Slow the rate","Stop the transfusion","Give paracetamol","Flush the line"],a:1,e:"Stop the transfusion immediately, then keep IV access with a new saline line."}]};
 
 const MODULES=[
- {name:"Know the RN OSCE", lessons:INFO_LESSONS},
- {name:"Demo videos", lessons:[VIDEO_LESSON]},
- {name:"Foundation station", lessons:[STATIONS[0]]},
- {name:"Assessment & care planning", lessons:[STATIONS[1],STATIONS[8],STATIONS[9],...MSE_STATIONS]},
- {name:"Care delivery", lessons:[STATIONS[2],STATIONS[3],STATIONS[4],STATIONS[5],STATIONS[7],STATIONS[10]]},
- {name:"Evaluation of care", lessons:[STATIONS[6]]},
- {name:"Exam simulation", lessons:[{id:"mock",code:"MC",kind:"mock",title:"Full mock circuit",summary:"All ten stations in sequence: 2 minutes reading, 8 minutes performance, no pauses."}]}
+ {name:"Start here: know the OSCE", ic:"book", c:"var(--teal)", lessons:INFO_LESSONS},
+ {name:"Station 0 · Warm-up", ic:"spark", c:"var(--teal)", lessons:[STATIONS[0]]},
+ {name:"OSCE stations 1–10", ic:"grid", c:"var(--teal)", lessons:STATIONS.slice(1)},
+ {name:"Extra practice stations", ic:"plus", c:"var(--teal)", lessons:MSE_STATIONS},
+ {name:"Demo videos", ic:"play", c:"var(--teal)", lessons:[VIDEO_LESSON]},
+ {name:"Exam simulation", ic:"clock", c:"var(--teal)", lessons:[{id:"mock",code:"MC",kind:"mock",title:"Full mock circuit",summary:"All ten stations in sequence: 2 minutes reading, 8 minutes performance, no pauses."}]}
 ];
+/* station numbering + colour coding (AHPRA format: stations numbered 1–10) */
+const HUES=["var(--d-found)"].concat(Array(12).fill("var(--teal)"));
+const stNum=S=>+S.code.slice(1);
+const hueOf=S=>HUES[stNum(S)%HUES.length];
+const DOM_SHORT={"Nursing assessment & care planning":["Assessment","var(--d-assess)"],"Care delivery":["Care delivery","var(--d-care)"],"Evaluation of care":["Evaluation","var(--d-eval)"],"Foundation":["Warm-up","var(--d-found)"]};
+const stLabel=S=>{const n=stNum(S);return n===0?"Station 0 · Warm-up":n<=10?"Station "+n:"Extra station "+n};
+const ICONS={book:'<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',plus:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',play:'<circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/>',clock:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/>'};
+const ico=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
 const ALL=MODULES.flatMap(m=>m.lessons);
 STATIONS.forEach(s=>s.kind="station");
 MSE_STATIONS.forEach(s=>{s.kind="station";s.chart={title:"MSE framework",render:()=>mseHTML()}});
@@ -1139,12 +1253,12 @@ function pagesOf(L){
 /* ---------------- landing extras ---------------- */
 (function(){
   const row=$("#circuitRow");const stops=STATIONS.slice(1);
-  row.innerHTML=stops.map((s,i)=>`<div class="cstop" data-i="${i}"><b>${"ABCDEFGHIJ"[i]}</b><span>${s.title.split(" ")[0].replace(/[^A-Za-z]/g,"")}</span></div>`).join("");
-  let i=0;const tick=()=>{row.querySelectorAll(".cstop").forEach((c,j)=>c.classList.toggle("on",j===i));$("#circuitNow").textContent=`Station ${"ABCDEFGHIJ"[i]} · ${stops[i].title}`;i=(i+1)%10};
+  row.innerHTML=stops.map((s,i)=>`<div class="cstop" data-i="${i}"><b>${(i+1)}</b><span>${s.title.split(" ")[0].replace(/[^A-Za-z]/g,"")}</span></div>`).join("");
+  let i=0;const tick=()=>{row.querySelectorAll(".cstop").forEach((c,j)=>c.classList.toggle("on",j===i));$("#circuitNow").textContent=`Station ${(i+1)} · ${stops[i].title}`;i=(i+1)%10};
   tick();if(!matchMedia("(prefers-reduced-motion: reduce)").matches)setInterval(tick,1600);
   const groups={"Nursing assessment & care planning":[],"Care delivery":[],"Evaluation of care":[]};
   [...stops,...MSE_STATIONS].forEach(s=>groups[s.domain].push(s));
-  $("#domainList").innerHTML=Object.entries(groups).map(([k,v])=>`<div class="domain"><h3>${k}</h3><ul>${v.map(s=>`<li>${s.title}<span>${s.code}</span></li>`).join("")}</ul></div>`).join("");
+  $("#domainList").innerHTML=Object.entries(groups).map(([k,v])=>`<div class="domain"><h3>${k}</h3><ul>${v.map(s=>`<li>${s.title}<span>Station ${stNum(s)}</span></li>`).join("")}</ul></div>`).join("");
   // monitor numbers + clock
   let sec=360;setInterval(()=>{const hr=116+Math.round(Math.random()*5),sp=90+Math.round(Math.random()*1.4);$("#vHR").textContent=hr;$("#vSp").textContent=sp;sec=sec>0?sec-1:360;$("#heroClock").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")},1000);
 })();
@@ -1235,34 +1349,61 @@ function enterApp(u,name){name=name||u;user=u;const d=store.get(pkey(),{prog:{},
   $("#userName").textContent=name;$("#avatar").textContent=name[0].toUpperCase();show("app");renderRail();renderLesson();toast("Signed in as "+name)}
 
 /* ---------------- rail ---------------- */
+let railClosed=new Set(store.get("ngn_rail_closed",[]));
+function railItem(L){const i=ALL.indexOf(L),n=pagesOf(L).length,sn=seen(L).length,done=lessonDone(L),pct=Math.min(100,Math.round(sn/n*100));
+  let code,kick,hue,q=L.title+" "+(L.summary||"");
+  if(L.kind==="station"){const num=stNum(L),d=DOM_SHORT[L.domain]||["",""];hue=hueOf(L);code=`<small>ST</small>${num}`;kick=`${num===0?"Warm-up":num<=10?"Station "+num:"Extra · "+num}`;q+=" station "+num+" "+L.domain+" "+L.skills.join(" ")}
+  else if(L.kind==="mock"){hue="var(--teal)";code="10×";kick="Mock exam"}
+  else {hue="var(--teal)";code=L.id==="v1"?"▶":L.code;kick=L.id==="v1"?"Videos":"Lesson "+L.code.slice(1)}
+  return `<button class="rail-item ${i===cur.l?"on":""} ${done?"done":""}" style="--st:${hue}" data-l="${i}" data-q="${esc(q.toLowerCase())}"><span class="rail-code">${done?"✓":code}</span><span class="t"><span class="kick">${kick}${L.kind==="station"&&DOM_SHORT[L.domain]&&stNum(L)>0?`<span class="dtag" style="--dc:${DOM_SHORT[L.domain][1]}">${DOM_SHORT[L.domain][0]}</span>`:""}</span>${esc(L.title)}<span class="mini"><i style="width:${pct}%"></i></span></span></button>`}
 function renderRail(){
-  let h="";MODULES.forEach(m=>{h+=`<div class="rail-mod">${m.name}</div>`;m.lessons.forEach(L=>{const i=ALL.indexOf(L),n=pagesOf(L).length,s=seen(L).length;
-    h+=`<button class="rail-item ${i===cur.l?"on":""} ${lessonDone(L)?"done":""}" data-l="${i}"><span class="rail-code">${lessonDone(L)?"✓":L.code}</span><span class="t">${esc(L.title)}<span class="meta">${s}/${n} pages</span></span></button>`})});
-  $("#railList").innerHTML=h;
-  const done=ALL.filter(lessonDone).length,pct=Math.round(done/ALL.length*100);$("#progBar").style.width=pct+"%";$("#progText").textContent=`${pct}% · ${done}/${ALL.length} lessons`;
+  const curL=ALL[cur.l];let h="";
+  MODULES.forEach((m,mi)=>{const dn=m.lessons.filter(lessonDone).length,closed=railClosed.has(mi)&&!m.lessons.includes(curL);
+    h+=`<div class="rsec ${closed?"closed":""}" data-sec="${mi}" style="--sc:${m.c}"><button class="rsec-h" data-sec-t="${mi}" aria-expanded="${!closed}"><span class="rsec-ic">${ico(m.ic)}</span><span class="rsec-t">${m.name}</span><span class="rsec-n">${dn}/${m.lessons.length}</span><svg class="rsec-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="rsec-b">${m.lessons.map(railItem).join("")}</div></div>`});
+  $("#railList").innerHTML=h+`<div class="rail-empty" id="railEmpty" hidden>No stations match your search.</div>`;
+  filterRail();
+  const done=ALL.filter(lessonDone).length,pct=Math.round(done/ALL.length*100);$("#progBar").style.width=pct+"%";$("#progText").textContent=pct+"%";
+  const sd=STATIONS.slice(1).filter(lessonDone).length;$("#progSub").textContent=`${done}/${ALL.length} lessons · ${sd}/10 OSCE stations done`;
+  const on=$("#railList .rail-item.on");if(on&&on.scrollIntoView)on.scrollIntoView({block:"nearest"});
 }
-$("#railList").addEventListener("click",e=>{const b=e.target.closest("[data-l]");if(!b)return;cur={l:+b.dataset.l,p:0};closeRail();renderLesson()});
+function filterRail(){const q=($("#railSearch").value||"").trim().toLowerCase();let any=false;
+  document.querySelectorAll("#railList .rsec").forEach(sec=>{let vis=0;sec.querySelectorAll(".rail-item").forEach(b=>{const ok=!q||b.dataset.q.includes(q);b.hidden=!ok;if(ok)vis++});
+    sec.hidden=!!q&&!vis;if(q&&vis)sec.classList.remove("closed");if(vis)any=true});
+  const e=$("#railEmpty");if(e)e.hidden=any}
+$("#railSearch").addEventListener("input",()=>{if(!$("#railSearch").value)return renderRail();filterRail()});
+$("#railList").addEventListener("click",e=>{const t=e.target.closest("[data-sec-t]");if(t){const mi=+t.dataset.secT,sec=t.parentElement,c=sec.classList.toggle("closed");t.setAttribute("aria-expanded",!c);c?railClosed.add(mi):railClosed.delete(mi);store.set("ngn_rail_closed",[...railClosed]);return}
+  const b=e.target.closest("[data-l]");if(!b)return;cur={l:+b.dataset.l,p:0};closeRail();renderLesson()});
 $("#menuBtn").onclick=()=>{$("#rail").classList.add("open");$("#scrim").hidden=false};
 function closeRail(){$("#rail").classList.remove("open");$("#scrim").hidden=true}
 $("#scrim").onclick=closeRail;
 
 /* ---------------- lesson render ---------------- */
+function pgBtn(L,t,i){return `<button class="pg ${i===cur.p?"on":""} ${seen(L).includes(i)?"seen":""}" data-p="${i}"><i>${seen(L).includes(i)&&i!==cur.p?"✓":i+1}</i>${t}</button>`}
+function pagerHTML(L,pages){
+  if(L.kind!=="station")return `<div class="pager">${pages.map((t,i)=>pgBtn(L,t,i)).join("")}</div>`;
+  const keys=stationKeys(L);
+  return `<div class="pager phased">${PHASES.map(ph=>{const idx=keys.map((k,i)=>ph.k.includes(k)?i:-1).filter(i=>i>=0);if(!idx.length)return"";
+    return `<div class="ph" style="--pc:${ph.c}"><span class="ph-l">${ph.l}</span><div class="ph-row">${idx.map(i=>pgBtn(L,pages[i],i)).join("")}</div></div>`}).join("")}</div>`}
+function stStrip(L){const btn=S=>`<button class="sts ${S===L?"on":""} ${lessonDone(S)?"done":""}" style="--st:${hueOf(S)}" data-jump="${ALL.indexOf(S)}" title="${esc(stLabel(S)+": "+S.title)}" aria-label="${esc(stLabel(S)+": "+S.title)}">${stNum(S)}</button>`;
+  return `<div class="ststrip" aria-label="Jump to station"><span>Stations</span>${btn(STATIONS[0])}<span class="sts-sep"></span>${STATIONS.slice(1).map(btn).join("")}<span class="sts-sep"></span>${MSE_STATIONS.map(btn).join("")}</div>`}
 function renderLesson(){
   const L=ALL[cur.l],pages=pagesOf(L);if(cur.p>=pages.length)cur.p=0;markSeen(L,cur.p);saveProg();renderRail();
-  const chips=L.kind==="station"?[`<span class="chip teal">${L.domain}</span>`,...L.skills.map(s=>`<span class="chip">${s}</span>`)]:(L.chips||[]).map(c=>`<span class="chip teal">${c}</span>`);
+  const chips=L.kind==="station"?L.skills.map(s=>`<span class="chip">${s}</span>`):(L.chips||[]).map(c=>`<span class="chip teal">${c}</span>`);
   let body="";
   if(L.kind==="info") body= cur.p<L.pages.length? L.pages[cur.p].h : quizHTML(L.quiz);
   else if(L.kind==="station") body=stationPage(L,cur.p);
   else body=mockHTML();
   $("#stageIn").innerHTML=`
-   <div class="lhead"><div class="eyebrow">${L.kind==="station"?(L.code==="S0"?"Practice station · foundation":"Practice station "+L.code.slice(1)):L.kind==="mock"?"Exam simulation":"Exam format · "+L.code}</div><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p><div class="chips">${chips.join("")}</div></div>
-   ${pages.length>1?`<div class="pager">${pages.map((t,i)=>`<button class="pg ${i===cur.p?"on":""} ${seen(L).includes(i)?"seen":""}" data-p="${i}"><i>${seen(L).includes(i)&&i!==cur.p?"✓":i+1}</i>${t}</button>`).join("")}</div>`:""}
+   ${L.kind==="station"?stStrip(L):""}
+   <div class="lhead" style="--st:${L.kind==="station"?hueOf(L):"var(--teal)"}"><div class="eyebrow">${L.kind==="station"?`<span class="stnum">${stNum(L)}</span>${stLabel(L)}${stNum(L)>0&&stNum(L)<=10?" of 10":""} · ${L.domain}`:L.kind==="mock"?"Exam simulation":"Know the OSCE · Lesson "+L.code.slice(1)}</div><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p>${L.kind==="station"?`<div class="fmt"><span>⏱ 2:00 reading</span><span>▶ 8:00 performance</span><span>🔔 bell at 6:00</span></div>`:""}<div class="chips">${chips.join("")}</div></div>
+   ${pages.length>1?pagerHTML(L,pages):""}
    <section class="page">${body}</section>
    <div class="pfoot"><button class="btn btn-ghost" id="prevBtn" ${cur.l===0&&cur.p===0?"disabled":""}>← Previous</button><span class="count">Page ${cur.p+1} of ${pages.length}</span><button class="btn btn-primary" id="nextBtn">${cur.p<pages.length-1?"Next page →":cur.l<ALL.length-1?"Complete & next lesson →":"Finish course ✓"}</button></div>`;
   $("#stage").scrollTop=0;
   bindPage(L);
 }
-$("#stageIn").addEventListener("click",e=>{const pg=e.target.closest("[data-p]");if(pg){cur.p=+pg.dataset.p;renderLesson();return}
+$("#stageIn").addEventListener("click",e=>{const jm=e.target.closest("[data-jump]");if(jm){cur={l:+jm.dataset.jump,p:0};renderLesson();return}
+  const pg=e.target.closest("[data-p]");if(pg){cur.p=+pg.dataset.p;renderLesson();return}
   if(e.target.id==="nextBtn"){const L=ALL[cur.l],n=pagesOf(L).length;if(cur.p<n-1)cur.p++;else if(cur.l<ALL.length-1){toast("Lesson complete: "+L.title);cur={l:cur.l+1,p:0}}else{toast("Course complete. Well done!");return renderRail()}renderLesson()}
   if(e.target.id==="prevBtn"){if(cur.p>0)cur.p--;else if(cur.l>0){cur.l--;cur.p=pagesOf(ALL[cur.l]).length-1}renderLesson()}
 });
@@ -1276,7 +1417,7 @@ function obsHTML(obs,extra){if(!obs)return"";const rows=extra?[...obs.rows,extra
     const z=({"RR":"rr","SpO₂":"sp","HR":"hr","BP":"bp","Temp":"t"})[c];const r=z?zoneOf(z,n):"";return r==="r"?"hi":r==="y"?"am":""};
   return `<div class="obs-wrap"><table class="obs"><thead><tr>${obs.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${rows.map((r,ri)=>`<tr>${r.map((v,ci)=>`<td class="${flag(obs.cols[ci],v,ri)}">${v}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`}
 function screenHTML(S,withActions=true){const I=S.instr;
-  return `<div class="screen"><div class="screen-head"><span>${S.code==="S0"?"Practice":"Station "+S.code.slice(1)} · Candidate instructions</span><span>Reading time 2:00 · Performance 8:00</span></div>
+  return `<div class="screen"><div class="screen-head"><span>${stLabel(S)} · Candidate instructions</span><span>Reading time 2:00 · Performance 8:00</span></div>
    <dl class="kv"><dt>Setting</dt><dd>${I.setting}</dd><dt>Date / time</dt><dd class="mono">${I.time}</dd><dt>Your role</dt><dd>You are the registered nurse caring for this patient.</dd></dl>
    <h4>Patient</h4>${bandHTML(I.patient)}
    <h4>Background</h4><p>${I.background}</p>
@@ -1287,7 +1428,8 @@ function screenHTML(S,withActions=true){const I=S.instr;
    <p class="eoi">&gt;&gt;&gt;END OF CANDIDATE INSTRUCTIONS&lt;&lt;&lt;</p>
    ${withActions?`<div class="screen-actions"><button class="btn btn-primary btn-sm" data-act="read">▶ Start 2-minute reading time</button></div>`:""}</div>`}
 
-function stationKeys(S){return ["brief","instr","guide",...(S.video?["video"]:[]),...(S.chart?["chart"]:[]),"perform","mark","scripts","quiz"]}
+function stationKeys(S){return ["brief","guide",...(S.video?["video"]:[]),...(S.chart?["chart"]:[]),"instr","perform","mark","scripts","quiz"]}
+const PHASES=[{l:"1 · Prepare",c:"var(--teal)",k:["brief","guide","video","chart"]},{l:"2 · Reading · 2:00",c:"var(--teal)",k:["instr"]},{l:"3 · Perform · 8:00",c:"var(--teal)",k:["perform"]},{l:"4 · Review",c:"var(--teal)",k:["mark","scripts","quiz"]}];
 function stationPage(S,p){const k=stationKeys(S)[p];
   if(k==="chart") return S.chart.render();
   if(k==="video") return videoHTML(S.video);
@@ -1372,14 +1514,14 @@ document.querySelectorAll("[data-tmode]").forEach(b=>b.onclick=()=>timer.set(b.d
 /* ---------------- mock circuit ---------------- */
 const MOCK=STATIONS.slice(1);let mock={i:-1,phase:"idle"};
 function mockHTML(){
-  const grid=`<div class="mock-grid">${MOCK.map((s,i)=>`<div class="${i===mock.i?"cur":i<mock.i||mock.phase==="done"?"fin":""}"><b>${"ABCDEFGHIJ"[i]}</b>${s.title.split(" ")[0]}</div>`).join("")}</div>`;
+  const grid=`<div class="mock-grid">${MOCK.map((s,i)=>`<div class="${i===mock.i?"cur":i<mock.i||mock.phase==="done"?"fin":""}"><b>${(i+1)}</b>${s.title.split(" ")[0]}</div>`).join("")}</div>`;
   if(mock.phase==="idle") return `<h2 class="page-title">Full mock circuit</h2><p class="page-sub">About 100 minutes. Set up a quiet space, a pen and one sheet of paper per station.</p>${grid}
     <div class="block"><h3>How it runs</h3><ul class="plain"><li>Each station opens with 2 minutes of candidate instructions. The clock moves you into the room automatically.</li><li>8 minutes of performance follow, with the bell at 6:00. Reveal the cue when the patient would respond.</li><li>At 8:00 the next station's reading time begins. There are no pauses, just like the real circuit.</li><li>Mark each station afterwards from its lesson page.</li></ul></div>
-    <button class="btn btn-primary" data-mock="start">Start circuit at station A</button>`;
+    <button class="btn btn-primary" data-mock="start">Start circuit at Station 1</button>`;
   if(mock.phase==="done") return `<h2 class="page-title">Circuit complete</h2>${grid}<div class="block"><h3>Now mark yourself</h3><p>Open each station's “Mark yourself” page and tick what you did. Be strict with critical items.</p></div><button class="btn btn-ghost" data-mock="reset">Run the circuit again</button>`;
   const S=MOCK[mock.i];
-  if(mock.phase==="read") return `<h2 class="page-title">Station ${"ABCDEFGHIJ"[mock.i]} · reading time</h2><p class="page-sub">Stay seated for the full two minutes.</p>${grid}${screenHTML(S,false)}<div class="screen-actions"><button class="btn btn-ghost btn-sm" data-mock="enter">Skip to the room →</button><button class="btn btn-ghost btn-sm" data-mock="stop">End circuit</button></div>`;
-  return `<h2 class="page-title">Station ${"ABCDEFGHIJ"[mock.i]} · ${S.title}</h2><p class="page-sub">Perform now. Bell at 6:00.</p>${grid}
+  if(mock.phase==="read") return `<h2 class="page-title">Station ${(mock.i+1)} · reading time</h2><p class="page-sub">Stay seated for the full two minutes.</p>${grid}${screenHTML(S,false)}<div class="screen-actions"><button class="btn btn-ghost btn-sm" data-mock="enter">Skip to the room →</button><button class="btn btn-ghost btn-sm" data-mock="stop">End circuit</button></div>`;
+  return `<h2 class="page-title">Station ${(mock.i+1)} · ${S.title}</h2><p class="page-sub">Perform now. Bell at 6:00.</p>${grid}
     <div id="cueBox"><div class="cue-locked"><span>Examiner cue</span><button class="btn btn-sm" style="background:var(--signal);color:#fff" data-mock="cue">Reveal</button></div></div>
     <div class="block"><h3>Tasks for this station</h3><ol style="margin:0;padding-left:22px">${S.instr.tasks.map(t=>`<li>${t}</li>`).join("")}</ol></div>
     <textarea class="work" id="mock_${S.id}" placeholder="Work through the station aloud and note your actions…"></textarea>
