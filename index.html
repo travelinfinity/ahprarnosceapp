@@ -1,4 +1,36 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+.rail-mc{float:right;font:600 11px var(--f-mono);color:var(--muted);letter-spacing:0;text-transform:none}
+.qscore{margin:-4px 0 14px;padding:10px 14px;border-radius:10px;background:var(--teal-soft);font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.qscore:empty{display:none}
+.dstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.dstat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center;min-width:0}
+.dstat b{display:block;font-size:15px;line-height:1.25}.dstat span{display:block;color:var(--muted);font-size:12.5px;line-height:1.35}
+.dstat .ring{flex:none;width:76px;height:76px}
+.dbig{font:800 30px var(--f-display);color:var(--teal);flex:none;min-width:56px;text-align:center}
+.dcal{display:flex!important;gap:3px;margin-top:6px}.dcal i{width:11px;height:11px;border-radius:3px;background:var(--sunk);display:block}.dcal i.on{background:var(--teal)}
+.dmods{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.dmod{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);transition:border-color .2s,transform .2s}
+.dmod:hover{border-color:var(--teal);transform:translateY(-2px)}
+.dmod-t{font-weight:700}.dmod-m{font-size:13px;color:var(--muted)}
+.dmod .bar,.dcont .bar{height:7px;border-radius:9px;background:var(--sunk);overflow:hidden;display:block}.dmod .bar i{display:block;height:100%;background:var(--teal);border-radius:9px}
+.dlink{all:unset;cursor:pointer;color:var(--ink);font-weight:600;text-align:left}.dlink:hover{color:var(--teal);text-decoration:underline}
+.dbad{color:var(--signal)}
+.dinput{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.rec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.rec-sub{color:var(--muted);font-size:14px;margin-top:4px}
+.rec-stop{background:var(--signal);color:#fff;animation:recp 1.4s infinite}
+@keyframes recp{0%,100%{box-shadow:0 0 0 0 rgba(217,65,47,.5)}50%{box-shadow:0 0 0 8px rgba(217,65,47,0)}}
+.rec-auto{display:flex;gap:8px;align-items:center;font-size:14px;margin:12px 0 4px;cursor:pointer}
+.rec-empty{color:var(--muted);font-size:14px;margin-top:12px}
+.rec-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);margin-top:10px}
+.rec-meta b{display:block;font-size:14px}.rec-meta span{font-size:12.5px;color:var(--muted)}
+.rec-item audio{width:100%;height:36px}
+.rec-acts{display:flex;gap:6px}
+@media (max-width:620px){.rec-item{grid-template-columns:1fr}}
+@media (max-width:900px){.dstats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.dstats{grid-template-columns:1fr}}
+</style>
+</head><body>
 <title>NextGen Nurses RN OSCE</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +43,6 @@
   --teal:#0E7279; --teal-ink:#FFFFFF; --teal-soft:#DCEFED; --signal:#D9412F; --signal-soft:#FCE7E3;
   --amber:#B87410; --amber-soft:#FBF0DC; --good:#1D8350; --good-soft:#DFF3E8;
   --screen:#0E1D24; --screen-2:#152A33; --screen-fg:#E6F1F1; --screen-dim:#8FA8AD; --ecg:#3EE08F;
-  --grad2:#0E7279; --grad3:#0E7279; --gold:#0E7279;
-  --d-assess:#0E7279; --d-care:#D9412F; --d-eval:#B87410; --d-found:#1D8350;
   --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -22,15 +52,11 @@
   --paper:#0A161B; --surface:#0F2129; --sunk:#132A33; --ink:#E4EFEE; --muted:#93A8AD; --line:#21373F;
   --teal:#3DB4B3; --teal-ink:#05201F; --teal-soft:#123A3E; --signal:#FF6E5E; --signal-soft:#3A1B18;
   --amber:#E6A940; --amber-soft:#33270F; --good:#4CC488; --good-soft:#123222;
-  
-  --grad2:#3DB4B3; --grad3:#3DB4B3; --gold:#3DB4B3; --d-assess:#3DB4B3; --d-care:#FF6E5E; --d-eval:#E6A940; --d-found:#4CC488;
   --screen:#071116; --screen-2:#0E1E25; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0A161B; --surface:#0F2129; --sunk:#132A33; --ink:#E4EFEE; --muted:#93A8AD; --line:#21373F;
   --teal:#3DB4B3; --teal-ink:#05201F; --teal-soft:#123A3E; --signal:#FF6E5E; --signal-soft:#3A1B18;
   --amber:#E6A940; --amber-soft:#33270F; --good:#4CC488; --good-soft:#123222;
-  
-  --grad2:#3DB4B3; --grad3:#3DB4B3; --gold:#3DB4B3; --d-assess:#3DB4B3; --d-care:#FF6E5E; --d-eval:#E6A940; --d-found:#4CC488;
   --screen:#071116; --screen-2:#0E1E25; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}
 
 html,body{height:100%}
@@ -422,106 +448,6 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
 #lb img{background:#fff;max-width:none;width:100%;max-width:900px;transition:width .2s}
 #lb.z2 img{width:200%;max-width:1800px}
 @media (max-width:700px){.vid-row{grid-template-columns:1fr!important}.vid-row video{max-width:360px;margin:0 auto}}
-
-/* ============ Station navigation ============ */
-/* rail */
-.rail{background:var(--surface)}
-.rail-prog{padding:16px}
-.rail-prog .card{border-radius:14px;padding:14px 16px;color:#fff;background:linear-gradient(135deg,var(--teal),color-mix(in srgb,var(--teal) 45%,var(--grad2)))}
-.rail-prog .row{font-size:13px}
-.rail-prog .bar{background:rgba(255,255,255,.25);height:8px}
-.rail-prog .bar i{background:linear-gradient(90deg,#fff,#FFE27A)}
-.rail-prog .sub{display:block;font-size:12px;opacity:.9;margin-top:8px}
-.rail-search{padding:0 16px 10px}
-.rail-search input{width:100%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:10px 14px 10px 38px;font:500 14px var(--f-body);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2355696F' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='m11 11 3.5 3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:14px 50%}
-.rail-search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
-.rail-list{padding:2px 10px 30px}
-.rsec{margin-top:6px}
-.rsec-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:10px 8px;border-radius:10px;color:var(--ink);text-align:left}
-.rsec-h:hover{background:var(--sunk)}
-.rsec-ic{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--sc) 14%,transparent);color:var(--sc)}
-.rsec-ic svg{width:16px;height:16px}
-.rsec-t{flex:1;min-width:0;font:800 12px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase}
-.rsec-n{font:700 11px var(--f-mono);color:var(--muted);background:var(--sunk);border-radius:99px;padding:3px 8px}
-.rsec-ch{flex:none;width:16px;height:16px;color:var(--muted);transition:transform .2s}
-.rsec.closed .rsec-ch{transform:rotate(-90deg)}
-.rsec.closed .rsec-b{display:none}
-.rsec-b{display:grid;gap:4px;padding:2px 0 6px}
-.rail-item{--st:var(--teal);border:1.5px solid transparent;border-left-width:1.5px;border-radius:12px;padding:8px 10px;gap:12px}
-.rail-item:hover{background:color-mix(in srgb,var(--st) 7%,var(--surface))}
-.rail-item.on{background:color-mix(in srgb,var(--st) 12%,var(--surface));border-color:color-mix(in srgb,var(--st) 45%,transparent);font-weight:700}
-.rail-code{width:40px;height:40px;border-radius:11px;background:color-mix(in srgb,var(--st) 14%,var(--surface));color:var(--st);font:800 15px/1 var(--f-display);display:grid;place-items:center;text-align:center}
-.rail-code small{display:block;font:700 8px/1 var(--f-body);letter-spacing:.08em;margin-bottom:2px;opacity:.85}
-.rail-item.on .rail-code{background:var(--st);color:#fff}
-.rail-item.done .rail-code{background:var(--good);color:#fff}
-.rail-item .kick{display:block;font:700 10.5px/1.2 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--st);margin-bottom:2px}
-.rail-item .t{flex:1;line-height:1.3}
-.rail-item .mini{display:block;height:4px;border-radius:99px;background:var(--sunk);margin-top:6px;overflow:hidden}
-.rail-item .mini i{display:block;height:100%;background:var(--st)}
-.rail-item.done .mini i{background:var(--good)}
-.rail-empty{padding:18px 10px;color:var(--muted);font-size:14px}
-.dtag{display:inline-block;font:700 10px/1 var(--f-body);letter-spacing:.04em;padding:3px 6px;border-radius:5px;margin-left:4px;vertical-align:1px;color:#fff;background:var(--dc)}
-
-/* lesson header banner */
-.lhead{--st:var(--teal);background:linear-gradient(135deg,color-mix(in srgb,var(--st) 88%,#fff),var(--st) 45%,color-mix(in srgb,var(--st) 62%,#1A0B4A));color:#fff;border-radius:20px;padding:24px 26px;position:relative;overflow:hidden;box-shadow:0 18px 40px -22px var(--st)}
-.lhead::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12)}
-.lhead > *{position:relative;z-index:1}
-.lhead .eyebrow{color:#fff;opacity:.92;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.lhead .stnum{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:#fff;color:var(--st);font:800 17px/1 var(--f-display);letter-spacing:0}
-.lhead p{color:rgba(255,255,255,.9)}
-.lhead .chip{background:rgba(255,255,255,.18);color:#fff}
-.lhead .chip.teal{background:#fff;color:var(--st)}
-.fmt{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
-.fmt span{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.18);border-radius:99px;padding:6px 12px;font:700 12px var(--f-mono)}
-
-/* station jump strip */
-.ststrip{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:2px 2px 8px;margin:-6px 0 16px;scrollbar-width:thin}
-.ststrip > span{flex:none;font:700 11px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:4px}
-.sts{flex:none;width:36px;height:36px;border-radius:10px;border:1.5px solid color-mix(in srgb,var(--st) 40%,var(--line));background:var(--surface);color:var(--st);font:800 14px var(--f-display);position:relative}
-.sts:hover{background:color-mix(in srgb,var(--st) 10%,var(--surface))}
-.sts.on{background:var(--st);color:#fff;border-color:var(--st);transform:translateY(-2px);box-shadow:0 8px 16px -8px var(--st)}
-.sts.done::after{content:"✓";position:absolute;right:-5px;top:-5px;width:16px;height:16px;border-radius:50%;background:var(--good);color:#fff;font:800 9px/16px var(--f-body)}
-.sts-sep{flex:none;width:1px;height:24px;background:var(--line);margin:0 4px}
-
-/* phased pager */
-.pager.phased{gap:10px;align-items:stretch}
-.ph{flex:none;display:grid;gap:6px;border-radius:14px;padding:8px;background:color-mix(in srgb,var(--pc) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--pc) 25%,var(--line))}
-.ph-l{font:800 10.5px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--pc);padding:2px 4px}
-.ph-row{display:flex;gap:6px}
-.ph .pg.on{border-color:var(--pc)}
-.ph .pg.on i{background:var(--pc);color:#fff}
-.page-title{background:linear-gradient(90deg,var(--ink),color-mix(in srgb,var(--ink) 40%,var(--teal)));-webkit-background-clip:text;background-clip:text;color:transparent}
-.block{border-radius:16px}
-.mock-grid div b{color:var(--teal)}
-.mock-grid div.cur{border-color:var(--teal);background:var(--teal-soft)}
-
-
-/* original look for navigation pieces */
-.rail-prog{padding:18px 18px 14px}
-.rail-prog .card{background:none;color:var(--ink);padding:0;border-radius:0}
-.rail-prog .bar{background:var(--sunk)}
-.rail-prog .bar i{background:linear-gradient(90deg,var(--teal),var(--good))}
-.rail-prog .sub{color:var(--muted);opacity:1}
-.rsec-ic{background:var(--teal-soft);color:var(--teal)}
-.rail-item{border-radius:8px}
-.rail-code{border-radius:8px;background:var(--sunk);color:var(--muted)}
-.rail-item .kick{color:var(--teal)}
-.rail-item.on{background:var(--teal-soft);border-color:transparent;border-left:3px solid var(--teal)}
-.dtag{background:transparent!important;color:var(--dc)!important;border:1px solid currentColor}
-.lhead{background:none;color:var(--ink);border-radius:0;padding:0;box-shadow:none}
-.lhead::after{display:none}
-.lhead .eyebrow{color:var(--teal);opacity:1}
-.lhead .stnum{background:var(--teal);color:var(--teal-ink);border-radius:8px}
-.lhead p{color:var(--muted)}
-.lhead .chip{background:var(--sunk);color:var(--muted)}
-.fmt span{background:var(--teal-soft);color:var(--teal)}
-.sts{border-radius:8px;border-color:var(--line);color:var(--ink)}
-.sts.on{box-shadow:none;transform:none}
-.ph{background:var(--surface);border-color:var(--line);border-radius:10px}
-.ph-l{color:var(--muted)}
-@media (min-width:700px){.pager.phased{flex-wrap:wrap;overflow:visible}}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dtag{color:#130C33}}
-:root[data-theme="dark"] .dtag{color:#130C33}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -567,7 +493,7 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
   </div></div></header>
 
   <section class="circuit"><div class="wrap">
-    <div class="circuit-cap"><span><b>The circuit.</b> Ten stations, numbered 1–10 here (RANZCOG Melbourne uses 1–10; Adelaide Health Simulation letters them A–J).</span><span class="mono" id="circuitNow">Station 1 · reading</span></div>
+    <div class="circuit-cap"><span><b>The circuit.</b> Stations are lettered A–J at Adelaide Health Simulation and numbered 1–10 at RANZCOG Melbourne.</span><span class="mono" id="circuitNow">Station A · reading</span></div>
     <div class="circuit-row" id="circuitRow"></div>
   </div></section>
 
@@ -658,8 +584,8 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
     </p>
     <div class="demo-hint" id="pendingBox" hidden>
       <b style="color:var(--ink);font-size:15px">Your account is ready</b>
-      <p style="margin-top:6px">Course access hasn't been unlocked for <b id="pendingEmail"></b> yet. Once your purchase is confirmed, sign in again to start.</p>
-      <p style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-primary btn-sm" style="text-decoration:none" href="https://buy.stripe.com/28EcMY8Ce0Xdfhj03G00005" target="_blank" rel="noopener">Buy access · A$199</a><a class="btn btn-ghost btn-sm" id="contactLink" href="#" target="_blank" rel="noopener" hidden>Contact NextGen Nurses</a><button class="btn btn-ghost btn-sm" id="pendingCheck" type="button">Check again</button><button class="btn btn-ghost btn-sm" id="pendingOut" type="button">Sign out</button></p>
+      <p style="margin-top:6px">Course access hasn't been unlocked for <b id="pendingEmail"></b> yet. Buy access below using this email. We unlock your account once your payment is confirmed, usually within a few hours. Then tap Check again.</p>
+      <p style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-primary btn-sm" id="pendingBuy" style="text-decoration:none" href="https://buy.stripe.com/28EcMY8Ce0Xdfhj03G00005" target="_blank" rel="noopener">Buy access · A$199</a><a class="btn btn-ghost btn-sm" id="contactLink" href="#" target="_blank" rel="noopener" hidden>Contact NextGen Nurses</a><button class="btn btn-ghost btn-sm" id="pendingCheck" type="button">Check again</button><button class="btn btn-ghost btn-sm" id="pendingOut" type="button">Sign out</button></p>
     </div>
   </div></div>
 </div>
@@ -682,8 +608,7 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
   </div>
   <div class="shell">
     <aside class="rail" id="rail">
-      <div class="rail-prog"><div class="card"><div class="row"><span>Your progress</span><span id="progText">0%</span></div><div class="bar"><i id="progBar"></i></div><span class="sub" id="progSub"></span></div></div>
-      <div class="rail-search"><input id="railSearch" type="search" placeholder="Search stations or skills…" aria-label="Search stations or skills"></div>
+      <div class="rail-prog"><div class="row"><span>Course progress</span><span id="progText">0%</span></div><div class="bar"><i id="progBar"></i></div></div>
       <nav class="rail-list" id="railList"></nav>
     </aside>
     <div class="scrim" id="scrim" hidden></div>
@@ -771,7 +696,7 @@ const INFO_LESSONS=[
   {t:"Station domains", h:`
     <h2 class="page-title">The three domains of care</h2><p class="page-sub">How the handbook groups station focus, and where each practice station in this app sits.</p>
     <div class="block" style="overflow-x:auto"><table class="obs" style="font-family:var(--f-body);min-width:520px"><thead><tr><th style="color:var(--muted);border-color:var(--line)">Nursing assessment & care planning</th><th style="color:var(--muted);border-color:var(--line)">Care delivery</th><th style="color:var(--muted);border-color:var(--line)">Evaluation of care</th></tr></thead>
-    <tbody><tr>${["Vital signs · Station 1<br>Focused nursing assessment · Station 8<br>Risk assessment · Station 9","Medication administration · Station 4<br>Basic life support · Station 2<br>Aseptic technique / ANTT · Station 10<br>Pain assessment & management · Station 7<br>IV fluids · Station 5<br>Blood transfusion · Station 3","Interdisciplinary communication (ISBAR) · Station 6"].map(c=>`<td style="border-color:var(--line);text-align:left;vertical-align:top;line-height:1.9">${c}</td>`).join("")}</tr></tbody></table></div>
+    <tbody><tr>${["Vital signs · S1<br>Focused nursing assessment · S8<br>Risk assessment · S9","Medication administration · S4<br>Basic life support · S2<br>Aseptic technique / ANTT · S10<br>Pain assessment & management · S7<br>IV fluids · S5<br>Blood transfusion · S3","Interdisciplinary communication (ISBAR) · S6"].map(c=>`<td style="border-color:var(--line);text-align:left;vertical-align:top;line-height:1.9">${c}</td>`).join("")}</tr></tbody></table></div>
     <div class="block"><h3>Skills listed in the handbook</h3><div class="chips">${["Physiological observations","Vital signs","Calculating drug dosages","Subcut / IM injection","ANTT","In-hospital resuscitation","Safe sharps disposal","Medication administration","Wound care","Hand hygiene","Therapeutic communication & consent","Infection control","Patient identification","IV therapy","Risk management"].map(s=>`<span class="chip teal">${s}</span>`).join("")}</div></div>
     <div class="block"><h3>Communication is marked in every station</h3><p>Examiners watch how you explain care, involve the patient in decisions, gain informed consent, listen, manage an anxious patient or relative, give discharge instructions, show compassion, and document clearly.</p></div>
     <p class="src">${SRC}, pp. 10–11.</p>`},
@@ -1203,38 +1128,368 @@ const VIDEOS={
   vitals:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/vitals.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/vitals.jpg",title:"Taking & charting vital signs",len:"2:27",note:"A full set of observations on the Standard Adult General Observation Chart: patient concern, SpO₂ & device, HR & rhythm, RR, BP chevrons, temperature, ACVPU, pain at rest and on movement, and initials. Every value is plotted as it is spoken."},
   isbar:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/isbar.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/isbar.jpg",title:"Bedside ISBAR handover",len:"4:10",note:"Night RN to day RN at the bedside with the patient included: identify, situation (yellow-zone clinical review overnight), background with allergy clarification, assessment, recommendations, read-back and bedside safety check."},
   bls:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/bls.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/bls.jpg",title:"Basic life support (DRSABCD)",len:"3:03",note:"ANZCOR adult BLS in hospital with two rescuers: danger, response, send for help, airway, breathing check (agonal gasps), 30:2 CPR counted in real time, AED pads, analysis, safe shock, compressor swap and handover to the Code Blue team."},
-  transfusion:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/transfusion.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/transfusion.jpg",title:"Blood transfusion & reaction",len:"5:47",note:"Consent check, baseline obs, two-person bedside check, start and stay 15 minutes, 15-minute and completion obs, then an acute reaction on unit 2: stop, saline, obs, escalate, clerical check, keep the bag, notify blood bank, document."}
+  transfusion:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/transfusion.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/transfusion.jpg",title:"Blood transfusion & reaction",len:"5:47",note:"Consent check, baseline obs, two-person bedside check, start and stay 15 minutes, 15-minute and completion obs, then an acute reaction on unit 2: stop, saline, obs, escalate, clerical check, keep the bag, notify blood bank, document."},
+  approach:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/approach.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/approach.jpg",title:"Universal station approach",len:"2:11",note:"Hand hygiene, introduction, three identifiers checked against the ID band, the red allergy band, consent and privacy, a one-minute radial pulse, and a safe close: bed low, brakes on, call bell in reach, hand hygiene, document."},
+  meds:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/meds.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/meds.jpg",title:"Oral medication administration",len:"2:08",note:"Reading the NIMC in order, three label checks, identification and allergy with the patient, a one-minute apical pulse before digoxin, giving and teaching, then signing straight away (and when to circle W)."},
+  ivfluids:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/ivfluids.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/ivfluids.jpg",title:"IV fluids & fluid overload",len:"2:39",note:"Checking the fluid order and bag, calculating the rate, VIP scoring the cannula, programming the volumetric pump, then recognising fluid overload two hours later and escalating with ISBAR."},
+  pain:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/pain.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/pain.jpg",title:"Pain assessment & PRN opioid",len:"2:06",note:"A 0–10 pain score and PQRST, observations and sedation score, checking the PRN order, the Schedule 8 two-nurse check, ice and elevation, then reassessment at 45 minutes and documentation."},
+  resp:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/resp.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/resp.jpg",title:"Focused respiratory assessment",len:"1:52",note:"Look, count for a full minute, chest expansion and auscultation side to side, sputum, positioning, oxygen to a prescribed 92–96% target, and escalation per the calling criteria."},
+  falls:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/falls.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/falls.jpg",title:"Falls & pressure injury prevention",len:"2:10",note:"Falls risk screening, making the room safe (bed low, brakes, call bell, frame, glasses, footwear), a skin check finding a stage 1 pressure injury, Braden scoring, the SSKIN bundle and teach-back."},
+  antt:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/antt.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/antt.jpg",title:"Wound dressing using ANTT",len:"2:04",note:"Checking the wound plan, cleaning the tray, the general aseptic field and key parts, removing and assessing the wound, cleaning with 0.9% sodium chloride using non-touch technique, and documentation."},
+  mse:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/mse.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/mse.jpg",title:"Mental state examination & risk",len:"2:08",note:"Setting up a safe conversation, observing appearance, behaviour and speech, asking about mood, perception and orientation, asking directly about suicidal thoughts, then keeping the person safe and escalating."},
 };
 function videoHTML(k,withHead=true){const v=VIDEOS[k];return `${withHead?`<h2 class="page-title">Watch the demo</h2><p class="page-sub">${v.title} · ${v.len}. Watch it once through, then again with the rubric open and tick what you see.</p>`:""}
   <div class="block" style="padding:16px"><div style="display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:20px;align-items:start" class="vid-row">
   <video controls playsinline preload="metadata" poster="${v.poster}" style="width:100%;aspect-ratio:9/16;background:#0E1D24;border-radius:12px;display:block"><source src="${v.src}" type="video/mp4">Your browser can't play this video.</video>
   <div><h3>${v.title}</h3><p style="color:var(--muted);margin-top:6px">${v.note}</p>
   <div class="callout info" style="margin-top:14px"><b class="ic">i</b><div>Teaching demonstration with fictional patients. Follow your local policy and the current guidelines; procedures and escalation numbers differ between hospitals.</div></div></div></div></div>`}
-const VIDEO_LESSON={id:"v1",code:"VID",kind:"info",title:"Demo video library",summary:"Animated demonstrations of four core skills, with narration and the charting shown as it happens.",chips:["4 videos","Vertical, phone-friendly"],
+const VIDEO_LESSON={id:"v1",code:"VID",kind:"info",title:"Demo video library",summary:"Animated demonstrations of core OSCE skills, with narration and the charting shown as it happens.",chips:[Object.keys(VIDEOS).length+" videos","Vertical, phone-friendly"],
   pages:Object.keys(VIDEOS).map(k=>({t:VIDEOS[k].title,h:videoHTML(k,false)})),
   quiz:[{q:"In the vital signs demo, how is blood pressure charted?",o:["A dot for systolic only","A downward V at systolic and an upward arrow at diastolic, joined by a line","Written as numbers in the box","A cross at the mean pressure"],a:1,e:"Chevrons mark systolic and diastolic; only systolic is the trigger on the NSW chart."},
         {q:"In the BLS demo, when do the rescuers swap compressors?",o:["Never","Only when exhausted","During the AED rhythm analysis, to keep pauses short","Before the first shock is charged"],a:2,e:"Swapping during the analysis pause keeps interruptions to compressions to a minimum."},
+        {q:"In the medication demo, what is checked for a full minute before giving digoxin?",o:["Respiratory rate","Apical pulse","Blood pressure","Temperature"],a:1,e:"Digoxin slows the heart. Check the apical pulse for 60 seconds and withhold and report if it is below the limit in local policy (commonly 60)."},
+        {q:"In the wound demo, which of these is a key part?",o:["The patient's wound","The tray surface","The forceps tips","The bin"],a:2,e:"Key parts are the parts of equipment that could contaminate the key site, so they are never touched."},
         {q:"In the transfusion demo, what is the first action when the reaction starts?",o:["Slow the rate","Stop the transfusion","Give paracetamol","Flush the line"],a:1,e:"Stop the transfusion immediately, then keep IV access with a new saline line."}]};
 
-const MODULES=[
- {name:"Start here: know the OSCE", ic:"book", c:"var(--teal)", lessons:INFO_LESSONS},
- {name:"Station 0 · Warm-up", ic:"spark", c:"var(--teal)", lessons:[STATIONS[0]]},
- {name:"OSCE stations 1–10", ic:"grid", c:"var(--teal)", lessons:STATIONS.slice(1)},
- {name:"Extra practice stations", ic:"plus", c:"var(--teal)", lessons:MSE_STATIONS},
- {name:"Demo videos", ic:"play", c:"var(--teal)", lessons:[VIDEO_LESSON]},
- {name:"Exam simulation", ic:"clock", c:"var(--teal)", lessons:[{id:"mock",code:"MC",kind:"mock",title:"Full mock circuit",summary:"All ten stations in sequence: 2 minutes reading, 8 minutes performance, no pauses."}]}
+/* ================= CORE CONCEPTS MODULE (LMS add-on) ================= */
+const CSRC={nmba:"Source: NMBA, Registered nurse standards for practice (2016) and Code of conduct for nurses (2018)",
+ acsqhc:"Source: Australian Commission on Safety and Quality in Health Care, NSQHS Standards (2nd ed.)",
+ crc:"Source: Levett-Jones, T. (ed.), Clinical Reasoning: Learning to Think Like a Nurse",
+ nhhi:"Source: National Hand Hygiene Initiative; NHMRC Australian Guidelines for the Prevention and Control of Infection in Healthcare",
+ med:"Source: ACSQHC, National Inpatient Medication Chart user guide; High-risk medicines (APINCHS)"};
+const ctab=(head,rows)=>`<div class="block" style="overflow-x:auto"><table class="ztable" style="min-width:440px"><thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>i===0?`<td><b>${c}</b></td>`:`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+const CONCEPT_LESSONS=[
+{ id:"c1", code:"C1", kind:"info", title:"NMBA standards & Code of Conduct", summary:"The professional frameworks every OSCE station is mapped to, and what they look like at the bedside.", chips:["RN Standards for Practice","Code of conduct"],
+  pages:[
+  {t:"RN Standards for Practice", h:`
+    <h2 class="page-title">The 7 RN Standards for Practice</h2><p class="page-sub">Every OSCE station is mapped to these. Examiners look for behaviours, not recited definitions.</p>
+    ${ctab(["Standard","What the examiner sees you do"],[
+     ["1. Thinks critically and analyses nursing practice","Links findings to a cause (“HR 118 and BP 92/60 after surgery: I'm thinking of bleeding”). Uses evidence and local policy."],
+     ["2. Engages in therapeutic and professional relationships","Introduces self, uses the patient's preferred name, respects privacy, culture and choices; works with the team."],
+     ["3. Maintains the capability for practice","Works within scope; asks for help; knows when to stop and escalate."],
+     ["4. Comprehensively conducts assessments","Systematic assessment (ABCDE, focused systems), accurate observations, asks the right questions."],
+     ["5. Develops a plan for nursing practice","States priorities and goals with the patient (“Our goal is pain under 4/10 within the hour”)."],
+     ["6. Provides safe, appropriate and responsive quality nursing practice","Performs the skill safely: IDs, allergy, hand hygiene, ANTT, medication rights, escalation."],
+     ["7. Evaluates outcomes to inform nursing practice","Reassesses after every intervention and changes the plan if it isn't working; documents."]])}
+    <div class="callout info"><b class="ic">i</b><div>The NMBA consulted on revised RN and EN standards in early 2026. Until new standards are published with a start date, the 2016 standards remain the ones in force. Check nursingmidwiferyboard.gov.au before your exam.</div></div>
+    <p class="src">${CSRC.nmba}.</p>`},
+  {t:"Code of conduct & ethics", h:`
+    <h2 class="page-title">Code of conduct for nurses</h2><p class="page-sub">Seven principles that describe the behaviour expected of every nurse in Australia.</p>
+    <div class="grid2">
+     <div class="block"><h3>The 7 principles</h3><ol class="steps-ol">
+      <li><b>Legal compliance</b>: work within the law and your scope.</li>
+      <li><b>Person-centred practice</b>: the person is a partner in their care; informed consent.</li>
+      <li><b>Cultural practice and respectful relationships</b>: culturally safe care, including for Aboriginal and Torres Strait Islander peoples.</li>
+      <li><b>Professional behaviour</b>: boundaries, honesty, privacy and confidentiality, accurate documentation.</li>
+      <li><b>Teaching, supervising and assessing</b>.</li>
+      <li><b>Research in health</b>.</li>
+      <li><b>Health and wellbeing</b>: your own, and that of colleagues.</li></ol></div>
+     <div class="block"><h3>In the OSCE, this means</h3><ul class="plain">
+      <li>Ask permission before every touch and explain what you are doing.</li>
+      <li>Close curtains, keep the patient covered, speak discreetly.</li>
+      <li>Never guess: say you would check policy, or ask the nurse in charge.</li>
+      <li>Accept a patient's informed refusal, explore why, and report it.</li>
+      <li>Offer a professional interpreter rather than a family member.</li></ul></div>
+    </div>
+    <div class="callout amber"><b class="ic">★</b><div><b>Code of ethics.</b> Since 2018 the International Council of Nurses (ICN) Code of ethics for nurses applies to all nurses in Australia, alongside the NMBA Code of conduct.</div></div>
+    <div class="block"><h3>Cultural safety</h3><p>Cultural safety is defined by the Aboriginal and Torres Strait Islander people receiving care, not by the nurse. In practice: ask every patient whether they identify as Aboriginal and/or Torres Strait Islander, offer an Aboriginal Liaison Officer or health worker, include family and kin as the person wishes, and reflect on your own assumptions and power in the relationship.</p></div>
+    <p class="src">${CSRC.nmba}. NMBA adopted the National Scheme definition of cultural safety in March 2025.</p>`}
+  ],
+  quiz:[
+   {q:"After giving IV morphine, you return in 15 minutes to check pain, respiratory rate and sedation. Which RN standard does this best demonstrate?",o:["Standard 2: therapeutic relationships","Standard 3: capability for practice","Standard 7: evaluates outcomes","Standard 5: develops a plan"],a:2,e:"Reassessing the effect of an intervention and adjusting care is evaluation (Standard 7)."},
+   {q:"A Vietnamese-speaking patient's son offers to interpret consent for a procedure. What is the best response?",o:["Accept, as family know the patient best","Arrange a professional interpreter","Use gestures and a translation app","Ask the patient to sign anyway"],a:1,e:"Use a professional (accredited) interpreter, on site or by phone, for consent and important information. Family members may filter or soften information."},
+   {q:"Who determines whether care is culturally safe?",o:["The nurse delivering care","The hospital's policy","The person and community receiving care","The NMBA"],a:2,e:"Cultural safety is determined by the Aboriginal and Torres Strait Islander individuals, families and communities receiving care."}
+  ]},
+{ id:"c2", code:"C2", kind:"info", title:"NSQHS Standards at the bedside", summary:"The 8 national safety and quality standards, and the bedside action that proves you know each one.", chips:["8 standards","Accreditation"],
+  pages:[
+  {t:"The 8 standards", h:`
+    <h2 class="page-title">The NSQHS Standards</h2><p class="page-sub">Australian hospitals are accredited against these. OSCE stations are full of them, even when they aren't named.</p>
+    ${ctab(["Standard","Bedside action examiners look for"],[
+     ["1. Clinical Governance","Follow policy and scope; report incidents (e.g. a fall) through the incident system."],
+     ["2. Partnering with Consumers","Shared decisions, informed consent, teach-back, involve family as the patient wishes."],
+     ["3. Preventing and Controlling Infections","5 moments of hand hygiene, PPE, ANTT, cannula care, sharps safety."],
+     ["4. Medication Safety","Medication rights, allergy check, NIMC documentation, high-risk medicine checks."],
+     ["5. Comprehensive Care","Screen and act on falls, pressure injury, delirium, nutrition and end-of-life needs."],
+     ["6. Communicating for Safety","3 identifiers, ISBAR handover, read-back, clear documentation."],
+     ["7. Blood Management","Consent, two-person bedside check, observation schedule, reaction response."],
+     ["8. Recognising and Responding to Acute Deterioration","Accurate observations, track and trigger chart, escalate per calling criteria."]])}
+    <div class="callout info"><b class="ic">i</b><div><b>Memory hook.</b> In almost every station you will touch Standards 3 (hand hygiene), 6 (identification and handover) and 8 (observations and escalation).</div></div>
+    <p class="src">${CSRC.acsqhc}.</p>`},
+  {t:"Patient identification", h:`
+    <h2 class="page-title">Patient identification</h2><p class="page-sub">Part of Communicating for Safety. Done before every procedure, medicine, specimen and handover.</p>
+    <div class="grid2">
+     <div class="block"><h3>The 3 approved identifiers</h3><ul class="plain"><li><b>Full name</b> (family and given names)</li><li><b>Date of birth</b></li><li><b>MRN / UR number</b> or another approved identifier</li></ul><p style="margin-top:10px">Ask the patient to <b>state</b> their name and date of birth (open question), then check against the ID band and the chart.</p></div>
+     <div class="block"><h3>Never</h3><ul class="plain"><li>Ask “Are you Mr Smith?” (closed question).</li><li>Use bed number or diagnosis as an identifier.</li><li>Proceed if any identifier doesn't match. Stop and resolve it first.</li></ul></div>
+    </div>
+    <div class="callout warn"><b class="ic">!</b><div><b>Allergy check is part of the same moment.</b> Look for the red allergy band, ask the patient what happens when they have the allergen, and confirm it matches the chart.</div></div>
+    <p class="src">${CSRC.acsqhc}, Standard 6.</p>`}
+  ],
+  quiz:[
+   {q:"Which set lists three approved patient identifiers?",o:["Name, bed number, diagnosis","Full name, date of birth, MRN","Name, address, doctor","Date of birth, ward, allergy"],a:1,e:"Full name, date of birth and the MRN/UR number (or another approved identifier). Bed numbers and diagnoses are never identifiers."},
+   {q:"Using a falls risk tool and putting a plan in place relates most to which NSQHS Standard?",o:["Standard 4: Medication Safety","Standard 5: Comprehensive Care","Standard 7: Blood Management","Standard 2: Partnering with Consumers"],a:1,e:"Comprehensive Care covers screening and managing risks such as falls, pressure injuries, delirium and malnutrition."},
+   {q:"Which question is the safest way to confirm identity?",o:["“Are you Robert Hollis?”","“You're in bed 12, aren't you?”","“Can you tell me your full name and date of birth?”","“Is this your wristband?”"],a:2,e:"Open questions make the patient state their details, which you then match to the band and chart."}
+  ]},
+{ id:"c3", code:"C3", kind:"info", title:"Clinical Reasoning Cycle", summary:"Levett-Jones' 8-step cycle: the thinking framework behind ‘think aloud’ in every station.", chips:["Think aloud","Prioritise"],
+  pages:[
+  {t:"The 8 steps", h:`
+    <h2 class="page-title">The Clinical Reasoning Cycle</h2><p class="page-sub">Widely taught in Australian nursing programs. Saying your reasoning aloud lets the examiner award marks for thinking, not just doing.</p>
+    <div class="steps">
+     <div class="step"><span class="step-n">01</span><h3>Consider the patient situation</h3><p>Who is this person, what is the context?</p></div>
+     <div class="step"><span class="step-n">02</span><h3>Collect cues & information</h3><p>Review the chart and history, gather new information, recall knowledge.</p></div>
+     <div class="step"><span class="step-n">03</span><h3>Process information</h3><p>Interpret, discriminate relevant from irrelevant, relate, infer, match patterns, predict.</p></div>
+     <div class="step"><span class="step-n">04</span><h3>Identify problems</h3><p>Synthesise the facts into a nursing problem or diagnosis.</p></div>
+     <div class="step"><span class="step-n">05</span><h3>Establish goals</h3><p>Specific, measurable and time-framed.</p></div>
+     <div class="step"><span class="step-n">06</span><h3>Take action</h3><p>Select and carry out the best interventions.</p></div>
+     <div class="step"><span class="step-n">07</span><h3>Evaluate outcomes</h3><p>Has the situation improved? Reassess.</p></div>
+     <div class="step"><span class="step-n">08</span><h3>Reflect</h3><p>What did you learn, and what would you do differently?</p></div>
+    </div>
+    <p class="src" style="margin-top:14px">${CSRC.crc}.</p>`},
+  {t:"Worked example", h:`
+    <h2 class="page-title">Worked example: think aloud</h2><p class="page-sub">Post-operative patient, Day 1 after bowel resection, 0600 observations just taken.</p>
+    ${ctab(["Step","What you say aloud"],[
+     ["Consider","“Mr Lee, 68, Day 1 after a bowel resection, history of hypertension.”"],
+     ["Collect","“HR 118, BP 92/60 (baseline 140/85), RR 22, SpO₂ 95% RA, T 36.4, drain 300 mL fresh blood in 2 hours, urine 15 mL/h.”"],
+     ["Process","“HR is rising and BP falling compared with baseline. With fresh drain loss and low urine output, the pattern suggests hypovolaemia from bleeding.”"],
+     ["Problem","“Hypovolaemia secondary to post-operative bleeding: risk of shock.”"],
+     ["Goals","“Maintain systolic BP above 100 and urine output above 0.5 mL/kg/h within the next hour.”"],
+     ["Action","“Lie flat, high-flow oxygen per protocol, stay with him, call a rapid response per the calling criteria, ISBAR to the team, prepare for fluids and bloods.”"],
+     ["Evaluate","“Repeat obs every 5 to 15 minutes, monitor drain and urine output.”"],
+     ["Reflect","“I recognised the trend early by comparing with baseline.”"]])}
+    <div class="callout info"><b class="ic">i</b><div><b>Exam tip.</b> Examiners can't mark what they can't hear. Name the finding, say what it means, then say what you'll do.</div></div>`}
+  ],
+  quiz:[
+   {q:"“HR has risen from 80 to 118 and BP has fallen. With fresh drain loss, I think he is bleeding.” Which step is this?",o:["Collect cues","Process information","Establish goals","Reflect"],a:1,e:"Interpreting and relating cues to reach an inference is processing information."},
+   {q:"Which goal is written correctly?",o:["Improve pain","Patient comfortable","Pain below 4/10 within 1 hour of oral analgesia","Give analgesia"],a:2,e:"Goals should be specific, measurable and time-framed."},
+   {q:"Why should you ‘think aloud’ in the OSCE?",o:["It fills the time","Examiners can only mark reasoning they can see or hear","It is required by the handbook word for word","It replaces doing the skill"],a:1,e:"Saying your reasoning lets the examiner award marks for clinical judgement. You still have to perform the skills."}
+  ]},
+{ id:"c4", code:"C4", kind:"info", title:"Recognising & responding to deterioration", summary:"ABCDE, track-and-trigger charts and escalation: the core of NSQHS Standard 8.", chips:["ABCDE","Calling criteria"],
+  pages:[
+  {t:"ABCDE assessment", h:`
+    <h2 class="page-title">ABCDE: assess and treat as you go</h2><p class="page-sub">Use it whenever a patient looks unwell. Fix each problem before moving to the next letter.</p>
+    ${ctab(["","Look / measure","Act"],[
+     ["A · Airway","Talking? Noisy breathing, stridor, gurgling, swelling","Position, suction, call for help immediately if obstructed"],
+     ["B · Breathing","RR (full minute), SpO₂ & device, work of breathing, chest expansion, auscultate","Sit up, oxygen per order/protocol to target range"],
+     ["C · Circulation","HR, BP, capillary refill, skin colour & temperature, urine output, bleeding","IV access, fluids as ordered, stop bleeding, lie flat if hypotensive"],
+     ["D · Disability","Level of consciousness (ACVPU / GCS), pupils, BGL, pain, new confusion","Treat BGL &lt; 4 mmol/L per protocol, analgesia, safety"],
+     ["E · Exposure","Temperature, rashes, wounds, drains, calves, the whole body (with dignity)","Keep warm, look everywhere, then re-cover"]])}
+    <div class="callout warn"><b class="ic">!</b><div><b>Re-start at A</b> after any intervention or any change, and escalate as soon as a calling criterion is met. Don't finish the whole survey first.</div></div>`},
+  {t:"Charts & escalation", h:`
+    <h2 class="page-title">Track & trigger: escalate on the chart's criteria</h2><p class="page-sub">Each state uses its own adult observation chart (e.g. NSW SAGO “Between the Flags”, Queensland Q-ADDS). The logic is the same.</p>
+    <div class="grid2">
+     <div class="block"><h3>Typical colour logic</h3><ul class="plain"><li><b>White zone</b>: within normal limits. Continue the observation plan.</li><li><b>Yellow zone</b>: early warning. Increase frequency and request a <b>clinical review</b> within the time on the chart (often 30 minutes).</li><li><b>Red zone</b>: serious deterioration. Call a <b>rapid response / MET / Code Blue</b> per local policy, stay with the patient.</li></ul></div>
+     <div class="block"><h3>Always escalate if</h3><ul class="plain"><li>You are worried, even when the numbers look acceptable.</li><li>The patient or family is worried (patient and family escalation, e.g. REACH in NSW, Ryan's Rule in Queensland).</li><li>The trend is worsening, even inside a zone.</li><li>Altered or new confusion.</li></ul></div>
+    </div>
+    <div class="block"><h3>Escalation script (ISBAR)</h3><p class="mono" style="font-size:14px;line-height:1.7;background:var(--sunk);padding:14px;border-radius:8px">I: “Hi, I'm Sarah, RN on 6 West, calling about Mr Lee, bed 4.”<br>S: “I'm concerned he is bleeding. His systolic is 92, in the yellow zone.”<br>B: “Day 1 after bowel resection, baseline BP 140/85.”<br>A: “HR 118, RR 22, drain 300 mL fresh blood in 2 hours, urine 15 mL/h.”<br>R: “Please review him within 15 minutes. Would you like bloods and a fluid bolus? I'll repeat obs every 15 minutes.”</p></div>
+    <p class="src">${CSRC.acsqhc}, Standard 8. Zone thresholds and response times vary by chart and hospital. Follow the chart you are given.</p>`}
+  ],
+  quiz:[
+   {q:"During ABCDE you find RR 30 and SpO₂ 86%. What do you do?",o:["Finish the full survey, then report","Treat breathing now (sit up, oxygen per protocol) and escalate","Document and recheck in 4 hours","Give a sedative to slow the breathing"],a:1,e:"ABCDE is assess-and-treat. Correct breathing problems as you find them and escalate immediately."},
+   {q:"The observations are in the white zone but the patient's wife says “he's just not himself.” What is the best response?",o:["Reassure her the numbers are normal","Take her concern seriously: assess the patient and escalate per the family escalation process","Ask her to speak to the doctor tomorrow","Document only"],a:1,e:"Family concern is a recognised trigger. Assess the patient and use the local patient and family escalation process."},
+   {q:"Which observation is a late sign of shock?",o:["Rising heart rate","Restlessness","Falling blood pressure","Cool peripheries"],a:2,e:"Hypotension is a late sign. Tachycardia, anxiety and cool skin usually come first."}
+  ]},
+{ id:"c5", code:"C5", kind:"info", title:"Infection prevention & control", summary:"5 moments, standard and transmission-based precautions, PPE order and ANTT.", chips:["5 moments","PPE","ANTT"],
+  pages:[
+  {t:"Hand hygiene & precautions", h:`
+    <h2 class="page-title">The 5 moments for hand hygiene</h2><p class="page-sub">Examiners watch your hands from the moment you enter the room.</p>
+    <div class="steps">
+     <div class="step"><span class="step-n">MOMENT 1</span><h3>Before touching a patient</h3><p>Including before taking a pulse or helping them move.</p></div>
+     <div class="step"><span class="step-n">MOMENT 2</span><h3>Before a procedure</h3><p>Before an aseptic or clean procedure, e.g. cannula care, dressing.</p></div>
+     <div class="step"><span class="step-n">MOMENT 3</span><h3>After a procedure or body fluid exposure risk</h3><p>Including after removing gloves.</p></div>
+     <div class="step"><span class="step-n">MOMENT 4</span><h3>After touching a patient</h3><p>When leaving the bedside.</p></div>
+     <div class="step"><span class="step-n">MOMENT 5</span><h3>After touching a patient's surroundings</h3><p>Bed rails, table, equipment, even if you didn't touch the patient.</p></div>
+    </div>
+    <div class="block" style="margin-top:16px"><h3>Standard vs transmission-based precautions</h3><ul class="plain">
+     <li><b>Standard precautions</b> (everyone, always): hand hygiene, PPE based on risk, respiratory hygiene, safe sharps, clean environment, aseptic technique.</li>
+     <li><b>Contact</b> (e.g. MRSA, C. difficile): gown and gloves; single room or cohort.</li>
+     <li><b>Droplet</b> (e.g. influenza): surgical mask within the patient's zone; single room.</li>
+     <li><b>Airborne</b> (e.g. TB, measles): P2/N95 respirator with a fit check; negative-pressure room if available.</li></ul></div>
+    <p class="src">${CSRC.nhhi}.</p>`},
+  {t:"PPE & ANTT", h:`
+    <h2 class="page-title">PPE sequence & ANTT</h2><p class="page-sub">Follow your facility's poster. This is the common order taught in Australia.</p>
+    <div class="grid2">
+     <div class="block"><h3>Putting on (donning)</h3><ol class="steps-ol"><li>Hand hygiene</li><li>Gown</li><li>Mask or P2/N95 respirator (fit check)</li><li>Protective eyewear / face shield</li><li>Gloves (over the gown cuffs)</li></ol></div>
+     <div class="block"><h3>Taking off (doffing)</h3><ol class="steps-ol"><li>Gloves</li><li>Hand hygiene</li><li>Gown (roll inside out)</li><li>Hand hygiene</li><li>Eyewear</li><li>Mask / respirator (by the straps, outside the room for airborne)</li><li>Hand hygiene</li></ol></div>
+    </div>
+    <div class="block"><h3>Aseptic non-touch technique (ANTT)</h3><ul class="plain">
+     <li><b>Key parts</b>: parts of equipment that, if contaminated, can infect the patient (needle hub, gauze, dressing pad, forceps tips).</li>
+     <li><b>Key sites</b>: the wound, cannula insertion site, any break in the skin.</li>
+     <li><b>Standard ANTT</b>: technically simple, short procedures; key parts protected by non-touch; general aseptic field.</li>
+     <li><b>Surgical ANTT</b>: complex, longer or many key parts; critical aseptic field and sterile gloves.</li></ul></div>
+    <div class="callout warn"><b class="ic">!</b><div>Touching a key part, or the field, with non-sterile hands is a critical error. Say it aloud and start again with new equipment.</div></div>`}
+  ],
+  quiz:[
+   {q:"You straighten the bed linen of a patient but don't touch the patient. Do you need hand hygiene before leaving?",o:["No, you didn't touch the patient","Yes: moment 5, after touching the patient's surroundings","Only if the linen is soiled","Only if wearing gloves"],a:1,e:"Moment 5 applies after touching anything in the patient's surroundings."},
+   {q:"Which PPE is required for a patient with suspected pulmonary tuberculosis?",o:["Surgical mask","Gloves only","P2/N95 respirator with a fit check","No PPE if the patient wears a mask"],a:2,e:"Airborne precautions require a P2/N95 respirator, fit checked every time."},
+   {q:"In ANTT, the gauze you will use to clean the wound is a…",o:["Key site","Key part","General aseptic field","Critical control point"],a:1,e:"Equipment that touches the key site, or could contaminate it, is a key part. Never touch it."}
+  ]},
+{ id:"c6", code:"C6", kind:"info", title:"Medication safety", summary:"Medication rights, the NIMC, high-risk medicines (APINCHS) and Schedule 8 checks.", chips:["NIMC","APINCHS","S8"],
+  pages:[
+  {t:"Rights & the NIMC", h:`
+    <h2 class="page-title">Before every dose</h2><p class="page-sub">Say each check aloud. In the OSCE, unspoken checks earn no marks.</p>
+    <div class="grid2">
+     <div class="block"><h3>Medication rights</h3><ul class="plain"><li><b>Right patient</b>: 3 identifiers + allergy</li><li><b>Right medicine</b>: generic name, label vs chart</li><li><b>Right dose</b>: calculate and double-check</li><li><b>Right route</b>: and the form (e.g. slow release, don't crush)</li><li><b>Right time</b>: and when it was last given</li><li><b>Right documentation</b>: sign straight after giving</li><li>Also: right indication, right to refuse, right response (reassess).</li></ul></div>
+     <div class="block"><h3>Read the NIMC in this order</h3><ol class="steps-ol"><li>Patient ID on every page; weight and height</li><li>Allergies & adverse drug reactions section completed and signed</li><li>Order: date, medicine, dose, route, frequency, indication, prescriber signature</li><li>Administration record: has it already been given?</li><li>Pre-administration checks (e.g. pulse, BP, BGL, INR)</li></ol></div>
+    </div>
+    ${ctab(["Code","When a dose is not given (circle the code, write the reason in the notes)"],[["A","Absent from ward"],["F","Fasting"],["R","Refused (notify the prescriber)"],["L","On leave"],["N","Not available (obtain or notify the prescriber)"],["S","Self-administering"],["V","Vomiting"],["W","Withheld (clinical reason, tell the prescriber)"]])}
+    <p class="src">${CSRC.med}. Codes as printed on the NIMC; check your local chart.</p>`},
+  {t:"High-risk medicines", h:`
+    <h2 class="page-title">High-risk medicines: APINCHS</h2><p class="page-sub">Medicines where an error is more likely to cause serious harm. Extra checks apply.</p>
+    ${ctab(["Letter","Group","Typical extra check"],[
+     ["A","Antimicrobials","Allergy history (penicillin), timing, levels where required"],
+     ["P","Potassium & other electrolytes","Never IV push; premixed bags; infusion pump; check level"],
+     ["I","Insulin","BGL before dose; type & timing vs meals; units, never ‘U’"],
+     ["N","Narcotics (opioids) & other sedatives","Sedation score & RR before and after; naloxone available"],
+     ["C","Chemotherapeutic agents","Specialised training, PPE, independent double check"],
+     ["H","Heparin & other anticoagulants","Weight-based dosing, aPTT / INR, bleeding signs"],
+     ["S","Systems","PCA, epidurals, pumps, look-alike/sound-alike names (Tall Man lettering)"]])}
+    <div class="callout warn"><b class="ic">!</b><div><b>Schedule 8 medicines</b> (e.g. oxycodone, morphine, fentanyl) are checked by two nurses (one an RN, per local policy) from the drug safe, and both sign the drugs of dependence register. Some states also apply this to Schedule 4D medicines.</div></div>
+    <p class="src">${CSRC.med}.</p>`}
+  ],
+  quiz:[
+   {q:"A patient's metoprolol is due. HR 46, BP 88/54, light-headed. What do you do?",o:["Give it and recheck in an hour","Withhold, circle W, document the reason and notify the prescriber","Give half the dose","Circle R"],a:1,e:"Withhold for symptomatic bradycardia and hypotension. W means withheld for a clinical reason; document and notify."},
+   {q:"What does the ‘P’ in APINCHS stand for?",o:["Paracetamol","Potassium and other electrolytes","Penicillins","Propofol"],a:1,e:"Concentrated potassium is a classic high-risk medicine and must never be given by IV push."},
+   {q:"Oxycodone 5 mg oral is due. Which is correct?",o:["Any staff member can sign for it","Two nurses check it from the drug safe and both sign the register","It doesn't need recording","Give it, then ask another nurse to sign later"],a:1,e:"Schedule 8 medicines require a two-person check and register entry at the time, per state law and local policy."}
+  ]},
+{ id:"c7", code:"C7", kind:"info", title:"Communication, consent & handover", summary:"Person-centred communication, valid consent, teach-back, open disclosure and ISBAR.", chips:["Consent","Teach-back","ISBAR"],
+  pages:[
+  {t:"Consent & communication", h:`
+    <h2 class="page-title">Valid consent</h2><p class="page-sub">Needed before every nursing procedure, not only for surgery.</p>
+    <div class="grid2">
+     <div class="block"><h3>For consent to be valid</h3><ul class="plain"><li>The person has <b>capacity</b> for this decision.</li><li>It is given <b>freely</b>, without pressure.</li><li>It is <b>specific</b> to the procedure.</li><li>The person is <b>informed</b>: what, why, risks, alternatives, in plain language, with an interpreter if needed.</li></ul></div>
+     <div class="block"><h3>Types</h3><ul class="plain"><li><b>Verbal</b>: most nursing care (“Is it okay if I check your blood pressure?”).</li><li><b>Implied</b>: e.g. offering an arm. Still explain first.</li><li><b>Written</b>: procedures per policy (e.g. surgery, blood products in many hospitals).</li><li>No capacity: substitute decision-maker per state law; emergency care to save life.</li></ul></div>
+    </div>
+    <div class="block"><h3>Communication that scores</h3><ul class="plain"><li>Open questions first, then closed questions to clarify.</li><li>Check understanding with <b>teach-back</b>: “So I know I explained it well, can you tell me what you'll do if you feel dizzy?”</li><li>Acknowledge emotion before giving information.</li><li>Avoid jargon; check hearing aids and glasses.</li></ul></div>`},
+  {t:"Handover & disclosure", h:`
+    <h2 class="page-title">ISBAR & open disclosure</h2><p class="page-sub">Structured communication is part of NSQHS Standard 6.</p>
+    ${ctab(["","Include"],[["I · Identify","You, your role and ward; the patient (3 identifiers)"],["S · Situation","Why you are calling, in one sentence, and how worried you are"],["B · Background","Diagnosis, relevant history, allergies, recent treatment"],["A · Assessment","Observations and findings, and what you think is happening"],["R · Recommendation","What you need, by when; read-back of orders and agreed plan"]])}
+    <div class="block"><h3>Open disclosure</h3><p>When something goes wrong (for example a fall or a missed dose), patients are told openly and promptly: an apology or expression of regret, the facts as known, what is being done, and how it will be prevented. As the RN in the OSCE, ensure the patient is safe, inform the nurse in charge and medical officer, document objectively, and complete an incident report.</p></div>
+    <p class="src">${CSRC.acsqhc}; Australian Open Disclosure Framework.</p>`}
+  ],
+  quiz:[
+   {q:"What is ‘teach-back’?",o:["The patient teaches the nurse their history","Asking the patient to explain in their own words what they've been told","Reading the leaflet aloud","Handover back to the previous nurse"],a:1,e:"Teach-back checks your explanation was understood, and corrects it if not."},
+   {q:"In ISBAR, “Please review him within 15 minutes” belongs in…",o:["Situation","Background","Assessment","Recommendation"],a:3,e:"Recommendation is what you need and by when."},
+   {q:"A patient falls in the OSCE scenario. After ensuring safety and assessing for injury, you should…",o:["Say nothing to avoid worrying the family","Inform the nurse in charge and medical officer, document, complete an incident report, and be open with the patient","Wait to see if bruising develops","Only document if injured"],a:1,e:"Escalate, document objectively, report the incident and practise open disclosure."}
+  ]},
+{ id:"c8", code:"C8", kind:"info", title:"Documentation & scope of practice", summary:"Legal documentation, delegation to ENs and AINs, and duty of care.", chips:["Blue folder","Delegation"],
+  pages:[
+  {t:"Documentation", h:`
+    <h2 class="page-title">Documentation that stands up</h2><p class="page-sub">“If it wasn't documented, it wasn't done.” In the OSCE you document in the blue folder when instructed.</p>
+    <div class="grid2">
+     <div class="block"><h3>Good notes are</h3><ul class="plain"><li><b>Factual and objective</b>: what you saw, measured and did. Quote the patient.</li><li><b>Timely</b>: as soon as possible after care.</li><li><b>Legible, in pen</b>, with date and time (24-hour clock).</li><li><b>Signed</b> with name, signature and designation (e.g. “S. Jones RN”).</li><li>Uses only approved abbreviations.</li></ul></div>
+     <div class="block"><h3>Never</h3><ul class="plain"><li>Use correction fluid, erase, or leave blank lines.</li><li>Write opinions or blame (“patient is difficult”).</li><li>Document care before giving it.</li><li>Errors: a single line through, “error”, initial, date. Late entries are labelled as late.</li></ul></div>
+    </div>
+    <div class="block"><h3>Model note</h3><p class="mono" style="font-size:14px;line-height:1.7;background:var(--sunk);padding:14px;border-radius:8px">29/10/2026 1030 Nursing: Pt c/o R knee pain 7/10, throbbing, worse on movement, onset 0930 after physio. Obs: RR 16, SpO₂ 98% RA, HR 84, BP 128/80, T 36.8, sedation 0. R foot warm, pulses present. Oxycodone 5 mg PO given 1035 (checked with A. Smith RN). Ice pack + elevation applied. Plan: reassess pain, RR & sedation at 1120. S. Jones RN (signature)</p></div>`},
+  {t:"Scope & delegation", h:`
+    <h2 class="page-title">Scope of practice & delegation</h2><p class="page-sub">The RN stays accountable for the decision to delegate.</p>
+    ${ctab(["Role","Typical scope (varies with education, policy and state law)"],[["Registered nurse (RN)","Comprehensive assessment, care planning, evaluation, complex care, delegation and supervision, all medicine routes per policy"],["Enrolled nurse (EN)","Works under the direction and supervision of an RN; care within their education and competence; medicine administration if they hold the qualification and policy allows"],["Assistant in nursing / care worker (AIN, PCA)","Unregulated: personal care, mobility assistance, basic observations if trained; must report changes to the RN"]])}
+    <div class="callout amber"><b class="ic">★</b><div><b>Before delegating, check:</b> is the patient stable? Is the task within the person's role, education and competence? Have you given clear instructions, including what to report and when? Will you supervise and follow up?</div></div>
+    <div class="block"><h3>Duty of care</h3><p>You owe each patient a duty to act as a reasonable, competent RN would. In practice: assess, act within scope, escalate concerns, never leave an unsafe patient, and refuse or question an order you believe is unsafe, and document that you did.</p></div>
+    <p class="src">${CSRC.nmba}; NMBA Decision-making framework for nursing and midwifery.</p>`}
+  ],
+  quiz:[
+   {q:"You make an error in your notes. What is correct?",o:["Use correction fluid","Scribble it out","Draw a single line through it, write ‘error’, initial and date it","Tear out the page"],a:2,e:"The original must stay readable. Single line, ‘error’, initial and date."},
+   {q:"Which task should NOT be delegated to an assistant in nursing?",o:["Helping a stable patient shower","Assessing a newly deteriorating patient","Making a bed","Assisting with meals"],a:1,e:"Assessment of an unstable or deteriorating patient stays with the RN."},
+   {q:"Which documentation entry is objective?",o:["“Patient was rude”","“Patient seems fine”","“States ‘I feel dizzy when I stand’; BP lying 132/78, standing 104/66”","“Probably dehydrated”"],a:2,e:"Objective notes record what the patient said and what you measured."}
+  ]}
 ];
-/* station numbering + colour coding (AHPRA format: stations numbered 1–10) */
-const HUES=["var(--d-found)"].concat(Array(12).fill("var(--teal)"));
-const stNum=S=>+S.code.slice(1);
-const hueOf=S=>HUES[stNum(S)%HUES.length];
-const DOM_SHORT={"Nursing assessment & care planning":["Assessment","var(--d-assess)"],"Care delivery":["Care delivery","var(--d-care)"],"Evaluation of care":["Evaluation","var(--d-eval)"],"Foundation":["Warm-up","var(--d-found)"]};
-const stLabel=S=>{const n=stNum(S);return n===0?"Station 0 · Warm-up":n<=10?"Station "+n:"Extra station "+n};
-const ICONS={book:'<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',plus:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',play:'<circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/>',clock:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/>'};
-const ico=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
+
+/* ================= LMS LAYER: dashboard, quiz scores, resume, streak, certificate ================= */
+const DASH_LESSON={id:"dash",code:"⌂",kind:"dash",title:"My learning dashboard",summary:"Your progress, scores, study streak and what to do next.",chips:["Saved on this device"]};
+let RESUME={l:1,p:0};
+const qkey=L=>"ngn_quiz_"+user+"_"+L.id;
+function quizRecord(L,qi,ok){const r=store.get(qkey(L),{});if(!(qi in r)){r[qi]=ok;store.set(qkey(L),r)}quizShow(L)}
+function quizStat(L){const r=store.get(qkey(L),{}),n=(L.quiz||[]).length,a=Object.keys(r).length,c=Object.values(r).filter(Boolean).length;return {n,a,c}}
+function quizShow(L){const el=document.getElementById("qScore");if(!el)return;const s=quizStat(L);
+  el.innerHTML=s.a?`<b>${s.c}/${s.a}</b> correct on first try${s.a<s.n?` · ${s.n-s.a} to go`:""}${s.a===s.n?(s.c===s.n?" · <span class=\"ok\">full marks</span>":" · <button class=\"btn btn-ghost btn-sm\" data-qreset=\"1\">Reset & retry</button>"):""}`:`Answer each question once to record your first-try score.`}
+function rubricStat(S){const n=S.rubric.length;let t=0,cm=0;S.rubric.forEach((r,i)=>{const v=store.get("ngn_chk_"+user+"_r_"+S.id+"_"+i,false);if(v)t++;else if(r.c)cm++});return {n,t,cm}}
+function dayKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function markDay(){const k="ngn_days_"+user,s=new Set(store.get(k,[]));s.add(dayKey());store.set(k,[...s].slice(-400))}
+function streak(){const s=new Set(store.get("ngn_days_"+user,[]));let n=0;const d=new Date();if(!s.has(dayKey(d)))d.setDate(d.getDate()-1);while(s.has(dayKey(d))){n++;d.setDate(d.getDate()-1)}return n}
+const COURSE=()=>ALL.filter(L=>L.kind!=="dash");
+function firstOpen(lessons){const L=lessons.find(x=>!lessonDone(x))||lessons[0];return ALL.indexOf(L)}
+function ring(p,size=112,col="var(--teal)"){const r=size/2-9,c=2*Math.PI*r;return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" class="ring"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--sunk)" stroke-width="12"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p/100)}" transform="rotate(-90 ${size/2} ${size/2})"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-size="${size/4.4}" font-weight="800" fill="var(--ink)">${p}%</text></svg>`}
+function dashHTML(){
+  const C=COURSE(),done=C.filter(lessonDone).length,pct=Math.round(done/C.length*100);
+  const qz=C.filter(L=>L.quiz&&L.quiz.length).map(L=>({L,...quizStat(L)})),qa=qz.reduce((a,x)=>a+x.a,0),qc=qz.reduce((a,x)=>a+x.c,0),qavg=qa?Math.round(qc/qa*100):0;
+  const sts=[...STATIONS,...MSE_STATIONS].map(S=>({S,...rubricStat(S)})),marked=sts.filter(x=>x.t>0);
+  const name=($("#userName").textContent||"").split("@")[0];
+  const days=new Set(store.get("ngn_days_"+user,[]));
+  const cal=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return `<i class="${days.has(dayKey(d))?"on":""}" title="${d.toLocaleDateString()}"></i>`}).join("");
+  const exam=store.get("ngn_exam_"+user,"");let left="";if(exam){const n=Math.ceil((new Date(exam+"T09:00")-new Date())/864e5);left=n>0?`<b>${n}</b> days to go`:n===0?"<b>Today.</b> You've got this.":"Exam date has passed"}
+  const R=ALL[RESUME.l]&&RESUME.l>0?ALL[RESUME.l]:ALL[firstOpen(C)];const Ri=ALL.indexOf(R),Rp=RESUME.l===Ri?RESUME.p:0;
+  const weak=qz.filter(x=>x.a&&x.c/x.a<0.7).map(x=>x.L).slice(0,4);
+  const mods=MODULES.filter(m=>m.lessons[0].kind!=="dash").map(m=>{const n=m.lessons.length,d=m.lessons.filter(lessonDone).length,p=Math.round(d/n*100);
+    return `<button class="dmod" data-jump="${firstOpen(m.lessons)}"><span class="dmod-t">${esc(m.name)}</span><span class="dmod-m">${d}/${n} lessons${p===100?" · ✓":""}</span><span class="bar"><i style="width:${p}%"></i></span></button>`}).join("");
+  return `<h2 class="page-title">Welcome back${name?", "+esc(name):""}</h2>
+  <div class="dstats">
+    <div class="dstat">${ring(pct)}<div><b>${done}/${C.length}</b><span>lessons complete</span></div></div>
+    <div class="dstat"><div class="dbig">${qa?qavg+"%":"–"}</div><div><b>Quiz accuracy</b><span>${qa?`${qc}/${qa} first-try answers`:"No quizzes answered yet"}</span></div></div>
+    <div class="dstat"><div class="dbig">${marked.length}</div><div><b>Stations self-marked</b><span>of ${sts.length} practice stations</span></div></div>
+    <div class="dstat"><div class="dbig">${streak()}🔥</div><div><b>Day streak</b><span>last 7 days</span><span class="dcal">${cal}</span></div></div>
+  </div>
+  <div class="grid2">
+    <div class="block dcont"><h3>Continue where you left off</h3><p><b>${esc(R.title)}</b><br><span style="color:var(--muted)">${esc(R.summary||"")}</span></p><button class="btn btn-primary" data-jump="${Ri}" data-jp="${Rp}">Continue →</button></div>
+    <div class="block"><h3>Your OSCE date</h3><p style="color:var(--muted)">Set your exam date to see a countdown.</p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px"><input type="date" id="examDate" value="${exam}" class="dinput"><span>${left}</span></div>
+      <p style="margin-top:10px;font-size:14px;color:var(--muted)">Aim for every station at least twice, plus two full mock circuits in the final fortnight.</p></div>
+  </div>
+  <div class="block"><h3>Modules</h3><div class="dmods">${mods}</div></div>
+  ${weak.length?`<div class="callout amber"><b class="ic">★</b><div><b>Revise these next</b> (below 70% on first try): ${weak.map(L=>`<button class="dlink" data-jump="${ALL.indexOf(L)}" data-jp="${pagesOf(L).length-1}">${esc(L.title)}</button>`).join(" · ")}</div></div>`:""}
+  <div class="grid2">
+    <div class="block"><h3>Quiz scores</h3><table class="ztable"><tbody>${qz.map(x=>`<tr><td><button class="dlink" data-jump="${ALL.indexOf(x.L)}" data-jp="${pagesOf(x.L).length-1}">${esc(x.L.title)}</button></td><td style="text-align:right;white-space:nowrap">${x.a?`<b class="${x.c/x.a>=0.7?"ok":"dbad"}">${x.c}/${x.a}</b>`:"<span style=\"color:var(--muted)\">–</span>"}</td></tr>`).join("")}</tbody></table></div>
+    <div class="block"><h3>Station self-marking</h3><table class="ztable"><tbody>${sts.map(x=>`<tr><td><button class="dlink" data-jump="${ALL.indexOf(x.S)}" data-jp="${stationKeys(x.S).indexOf("mark")}">${esc(x.S.code)} · ${esc(x.S.title)}</button></td><td style="text-align:right;white-space:nowrap">${x.t?`<b>${x.t}/${x.n}</b>${x.cm?` <span class="dbad" title="critical items not ticked">⚠ ${x.cm}</span>`:""}`:"<span style=\"color:var(--muted)\">not yet</span>"}</td></tr>`).join("")}</tbody></table>
+      <p class="src">⚠ = critical safety items you haven't ticked yet.</p></div>
+  </div>`;
+}
+
+/* ================= VOICE RECORDER (practise aloud, play back, download) ================= */
+const REC={};let recState=null;
+const recOK=()=>!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+const fmtT=s=>Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
+function recList(S){const L=REC[S.id]||[];if(!L.length)return `<p class="rec-empty">No recordings yet.</p>`;
+  return L.map((r,i)=>`<div class="rec-item"><div class="rec-meta"><b>Attempt ${i+1}</b><span>${r.when} · ${fmtT(r.dur)}</span></div><audio controls preload="metadata" src="${r.url}"></audio><div class="rec-acts"><a class="btn btn-ghost btn-sm" href="${r.url}" download="${r.name}">⬇ Download</a><button class="btn btn-ghost btn-sm" data-recdel="${i}">Delete</button></div></div>`).join("")}
+function recHTML(S,compact){
+  const on=recState&&recState.sid===S.id;
+  return `<div class="block rec" id="recBox" data-sid="${S.id}"><div class="rec-head"><div><h3>🎙 Record your attempt</h3><p class="rec-sub">${compact?"Play your recording back while you tick the rubric.":"Record yourself talking through the station, then listen back and mark yourself honestly."}</p></div>
+   ${recOK()?`<button class="btn ${on?"rec-stop":"btn-primary"}" id="recBtn">${on?"■ Stop · <span id=\"recT\">"+fmtT((Date.now()-recState.t0)/1000)+"</span>":"● Start recording"}</button>`:""}</div>
+   ${recOK()?"":`<div class="callout warn"><b class="ic">!</b><div>Recording isn't supported in this browser. Try the latest Chrome, Edge or Safari.</div></div>`}
+   ${!compact&&recOK()?`<label class="rec-auto"><input type="checkbox" id="recAuto" ${store.get("ngn_recauto",false)?"checked":""}> Start recording automatically when I start the 8-minute clock</label>`:""}
+   <div id="recList">${recList(S)}</div>
+   <p class="src">Recordings stay on this device only and are cleared when you close or refresh the page. Download any you want to keep.</p></div>`}
+async function recStart(S){if(recState)return;
+  try{const st=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});
+    const mime=["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/aac"].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))||"";
+    const mr=new MediaRecorder(st,mime?{mimeType:mime}:undefined),chunks=[];
+    recState={sid:S.id,code:S.code,title:S.title,mr,st,t0:Date.now(),chunks};
+    mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+    mr.onstop=()=>{const type=mr.mimeType||mime||"audio/webm",ext=/mp4|aac/.test(type)?"m4a":"webm",b=new Blob(chunks,{type}),d=new Date(),dur=(Date.now()-recState.t0)/1000;
+      const stamp=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")+"_"+String(d.getHours()).padStart(2,"0")+String(d.getMinutes()).padStart(2,"0");
+      (REC[recState.sid]=REC[recState.sid]||[]).push({url:URL.createObjectURL(b),dur,when:d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}),name:`OSCE_${recState.code}_${recState.title.replace(/[^A-Za-z0-9]+/g,"-")}_${stamp}.${ext}`});
+      st.getTracks().forEach(t=>t.stop());clearInterval(recState.iv);recState=null;toast("Recording saved. Play it back or download it");recRefresh()};
+    recState.iv=setInterval(()=>{const el=document.getElementById("recT");if(el&&recState)el.textContent=fmtT((Date.now()-recState.t0)/1000);if(recState&&Date.now()-recState.t0>15*60e3)recStop()},500);
+    mr.start(1000);toast("Recording… speak clearly");recRefresh();
+  }catch(e){recState=null;toast(e&&e.name==="NotAllowedError"?"Microphone blocked. Allow microphone access in your browser settings, then try again":"Couldn't start the microphone: "+(e.message||e),"err")}}
+function recStop(){if(recState&&recState.mr.state!=="inactive")recState.mr.stop()}
+function recRefresh(){const box=document.getElementById("recBox");if(!box)return;const S=ALL.find(x=>x.id===box.dataset.sid);if(!S)return;box.outerHTML=recHTML(S,!document.getElementById("recAuto"));bindRec(S)}
+function bindRec(S){const b=document.getElementById("recBtn");if(b)b.onclick=()=>recState?recStop():recStart(S);
+  const a=document.getElementById("recAuto");if(a)a.onchange=()=>store.set("ngn_recauto",a.checked);
+  document.querySelectorAll("[data-recdel]").forEach(x=>x.onclick=()=>{const L=REC[S.id]||[],i=+x.dataset.recdel;if(L[i]){URL.revokeObjectURL(L[i].url);L.splice(i,1)}recRefresh()})}
+window.addEventListener("beforeunload",e=>{if(recState||Object.values(REC).some(l=>l.length)){e.preventDefault();e.returnValue=""}});
+
+const MODULES=[
+ {name:"My learning", lessons:[DASH_LESSON]},
+ {name:"Know the RN OSCE", lessons:INFO_LESSONS},
+ {name:"Core concepts", lessons:CONCEPT_LESSONS},
+ {name:"Demo videos", lessons:[VIDEO_LESSON]},
+ {name:"Foundation station", lessons:[STATIONS[0]]},
+ {name:"Assessment & care planning", lessons:[STATIONS[1],STATIONS[8],STATIONS[9],...MSE_STATIONS]},
+ {name:"Care delivery", lessons:[STATIONS[2],STATIONS[3],STATIONS[4],STATIONS[5],STATIONS[7],STATIONS[10]]},
+ {name:"Evaluation of care", lessons:[STATIONS[6]]},
+ {name:"Exam simulation", lessons:[{id:"mock",code:"MC",kind:"mock",title:"Full mock circuit",summary:"All ten stations in sequence: 2 minutes reading, 8 minutes performance, no pauses."}]}
+];
 const ALL=MODULES.flatMap(m=>m.lessons);
 STATIONS.forEach(s=>s.kind="station");
 MSE_STATIONS.forEach(s=>{s.kind="station";s.chart={title:"MSE framework",render:()=>mseHTML()}});
+STATIONS[0].video="approach";STATIONS[4].video="meds";STATIONS[5].video="ivfluids";STATIONS[7].video="pain";STATIONS[8].video="resp";STATIONS[9].video="falls";STATIONS[10].video="antt";MSE_STATIONS[0].video="mse";
 STATIONS[1].video="vitals";STATIONS[2].video="bls";STATIONS[3].video="transfusion";STATIONS[6].video="isbar";
 STATIONS[1].chart={title:"Observation chart (SAGO)",render:()=>sagoHTML()};
 STATIONS[2].chart={title:"ARC BLS chart",render:()=>blsHTML()};
@@ -1245,6 +1500,7 @@ STATIONS[10].chart={title:"Photo review",render:()=>woundPhotoHTML()};
 STATIONS[4].chart={title:"Medication chart (NIMC)",render:()=>nimcHTML()};
 
 function pagesOf(L){
+  if(L.kind==="dash") return ["Overview"];
   if(L.kind==="info") return [...L.pages.map(p=>p.t),"Check yourself"];
   if(L.kind==="station") return stationKeys(L).map(k=>({brief:"Brief",instr:"Candidate instructions",guide:"Clinical guide",video:"Watch the demo",chart:L.chart&&L.chart.title,perform:"Perform",mark:"Mark yourself",scripts:"Scripts & documentation",quiz:"Quiz"})[k]);
   return ["Circuit"];
@@ -1253,12 +1509,12 @@ function pagesOf(L){
 /* ---------------- landing extras ---------------- */
 (function(){
   const row=$("#circuitRow");const stops=STATIONS.slice(1);
-  row.innerHTML=stops.map((s,i)=>`<div class="cstop" data-i="${i}"><b>${(i+1)}</b><span>${s.title.split(" ")[0].replace(/[^A-Za-z]/g,"")}</span></div>`).join("");
-  let i=0;const tick=()=>{row.querySelectorAll(".cstop").forEach((c,j)=>c.classList.toggle("on",j===i));$("#circuitNow").textContent=`Station ${(i+1)} · ${stops[i].title}`;i=(i+1)%10};
+  row.innerHTML=stops.map((s,i)=>`<div class="cstop" data-i="${i}"><b>${"ABCDEFGHIJ"[i]}</b><span>${s.title.split(" ")[0].replace(/[^A-Za-z]/g,"")}</span></div>`).join("");
+  let i=0;const tick=()=>{row.querySelectorAll(".cstop").forEach((c,j)=>c.classList.toggle("on",j===i));$("#circuitNow").textContent=`Station ${"ABCDEFGHIJ"[i]} · ${stops[i].title}`;i=(i+1)%10};
   tick();if(!matchMedia("(prefers-reduced-motion: reduce)").matches)setInterval(tick,1600);
   const groups={"Nursing assessment & care planning":[],"Care delivery":[],"Evaluation of care":[]};
   [...stops,...MSE_STATIONS].forEach(s=>groups[s.domain].push(s));
-  $("#domainList").innerHTML=Object.entries(groups).map(([k,v])=>`<div class="domain"><h3>${k}</h3><ul>${v.map(s=>`<li>${s.title}<span>Station ${stNum(s)}</span></li>`).join("")}</ul></div>`).join("");
+  $("#domainList").innerHTML=Object.entries(groups).map(([k,v])=>`<div class="domain"><h3>${k}</h3><ul>${v.map(s=>`<li>${s.title}<span>${s.code}</span></li>`).join("")}</ul></div>`).join("");
   // monitor numbers + clock
   let sec=360;setInterval(()=>{const hr=116+Math.round(Math.random()*5),sp=90+Math.round(Math.random()*1.4);$("#vHR").textContent=hr;$("#vSp").textContent=sp;sec=sec>0?sec-1:360;$("#heroClock").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")},1000);
 })();
@@ -1326,6 +1582,7 @@ async function afterSignIn(u){
   if(NGN_CONFIG.REQUIRE_ACCESS&&!(prof&&prof.has_access)){
     show("auth");$("#authTabs").hidden=true;$("#authForm").hidden=true;$("#forgotBtn").hidden=true;$("#backInBtn").hidden=true;
     $("#authTitle").textContent="Almost there";$("#pendingEmail").textContent=u.email;$("#pendingBox").hidden=false;
+    try{const bu=new URL("https://buy.stripe.com/28EcMY8Ce0Xdfhj03G00005");bu.searchParams.set("prefilled_email",u.email);bu.searchParams.set("client_reference_id",u.id);$("#pendingBuy").href=bu.toString()}catch(e){}
     if(NGN_CONFIG.CONTACT_URL){$("#contactLink").href=NGN_CONFIG.CONTACT_URL;$("#contactLink").hidden=false}
     return}
   enterApp(u.id,name);
@@ -1340,69 +1597,45 @@ $("#signOut").onclick=async()=>{try{if(sb)await sb.auth.signOut()}catch(e){}user
 /* ---------------- progress ---------------- */
 let user=null,prog={},cur={l:0,p:0};
 const pkey=()=>"ngn_prog_"+user;
-function saveProg(){store.set(pkey(),{prog,cur})}
+function saveProg(){if(ALL[cur.l]&&ALL[cur.l].kind!=="dash")RESUME={...cur};store.set(pkey(),{prog,cur:RESUME,curId:ALL[RESUME.l]&&ALL[RESUME.l].id})}
 function seen(L){return prog[L.id]||[]}
 function lessonDone(L){return seen(L).length>=pagesOf(L).length}
 function markSeen(L,p){const s=new Set(seen(L));s.add(p);prog[L.id]=[...s];saveProg()}
 
-function enterApp(u,name){name=name||u;user=u;const d=store.get(pkey(),{prog:{},cur:{l:0,p:0}});prog=d.prog||{};cur=d.cur||{l:0,p:0};
+function enterApp(u,name){name=name||u;user=u;const d=store.get(pkey(),{prog:{},cur:{l:0,p:0}});prog=d.prog||{};const oc=d.cur||{l:1,p:0};RESUME={l:oc.l,p:oc.p||0};if(d.curId){const ix=ALL.findIndex(L=>L.id===d.curId);if(ix>=0)RESUME.l=ix}else if(d.cur){RESUME.l=oc.l<4?oc.l+1:oc.l+1+CONCEPT_LESSONS.length}cur={l:0,p:0};
   $("#userName").textContent=name;$("#avatar").textContent=name[0].toUpperCase();show("app");renderRail();renderLesson();toast("Signed in as "+name)}
 
 /* ---------------- rail ---------------- */
-let railClosed=new Set(store.get("ngn_rail_closed",[]));
-function railItem(L){const i=ALL.indexOf(L),n=pagesOf(L).length,sn=seen(L).length,done=lessonDone(L),pct=Math.min(100,Math.round(sn/n*100));
-  let code,kick,hue,q=L.title+" "+(L.summary||"");
-  if(L.kind==="station"){const num=stNum(L),d=DOM_SHORT[L.domain]||["",""];hue=hueOf(L);code=`<small>ST</small>${num}`;kick=`${num===0?"Warm-up":num<=10?"Station "+num:"Extra · "+num}`;q+=" station "+num+" "+L.domain+" "+L.skills.join(" ")}
-  else if(L.kind==="mock"){hue="var(--teal)";code="10×";kick="Mock exam"}
-  else {hue="var(--teal)";code=L.id==="v1"?"▶":L.code;kick=L.id==="v1"?"Videos":"Lesson "+L.code.slice(1)}
-  return `<button class="rail-item ${i===cur.l?"on":""} ${done?"done":""}" style="--st:${hue}" data-l="${i}" data-q="${esc(q.toLowerCase())}"><span class="rail-code">${done?"✓":code}</span><span class="t"><span class="kick">${kick}${L.kind==="station"&&DOM_SHORT[L.domain]&&stNum(L)>0?`<span class="dtag" style="--dc:${DOM_SHORT[L.domain][1]}">${DOM_SHORT[L.domain][0]}</span>`:""}</span>${esc(L.title)}<span class="mini"><i style="width:${pct}%"></i></span></span></button>`}
 function renderRail(){
-  const curL=ALL[cur.l];let h="";
-  MODULES.forEach((m,mi)=>{const dn=m.lessons.filter(lessonDone).length,closed=railClosed.has(mi)&&!m.lessons.includes(curL);
-    h+=`<div class="rsec ${closed?"closed":""}" data-sec="${mi}" style="--sc:${m.c}"><button class="rsec-h" data-sec-t="${mi}" aria-expanded="${!closed}"><span class="rsec-ic">${ico(m.ic)}</span><span class="rsec-t">${m.name}</span><span class="rsec-n">${dn}/${m.lessons.length}</span><svg class="rsec-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="rsec-b">${m.lessons.map(railItem).join("")}</div></div>`});
-  $("#railList").innerHTML=h+`<div class="rail-empty" id="railEmpty" hidden>No stations match your search.</div>`;
-  filterRail();
-  const done=ALL.filter(lessonDone).length,pct=Math.round(done/ALL.length*100);$("#progBar").style.width=pct+"%";$("#progText").textContent=pct+"%";
-  const sd=STATIONS.slice(1).filter(lessonDone).length;$("#progSub").textContent=`${done}/${ALL.length} lessons · ${sd}/10 OSCE stations done`;
-  const on=$("#railList .rail-item.on");if(on&&on.scrollIntoView)on.scrollIntoView({block:"nearest"});
+  let h="";MODULES.forEach(m=>{h+=`<div class="rail-mod">${m.name}${m.lessons[0].kind==="dash"?"":`<span class="rail-mc">${m.lessons.filter(lessonDone).length}/${m.lessons.length}</span>`}</div>`;m.lessons.forEach(L=>{const i=ALL.indexOf(L),n=pagesOf(L).length,s=seen(L).length;
+    h+=`<button class="rail-item ${i===cur.l?"on":""} ${lessonDone(L)?"done":""}" data-l="${i}"><span class="rail-code">${lessonDone(L)?"✓":L.code}</span><span class="t">${esc(L.title)}<span class="meta">${s}/${n} pages</span></span></button>`})});
+  $("#railList").innerHTML=h;
+  const CC=COURSE(),done=CC.filter(lessonDone).length,pct=Math.round(done/CC.length*100);$("#progBar").style.width=pct+"%";$("#progText").textContent=`${pct}% · ${done}/${CC.length} lessons`;
 }
-function filterRail(){const q=($("#railSearch").value||"").trim().toLowerCase();let any=false;
-  document.querySelectorAll("#railList .rsec").forEach(sec=>{let vis=0;sec.querySelectorAll(".rail-item").forEach(b=>{const ok=!q||b.dataset.q.includes(q);b.hidden=!ok;if(ok)vis++});
-    sec.hidden=!!q&&!vis;if(q&&vis)sec.classList.remove("closed");if(vis)any=true});
-  const e=$("#railEmpty");if(e)e.hidden=any}
-$("#railSearch").addEventListener("input",()=>{if(!$("#railSearch").value)return renderRail();filterRail()});
-$("#railList").addEventListener("click",e=>{const t=e.target.closest("[data-sec-t]");if(t){const mi=+t.dataset.secT,sec=t.parentElement,c=sec.classList.toggle("closed");t.setAttribute("aria-expanded",!c);c?railClosed.add(mi):railClosed.delete(mi);store.set("ngn_rail_closed",[...railClosed]);return}
-  const b=e.target.closest("[data-l]");if(!b)return;cur={l:+b.dataset.l,p:0};closeRail();renderLesson()});
+$("#railList").addEventListener("click",e=>{const b=e.target.closest("[data-l]");if(!b)return;cur={l:+b.dataset.l,p:0};closeRail();renderLesson()});
 $("#menuBtn").onclick=()=>{$("#rail").classList.add("open");$("#scrim").hidden=false};
 function closeRail(){$("#rail").classList.remove("open");$("#scrim").hidden=true}
 $("#scrim").onclick=closeRail;
 
 /* ---------------- lesson render ---------------- */
-function pgBtn(L,t,i){return `<button class="pg ${i===cur.p?"on":""} ${seen(L).includes(i)?"seen":""}" data-p="${i}"><i>${seen(L).includes(i)&&i!==cur.p?"✓":i+1}</i>${t}</button>`}
-function pagerHTML(L,pages){
-  if(L.kind!=="station")return `<div class="pager">${pages.map((t,i)=>pgBtn(L,t,i)).join("")}</div>`;
-  const keys=stationKeys(L);
-  return `<div class="pager phased">${PHASES.map(ph=>{const idx=keys.map((k,i)=>ph.k.includes(k)?i:-1).filter(i=>i>=0);if(!idx.length)return"";
-    return `<div class="ph" style="--pc:${ph.c}"><span class="ph-l">${ph.l}</span><div class="ph-row">${idx.map(i=>pgBtn(L,pages[i],i)).join("")}</div></div>`}).join("")}</div>`}
-function stStrip(L){const btn=S=>`<button class="sts ${S===L?"on":""} ${lessonDone(S)?"done":""}" style="--st:${hueOf(S)}" data-jump="${ALL.indexOf(S)}" title="${esc(stLabel(S)+": "+S.title)}" aria-label="${esc(stLabel(S)+": "+S.title)}">${stNum(S)}</button>`;
-  return `<div class="ststrip" aria-label="Jump to station"><span>Stations</span>${btn(STATIONS[0])}<span class="sts-sep"></span>${STATIONS.slice(1).map(btn).join("")}<span class="sts-sep"></span>${MSE_STATIONS.map(btn).join("")}</div>`}
 function renderLesson(){
+  markDay();
   const L=ALL[cur.l],pages=pagesOf(L);if(cur.p>=pages.length)cur.p=0;markSeen(L,cur.p);saveProg();renderRail();
-  const chips=L.kind==="station"?L.skills.map(s=>`<span class="chip">${s}</span>`):(L.chips||[]).map(c=>`<span class="chip teal">${c}</span>`);
+  const chips=L.kind==="station"?[`<span class="chip teal">${L.domain}</span>`,...L.skills.map(s=>`<span class="chip">${s}</span>`)]:(L.chips||[]).map(c=>`<span class="chip teal">${c}</span>`);
   let body="";
   if(L.kind==="info") body= cur.p<L.pages.length? L.pages[cur.p].h : quizHTML(L.quiz);
   else if(L.kind==="station") body=stationPage(L,cur.p);
+  else if(L.kind==="dash") body=dashHTML();
   else body=mockHTML();
   $("#stageIn").innerHTML=`
-   ${L.kind==="station"?stStrip(L):""}
-   <div class="lhead" style="--st:${L.kind==="station"?hueOf(L):"var(--teal)"}"><div class="eyebrow">${L.kind==="station"?`<span class="stnum">${stNum(L)}</span>${stLabel(L)}${stNum(L)>0&&stNum(L)<=10?" of 10":""} · ${L.domain}`:L.kind==="mock"?"Exam simulation":"Know the OSCE · Lesson "+L.code.slice(1)}</div><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p>${L.kind==="station"?`<div class="fmt"><span>⏱ 2:00 reading</span><span>▶ 8:00 performance</span><span>🔔 bell at 6:00</span></div>`:""}<div class="chips">${chips.join("")}</div></div>
-   ${pages.length>1?pagerHTML(L,pages):""}
+   <div class="lhead"><div class="eyebrow">${L.kind==="station"?(L.code==="S0"?"Practice station · foundation":"Practice station "+L.code.slice(1)):L.kind==="mock"?"Exam simulation":L.kind==="dash"?"Your learning":/^C\d/.test(L.code)?"Core concept · "+L.code:L.code==="VID"?"Demo videos":"Exam format · "+L.code}</div><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p><div class="chips">${chips.join("")}</div></div>
+   ${pages.length>1?`<div class="pager">${pages.map((t,i)=>`<button class="pg ${i===cur.p?"on":""} ${seen(L).includes(i)?"seen":""}" data-p="${i}"><i>${seen(L).includes(i)&&i!==cur.p?"✓":i+1}</i>${t}</button>`).join("")}</div>`:""}
    <section class="page">${body}</section>
    <div class="pfoot"><button class="btn btn-ghost" id="prevBtn" ${cur.l===0&&cur.p===0?"disabled":""}>← Previous</button><span class="count">Page ${cur.p+1} of ${pages.length}</span><button class="btn btn-primary" id="nextBtn">${cur.p<pages.length-1?"Next page →":cur.l<ALL.length-1?"Complete & next lesson →":"Finish course ✓"}</button></div>`;
   $("#stage").scrollTop=0;
   bindPage(L);
 }
-$("#stageIn").addEventListener("click",e=>{const jm=e.target.closest("[data-jump]");if(jm){cur={l:+jm.dataset.jump,p:0};renderLesson();return}
+$("#stageIn").addEventListener("click",e=>{const jb=e.target.closest("[data-jump]");if(jb){cur={l:+jb.dataset.jump,p:+(jb.dataset.jp||0)};renderLesson();return}
   const pg=e.target.closest("[data-p]");if(pg){cur.p=+pg.dataset.p;renderLesson();return}
   if(e.target.id==="nextBtn"){const L=ALL[cur.l],n=pagesOf(L).length;if(cur.p<n-1)cur.p++;else if(cur.l<ALL.length-1){toast("Lesson complete: "+L.title);cur={l:cur.l+1,p:0}}else{toast("Course complete. Well done!");return renderRail()}renderLesson()}
   if(e.target.id==="prevBtn"){if(cur.p>0)cur.p--;else if(cur.l>0){cur.l--;cur.p=pagesOf(ALL[cur.l]).length-1}renderLesson()}
@@ -1417,7 +1650,7 @@ function obsHTML(obs,extra){if(!obs)return"";const rows=extra?[...obs.rows,extra
     const z=({"RR":"rr","SpO₂":"sp","HR":"hr","BP":"bp","Temp":"t"})[c];const r=z?zoneOf(z,n):"";return r==="r"?"hi":r==="y"?"am":""};
   return `<div class="obs-wrap"><table class="obs"><thead><tr>${obs.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${rows.map((r,ri)=>`<tr>${r.map((v,ci)=>`<td class="${flag(obs.cols[ci],v,ri)}">${v}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`}
 function screenHTML(S,withActions=true){const I=S.instr;
-  return `<div class="screen"><div class="screen-head"><span>${stLabel(S)} · Candidate instructions</span><span>Reading time 2:00 · Performance 8:00</span></div>
+  return `<div class="screen"><div class="screen-head"><span>${S.code==="S0"?"Practice":"Station "+S.code.slice(1)} · Candidate instructions</span><span>Reading time 2:00 · Performance 8:00</span></div>
    <dl class="kv"><dt>Setting</dt><dd>${I.setting}</dd><dt>Date / time</dt><dd class="mono">${I.time}</dd><dt>Your role</dt><dd>You are the registered nurse caring for this patient.</dd></dl>
    <h4>Patient</h4>${bandHTML(I.patient)}
    <h4>Background</h4><p>${I.background}</p>
@@ -1428,8 +1661,7 @@ function screenHTML(S,withActions=true){const I=S.instr;
    <p class="eoi">&gt;&gt;&gt;END OF CANDIDATE INSTRUCTIONS&lt;&lt;&lt;</p>
    ${withActions?`<div class="screen-actions"><button class="btn btn-primary btn-sm" data-act="read">▶ Start 2-minute reading time</button></div>`:""}</div>`}
 
-function stationKeys(S){return ["brief","guide",...(S.video?["video"]:[]),...(S.chart?["chart"]:[]),"instr","perform","mark","scripts","quiz"]}
-const PHASES=[{l:"1 · Prepare",c:"var(--teal)",k:["brief","guide","video","chart"]},{l:"2 · Reading · 2:00",c:"var(--teal)",k:["instr"]},{l:"3 · Perform · 8:00",c:"var(--teal)",k:["perform"]},{l:"4 · Review",c:"var(--teal)",k:["mark","scripts","quiz"]}];
+function stationKeys(S){return ["brief","instr","guide",...(S.video?["video"]:[]),...(S.chart?["chart"]:[]),"perform","mark","scripts","quiz"]}
 function stationPage(S,p){const k=stationKeys(S)[p];
   if(k==="chart") return S.chart.render();
   if(k==="video") return videoHTML(S.video);
@@ -1445,18 +1677,18 @@ function stationPage(S,p){const k=stationKeys(S)[p];
     <details class="block" style="padding:14px 20px"><summary style="cursor:pointer;font-weight:700">Show candidate instructions again</summary><div style="margin-top:14px">${screenHTML(S,false)}</div></details>
     <div class="screen-actions" style="margin:0 0 16px"><button class="btn btn-primary" data-act="perform">▶ Start 8-minute station</button></div>
     <div id="cueBox"><div class="cue-locked"><span>Examiner cue is hidden until you reach it</span><button class="btn btn-sm" style="background:var(--signal);color:#fff" data-act="cue">Reveal examiner cue</button></div></div>
-    <div class="block"><h3>Your attempt</h3><textarea class="work" id="w_${S.id}" placeholder="1. Hand hygiene, introduce, 3 identifiers, allergy, consent…&#10;2. Assessment and what each finding means…&#10;3. Priority action after the cue…&#10;4. Escalation script / ISBAR…&#10;5. Close: bed low, call bell, hand hygiene, document…"></textarea><p class="src">Your notes are saved on this device.</p></div>`;
+    ${recHTML(S)}<div class="block"><h3>Your attempt</h3><textarea class="work" id="w_${S.id}" placeholder="1. Hand hygiene, introduce, 3 identifiers, allergy, consent…&#10;2. Assessment and what each finding means…&#10;3. Priority action after the cue…&#10;4. Escalation script / ISBAR…&#10;5. Close: bed low, call bell, hand hygiene, document…"></textarea><p class="src">Your notes are saved on this device.</p></div>`;
   if(k==="mark") return `<h2 class="page-title">Mark yourself</h2><p class="page-sub">Tick only what you actually did and said. Items marked critical are patient-safety steps.</p>
     <div class="block"><ul class="checks" id="rubric">${S.rubric.map((r,i)=>`<li><input type="checkbox" id="r_${S.id}_${i}" data-c="${r.c?1:0}"><label for="r_${S.id}_${i}">${r.c?'<span class="crit">Critical</span>':""}${r.t}</label></li>`).join("")}</ul>
     <div class="score" id="scoreBox"><b id="scoreN">0/${S.rubric.length}</b><span id="scoreMsg">Tick the criteria you demonstrated.</span></div></div>
-    <div class="callout info"><b class="ic">i</b><div>This is a practice rubric. The real exam uses its own station-specific criteria mapped to the RN Standards for Practice; pass marks vary by station.</div></div>`;
+    ${recHTML(S,true)}<div class="callout info"><b class="ic">i</b><div>This is a practice rubric. The real exam uses its own station-specific criteria mapped to the RN Standards for Practice; pass marks vary by station.</div></div>`;
   if(k==="scripts") return `<h2 class="page-title">Scripts & documentation</h2><p class="page-sub">Phrases to practise aloud until they sound like you, and a model note for the blue folder.</p>
     ${S.scripts.map(s=>`<div class="script"><small>${s.l}</small><p>“${s.s}”</p><button class="btn btn-ghost btn-sm copy" data-copy="${esc(s.s)}">Copy</button></div>`).join("")}
     <div class="block"><h3>Model documentation (blue folder)</h3><p class="mono" style="font-size:14px;line-height:1.7;background:var(--sunk);padding:14px;border-radius:8px">${S.docs}</p><p class="src">Write the real date in D/M/YYYY format and sign with your name and designation.</p></div>`;
   return quizHTML(S.quiz);
 }
 
-function quizHTML(q){return `<h2 class="page-title">Check yourself</h2><p class="page-sub">${q.length} question${q.length>1?"s":""}. Pick an answer to see the explanation.</p>
+function quizHTML(q){return `<h2 class="page-title">Check yourself</h2><div class="qscore" id="qScore"></div><p class="page-sub">${q.length} question${q.length>1?"s":""}. Pick an answer to see the explanation.</p>
   ${q.map((x,qi)=>`<div class="quiz-q block" data-q="${qi}"><p>${qi+1}. ${x.q}</p>${x.o.map((o,oi)=>`<button class="opt" data-qi="${qi}" data-oi="${oi}"><b>${"ABCD"[oi]}</b><span>${o}</span></button>`).join("")}<div class="fb" hidden></div></div>`).join("")}`}
 
 /* ---------------- page bindings ---------------- */
@@ -1466,14 +1698,18 @@ function bindPage(L){
   st.querySelectorAll("textarea.work").forEach(t=>{const k="ngn_txt_"+user+"_"+t.id;t.value=store.get(k,"");t.addEventListener("input",()=>store.set(k,t.value))});
   st.querySelectorAll('input[type=checkbox][id]:not([data-wl]):not(#zPain):not(#zWorry)').forEach(c=>{const k="ngn_chk_"+user+"_"+c.id;c.checked=store.get(k,false);c.addEventListener("change",()=>{store.set(k,c.checked);if(c.closest("#rubric"))score(L)})});
   if($("#rubric"))score(L);
+  if(document.getElementById("recBox"))bindRec(L);
   st.querySelectorAll("[data-act]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.act;
     if(a==="read"){timer.set("read");timer.start();toast("Reading time started: 2 minutes")}
-    if(a==="perform"){timer.set("perform");timer.start();toast("Station started: 8 minutes")}
+    if(a==="perform"){timer.set("perform");timer.start();toast("Station started: 8 minutes");if(store.get("ngn_recauto",false)&&!recState)recStart(L)}
     if(a==="cue"){$("#cueBox").innerHTML=`<div class="cue"><h3>Examiner cue</h3><p>${L.cue}</p>${L.cueObs?`<div style="margin-top:12px" class="screen">${obsHTML(L.instr.obs||{cols:["Date","Time","RR","SpO₂","HR","BP","Temp","LOC"],rows:[]},L.cueObs)}</div>`:""}</div>`}
   }));
   st.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{const q=(L.quiz)[+b.dataset.qi],box=b.closest(".quiz-q"),fb=box.querySelector(".fb"),ok=+b.dataset.oi===q.a;
     box.querySelectorAll(".opt").forEach(o=>o.classList.remove("right","wrong"));b.classList.add(ok?"right":"wrong");if(!ok)box.querySelectorAll(".opt")[q.a].classList.add("right");
-    fb.hidden=false;fb.className="fb "+(ok?"right":"wrong");fb.innerHTML=(ok?"<b>Correct.</b> ":"<b>Not quite.</b> ")+q.e}));
+    fb.hidden=false;fb.className="fb "+(ok?"right":"wrong");fb.innerHTML=(ok?"<b>Correct.</b> ":"<b>Not quite.</b> ")+q.e;quizRecord(L,+b.dataset.qi,ok)}));
+  if(document.getElementById("qScore"))quizShow(L);
+  st.querySelectorAll("[data-qreset]").forEach(b=>b.addEventListener("click",()=>{store.del(qkey(L));renderLesson()}));
+  const ed=document.getElementById("examDate");if(ed)ed.addEventListener("change",()=>{store.set("ngn_exam_"+user,ed.value);renderLesson()});
   st.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{const txt=b.dataset.copy;
     navigator.clipboard?.writeText(txt).then(()=>toast("Script copied")).catch(()=>{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Text selected. Press Ctrl/Cmd+C to copy")})}));
   st.querySelectorAll("th.day").forEach(th=>th.addEventListener("click",()=>{const ok=th.dataset.xx==="2";st.querySelectorAll("th.day").forEach(x=>x.classList.remove("right","wrong"));th.classList.add(ok?"right":"wrong");
@@ -1514,14 +1750,14 @@ document.querySelectorAll("[data-tmode]").forEach(b=>b.onclick=()=>timer.set(b.d
 /* ---------------- mock circuit ---------------- */
 const MOCK=STATIONS.slice(1);let mock={i:-1,phase:"idle"};
 function mockHTML(){
-  const grid=`<div class="mock-grid">${MOCK.map((s,i)=>`<div class="${i===mock.i?"cur":i<mock.i||mock.phase==="done"?"fin":""}"><b>${(i+1)}</b>${s.title.split(" ")[0]}</div>`).join("")}</div>`;
+  const grid=`<div class="mock-grid">${MOCK.map((s,i)=>`<div class="${i===mock.i?"cur":i<mock.i||mock.phase==="done"?"fin":""}"><b>${"ABCDEFGHIJ"[i]}</b>${s.title.split(" ")[0]}</div>`).join("")}</div>`;
   if(mock.phase==="idle") return `<h2 class="page-title">Full mock circuit</h2><p class="page-sub">About 100 minutes. Set up a quiet space, a pen and one sheet of paper per station.</p>${grid}
     <div class="block"><h3>How it runs</h3><ul class="plain"><li>Each station opens with 2 minutes of candidate instructions. The clock moves you into the room automatically.</li><li>8 minutes of performance follow, with the bell at 6:00. Reveal the cue when the patient would respond.</li><li>At 8:00 the next station's reading time begins. There are no pauses, just like the real circuit.</li><li>Mark each station afterwards from its lesson page.</li></ul></div>
-    <button class="btn btn-primary" data-mock="start">Start circuit at Station 1</button>`;
+    <button class="btn btn-primary" data-mock="start">Start circuit at station A</button>`;
   if(mock.phase==="done") return `<h2 class="page-title">Circuit complete</h2>${grid}<div class="block"><h3>Now mark yourself</h3><p>Open each station's “Mark yourself” page and tick what you did. Be strict with critical items.</p></div><button class="btn btn-ghost" data-mock="reset">Run the circuit again</button>`;
   const S=MOCK[mock.i];
-  if(mock.phase==="read") return `<h2 class="page-title">Station ${(mock.i+1)} · reading time</h2><p class="page-sub">Stay seated for the full two minutes.</p>${grid}${screenHTML(S,false)}<div class="screen-actions"><button class="btn btn-ghost btn-sm" data-mock="enter">Skip to the room →</button><button class="btn btn-ghost btn-sm" data-mock="stop">End circuit</button></div>`;
-  return `<h2 class="page-title">Station ${(mock.i+1)} · ${S.title}</h2><p class="page-sub">Perform now. Bell at 6:00.</p>${grid}
+  if(mock.phase==="read") return `<h2 class="page-title">Station ${"ABCDEFGHIJ"[mock.i]} · reading time</h2><p class="page-sub">Stay seated for the full two minutes.</p>${grid}${screenHTML(S,false)}<div class="screen-actions"><button class="btn btn-ghost btn-sm" data-mock="enter">Skip to the room →</button><button class="btn btn-ghost btn-sm" data-mock="stop">End circuit</button></div>`;
+  return `<h2 class="page-title">Station ${"ABCDEFGHIJ"[mock.i]} · ${S.title}</h2><p class="page-sub">Perform now. Bell at 6:00.</p>${grid}
     <div id="cueBox"><div class="cue-locked"><span>Examiner cue</span><button class="btn btn-sm" style="background:var(--signal);color:#fff" data-mock="cue">Reveal</button></div></div>
     <div class="block"><h3>Tasks for this station</h3><ol style="margin:0;padding-left:22px">${S.instr.tasks.map(t=>`<li>${t}</li>`).join("")}</ol></div>
     <textarea class="work" id="mock_${S.id}" placeholder="Work through the station aloud and note your actions…"></textarea>
