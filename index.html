@@ -16,6 +16,15 @@
 .dlink{all:unset;cursor:pointer;color:var(--ink);font-weight:600;text-align:left}.dlink:hover{color:var(--teal);text-decoration:underline}
 .dbad{color:var(--signal)}
 .dinput{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.rec-why{background:linear-gradient(90deg,var(--signal-soft),var(--teal-soft));border:1px solid var(--line)}
+.rec-why b.ic{background:var(--signal);color:#fff}
+.rec-tip{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:var(--amber-soft,#FFF4D6);font-size:14px}
+.dhow{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-left:5px solid var(--teal)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.pbtn{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);transition:border-color .2s,transform .2s;min-height:96px}
+.pbtn:hover{border-color:var(--teal);transform:translateY(-2px)}
+.pbtn b{font:800 22px var(--f-display);color:var(--teal)}.pbtn span{font-size:13px;font-weight:600;line-height:1.3}.pbtn i{font-style:normal;font-size:12px;color:var(--muted);margin-top:auto}
+.pbtn.ok{border-color:var(--teal)}.pbtn.ok i{color:var(--teal);font-weight:700}.pbtn.warn i{color:var(--signal);font-weight:700}
 .rec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
 .rec-sub{color:var(--muted);font-size:14px;margin-top:4px}
 .rec-stop{background:var(--signal);color:#fff;animation:recp 1.4s infinite}
@@ -1432,6 +1441,8 @@ function dashHTML(){
     <div class="block"><h3>Your OSCE date</h3><p style="color:var(--muted)">Set your exam date to see a countdown.</p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px"><input type="date" id="examDate" value="${exam}" class="dinput"><span>${left}</span></div>
       <p style="margin-top:10px;font-size:14px;color:var(--muted)">Aim for every station at least twice, plus two full mock circuits in the final fortnight.</p></div>
   </div>
+  <div class="block dhow"><div><h3>New here? Start with the step-by-step guide</h3><p style="color:var(--muted)">How to navigate the app and run a practice station: read, perform & record, listen & mark.</p></div><button class="btn btn-primary" data-jump="${ALL.indexOf(START_LESSON)}" data-jp="1">How to practise →</button></div>
+  <div class="block"><h3>Student practice · Stations 1 to ${PRACTICE.length}</h3><p style="color:var(--muted);margin-bottom:12px">Exam conditions: read 2 min → perform & 🎙 record 8 min → listen & mark.</p><div class="pgrid">${PRACTICE.map(P=>{const r=rubricStat(P.station);return `<button class="pbtn ${r.t?(r.cm?"warn":"ok"):""}" data-jump="${ALL.indexOf(P)}"><b>${stNum(P.station)}</b><span>${esc(P.station.title)}</span><i>${r.t?r.t+"/"+r.n:"Start"}</i></button>`}).join("")}</div></div>
   <div class="block"><h3>Modules</h3><div class="dmods">${mods}</div></div>
   ${weak.length?`<div class="callout amber"><b class="ic">★</b><div><b>Revise these next</b> (below 70% on first try): ${weak.map(L=>`<button class="dlink" data-jump="${ALL.indexOf(L)}" data-jp="${pagesOf(L).length-1}">${esc(L.title)}</button>`).join(" · ")}</div></div>`:""}
   <div class="grid2">
@@ -1446,25 +1457,26 @@ const REC={};let recState=null;
 const recOK=()=>!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
 const fmtT=s=>Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
 function recList(S){const L=REC[S.id]||[];if(!L.length)return `<p class="rec-empty">No recordings yet.</p>`;
-  return L.map((r,i)=>`<div class="rec-item"><div class="rec-meta"><b>Attempt ${i+1}</b><span>${r.when} · ${fmtT(r.dur)}</span></div><audio controls preload="metadata" src="${r.url}"></audio><div class="rec-acts"><a class="btn btn-ghost btn-sm" href="${r.url}" download="${r.name}">⬇ Download</a><button class="btn btn-ghost btn-sm" data-recdel="${i}">Delete</button></div></div>`).join("")}
+  return L.map((r,i)=>`<div class="rec-item"><div class="rec-meta"><b>${r.tag==="mock"?"Mock circuit · ":""}Attempt ${i+1}</b><span>${r.when} · ${fmtT(r.dur)}</span></div><audio controls preload="metadata" src="${r.url}"></audio><div class="rec-acts"><a class="btn btn-ghost btn-sm" href="${r.url}" download="${r.name}">⬇ Download</a><button class="btn btn-ghost btn-sm" data-recdel="${i}">Delete</button></div></div>`).join("")}
 function recHTML(S,compact){
   const on=recState&&recState.sid===S.id;
   return `<div class="block rec" id="recBox" data-sid="${S.id}"><div class="rec-head"><div><h3>🎙 Record your attempt</h3><p class="rec-sub">${compact?"Play your recording back while you tick the rubric.":"Record yourself talking through the station, then listen back and mark yourself honestly."}</p></div>
    ${recOK()?`<button class="btn ${on?"rec-stop":"btn-primary"}" id="recBtn">${on?"■ Stop · <span id=\"recT\">"+fmtT((Date.now()-recState.t0)/1000)+"</span>":"● Start recording"}</button>`:""}</div>
    ${recOK()?"":`<div class="callout warn"><b class="ic">!</b><div>Recording isn't supported in this browser. Try the latest Chrome, Edge or Safari.</div></div>`}
    ${!compact&&recOK()?`<label class="rec-auto"><input type="checkbox" id="recAuto" ${store.get("ngn_recauto",false)?"checked":""}> Start recording automatically when I start the 8-minute clock</label>`:""}
+   ${compact||!recOK()?"":`<p class="rec-tip">⭐ <b>Important:</b> record every attempt, listen back, and download it for review. It's how you hear what the examiner hears.</p>`}
    <div id="recList">${recList(S)}</div>
    <p class="src">Recordings stay on this device only and are cleared when you close or refresh the page. Download any you want to keep.</p></div>`}
-async function recStart(S){if(recState)return;
+async function recStart(S,opts={}){if(recState){const n=opts.retry??6;if(n>0)setTimeout(()=>recStart(S,{...opts,retry:n-1}),300);return}
   try{const st=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});
     const mime=["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/aac"].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))||"";
     const mr=new MediaRecorder(st,mime?{mimeType:mime}:undefined),chunks=[];
-    recState={sid:S.id,code:S.code,title:S.title,mr,st,t0:Date.now(),chunks};
+    recState={sid:S.id,code:S.code,title:S.title,mr,st,t0:Date.now(),chunks,tag:opts.tag||""};
     mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
     mr.onstop=()=>{const type=mr.mimeType||mime||"audio/webm",ext=/mp4|aac/.test(type)?"m4a":"webm",b=new Blob(chunks,{type}),d=new Date(),dur=(Date.now()-recState.t0)/1000;
       const stamp=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")+"_"+String(d.getHours()).padStart(2,"0")+String(d.getMinutes()).padStart(2,"0");
-      (REC[recState.sid]=REC[recState.sid]||[]).push({url:URL.createObjectURL(b),dur,when:d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}),name:`OSCE_${recState.code}_${recState.title.replace(/[^A-Za-z0-9]+/g,"-")}_${stamp}.${ext}`});
-      st.getTracks().forEach(t=>t.stop());clearInterval(recState.iv);recState=null;toast("Recording saved. Play it back or download it");recRefresh()};
+      (REC[recState.sid]=REC[recState.sid]||[]).push({url:URL.createObjectURL(b),dur,when:d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}),tag:recState.tag,name:`OSCE_${recState.tag==="mock"?"MOCK_":""}${recState.code}_${recState.title.replace(/[^A-Za-z0-9]+/g,"-")}_${stamp}.${ext}`});
+      st.getTracks().forEach(t=>t.stop());clearInterval(recState.iv);recState=null;toast("Recording saved. Play it back or download it");recRefresh();if(typeof mock!=="undefined"&&mock.phase==="done"&&ALL[cur.l]&&ALL[cur.l].kind==="mock")renderLesson()};
     recState.iv=setInterval(()=>{const el=document.getElementById("recT");if(el&&recState)el.textContent=fmtT((Date.now()-recState.t0)/1000);if(recState&&Date.now()-recState.t0>15*60e3)recStop()},500);
     mr.start(1000);toast("Recording… speak clearly");recRefresh();
   }catch(e){recState=null;toast(e&&e.name==="NotAllowedError"?"Microphone blocked. Allow microphone access in your browser settings, then try again":"Couldn't start the microphone: "+(e.message||e),"err")}}
@@ -1475,16 +1487,78 @@ function bindRec(S){const b=document.getElementById("recBtn");if(b)b.onclick=()=
   document.querySelectorAll("[data-recdel]").forEach(x=>x.onclick=()=>{const L=REC[S.id]||[],i=+x.dataset.recdel;if(L[i]){URL.revokeObjectURL(L[i].url);L.splice(i,1)}recRefresh()})}
 window.addEventListener("beforeunload",e=>{if(recState||Object.values(REC).some(l=>l.length)){e.preventDefault();e.returnValue=""}});
 
+/* ================= START HERE + STUDENT PRACTICE + MOCK RECORDING ================= */
+const ORDERED=[...STATIONS,...MSE_STATIONS];
+const stNum=S=>+S.code.slice(1);
+const PRACTICE=ORDERED.filter(S=>S.code!=="S0").map(S=>({id:"p"+stNum(S),code:"P"+stNum(S),kind:"practice",station:S,title:"Station "+stNum(S)+" · "+S.title,
+  summary:"Practise this station like the real exam: read for 2 minutes, perform and record yourself for 8 minutes, then listen back and mark yourself.",
+  chips:[S.domain,"🎙 Record yourself"],cue:S.cue,cueObs:S.cueObs,instr:S.instr,rubric:S.rubric}));
+const RECORD_WHY=`<div class="callout rec-why"><b class="ic">🎙</b><div><b>Record yourself every time.</b> Examiners only mark what they see and <b>hear</b>. Listening back is the fastest way to catch missed steps: a skipped identifier, no consent, a vague escalation, or long silences. After each attempt, play it back while you tick the rubric, and <b>download</b> the file to keep it, compare attempts, or send it to your trainer for feedback.</div></div>`;
+function practicePage(L,p){const S=L.station;
+  if(p===0) return `<h2 class="page-title">Step 1 · Reading time (2 minutes)</h2><p class="page-sub">Start the reading clock, read to the end marker, and plan before you go in. Don't scroll ahead to the guide. Treat this like exam day.</p>
+    ${screenHTML(S)}
+    <div class="block" style="margin-top:16px"><h3>Your reading-time notes</h3><textarea class="work" style="min-height:120px" id="pn_${S.id}" placeholder="Tasks: 1… 2… 3…&#10;IDs + allergy: …&#10;Abnormal / trending: …&#10;First three actions: …"></textarea></div>
+    <div class="callout info"><b class="ic">→</b><div>When the 2 minutes are up, press <b>Next page</b> to go into the room.</div></div>`;
+  if(p===1) return `<h2 class="page-title">Step 2 · Perform & record (8 minutes)</h2><p class="page-sub">Tick auto-record, start the 8-minute clock, then say and do every step out loud. A bell sounds at 6:00. Reveal the examiner cue when the patient would respond.</p>
+    ${RECORD_WHY}
+    <details class="block" style="padding:14px 20px"><summary style="cursor:pointer;font-weight:700">Show candidate instructions again</summary><div style="margin-top:14px">${screenHTML(S,false)}</div></details>
+    ${recHTML(S)}
+    <div class="screen-actions" style="margin:0 0 16px"><button class="btn btn-primary" data-act="perform">▶ Start 8-minute station</button></div>
+    <div id="cueBox"><div class="cue-locked"><span>Examiner cue is hidden until you reach it</span><button class="btn btn-sm" style="background:var(--signal);color:#fff" data-act="cue">Reveal examiner cue</button></div></div>
+    <div class="block"><h3>Quick notes (optional)</h3><textarea class="work" id="pw_${S.id}" placeholder="Anything you'd write in the blue folder…"></textarea></div>`;
+  return `<h2 class="page-title">Step 3 · Listen back & mark yourself</h2><p class="page-sub">Play your recording and tick only what you actually <b>did and said</b>. Critical items are patient-safety steps: missing one means repeat the station.</p>
+    ${recHTML(S,true)}
+    <div class="block"><ul class="checks" id="rubric">${S.rubric.map((r,i)=>`<li><input type="checkbox" id="r_${S.id}_${i}" data-c="${r.c?1:0}"><label for="r_${S.id}_${i}">${r.c?'<span class="crit">Critical</span>':""}${r.t}</label></li>`).join("")}</ul>
+    <div class="score" id="scoreBox"><b id="scoreN">0/${S.rubric.length}</b><span id="scoreMsg">Tick the criteria you demonstrated.</span></div></div>
+    <div class="block"><h3>Fix what you missed</h3><p style="color:var(--muted)">Open the full station lesson to review the clinical guide, demo video and model scripts, then practise again.</p>
+    <div class="ctas" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px"><button class="btn btn-ghost btn-sm" data-jump="${ALL.indexOf(S)}" data-jp="${stationKeys(S).indexOf("guide")}">Clinical guide</button>${S.video?`<button class="btn btn-ghost btn-sm" data-jump="${ALL.indexOf(S)}" data-jp="${stationKeys(S).indexOf("video")}">Demo video</button>`:""}<button class="btn btn-ghost btn-sm" data-jump="${ALL.indexOf(S)}" data-jp="${stationKeys(S).indexOf("scripts")}">Scripts & documentation</button><button class="btn btn-primary btn-sm" data-jump="${ALL.indexOf(L)}" data-jp="0">↻ Practise again</button></div></div>`}
+const START_LESSON={id:"h0",code:"GO",kind:"info",title:"Start here: how to use this app",summary:"How the course is organised, and exactly what to do in each practice station.",chips:["Read first","5 minutes"],
+ pages:[
+ {t:"How the app is organised",h:`<h2 class="page-title">How the app is organised</h2><p class="page-sub">Work down the side menu from top to bottom. Your progress saves automatically on this device.</p>
+  <ol class="steps-ol">
+   <li><b>My learning</b>: your dashboard (progress, quiz scores, streak, exam countdown) and this guide.</li>
+   <li><b>Know the RN OSCE</b>: how the exam runs, exam day, paperwork rules, results.</li>
+   <li><b>Core concepts</b>: the Australian standards and frameworks behind every station.</li>
+   <li><b>Demo videos</b>: animated demonstrations of core skills.</li>
+   <li><b>Stations: learn</b>: Stations 0 to 12 in order. Each has a brief, candidate instructions, clinical guide, demo video, chart practice, perform page, rubric, scripts and a quiz.</li>
+   <li><b>Student practice</b>: Stations 1 to 12 stripped back to exam conditions: read, perform and record, then listen and mark.</li>
+   <li><b>Exam simulation</b>: the full mock circuit, back to back with no pauses, with voice recording for every station.</li></ol>
+  <div class="callout info"><b class="ic">i</b><div>Use <b>Previous</b> and <b>Next page</b> at the bottom of each page, or the numbered tabs at the top of a lesson. On a phone, tap <b>☰</b> to open the menu.</div></div>`},
+ {t:"Practice exam: step by step",h:`<h2 class="page-title">Practice exam: step by step</h2><p class="page-sub">Follow these steps for every station in <b>Student practice</b>.</p>
+  <div class="steps">
+   <div class="step"><span class="step-n">STEP 1</span><h3>Set up</h3><p>Quiet room, phone or laptop close by, a pen and one sheet of paper. Allow the microphone when your browser asks.</p></div>
+   <div class="step"><span class="step-n">STEP 2</span><h3>Read (2 min)</h3><p>Open <b>Student practice → Station 1</b>. Press <b>Start 2-minute reading time</b>, read to the end marker and jot your plan.</p></div>
+   <div class="step"><span class="step-n">STEP 3</span><h3>Start recording</h3><p>Press <b>Next page</b>. Tick <b>“Start recording automatically”</b>, or press <b>● Start recording</b>.</p></div>
+   <div class="step"><span class="step-n">STEP 4</span><h3>Perform (8 min)</h3><p>Press <b>Start 8-minute station</b>. Say and do everything aloud as if the examiner is watching. Bell at 6:00. Reveal the cue when the patient would respond.</p></div>
+   <div class="step"><span class="step-n">STEP 5</span><h3>Stop & listen</h3><p>Press <b>■ Stop</b>, then <b>Next page</b>. Play your recording back.</p></div>
+   <div class="step"><span class="step-n">STEP 6</span><h3>Mark yourself</h3><p>Tick only what you actually did and said. A missed <b>Critical</b> item means repeat the station.</p></div>
+   <div class="step"><span class="step-n">STEP 7</span><h3>Download</h3><p>Press <b>⬇ Download</b> to keep the file, compare attempts, or send it to your trainer.</p></div>
+   <div class="step"><span class="step-n">STEP 8</span><h3>Fix & repeat</h3><p>Use the guide, demo video and scripts for anything you missed, then press <b>↻ Practise again</b>.</p></div>
+   <div class="step"><span class="step-n">STEP 9</span><h3>Full mock</h3><p>Once each station passes, run the <b>Full mock circuit</b> with recording on, at least twice before your exam.</p></div>
+  </div>`},
+ {t:"Recording yourself",h:`<h2 class="page-title">Why you must record yourself</h2><p class="page-sub">It's the closest thing to having an examiner in the room.</p>
+  ${RECORD_WHY}
+  <div class="grid2">
+   <div class="block"><h3>What to listen for</h3><ul class="plain"><li>Did you introduce yourself and check <b>3 identifiers</b> and the allergy?</li><li>Did you ask for <b>consent</b> before touching?</li><li>Did you say your findings and what they mean (<b>think aloud</b>)?</li><li>Was your escalation a clear <b>ISBAR</b>?</li><li>Long pauses, “umm”, or rushing at the end?</li></ul></div>
+   <div class="block"><h3>Good to know</h3><ul class="plain"><li>Recordings stay on <b>your device only</b>. Nothing is uploaded.</li><li>They are cleared when you close or refresh the page, so <b>download</b> the ones you want to keep.</li><li>Files are named by station and time, e.g. <span class="mono">OSCE_S4_Medication-administration_….webm</span> (or .m4a on iPhone).</li><li>Use headphones to hear yourself clearly.</li></ul></div>
+  </div>`}],
+ quiz:[{q:"In Student practice, what should you do straight after the 8-minute station?",o:["Move on to the next station","Stop the recording, listen back and mark yourself","Delete the recording","Read the clinical guide first"],a:1,e:"Listen back while you tick the rubric. Tick only what you actually did and said."},
+       {q:"Where are your recordings saved?",o:["In your account online","On your device only, until you close or refresh the page","Emailed to your trainer","Nowhere"],a:1,e:"They stay on your device for privacy. Download any you want to keep."}]};
+/* mock circuit recording */
+function mockPrime(){if(!store.get("ngn_mockrec",true)||!recOK())return;navigator.mediaDevices.getUserMedia({audio:true}).then(s=>s.getTracks().forEach(t=>t.stop())).catch(()=>toast("Microphone blocked. The circuit will run without recording","err"))}
+function mockRecAll(){const items=MOCK.flatMap((S,i)=>(REC[S.id]||[]).filter(r=>r.tag==="mock").map(r=>({S,i,r})));
+  if(!items.length) return "";
+  return `<div class="block"><h3>🎙 Your circuit recordings</h3><p style="color:var(--muted)">Listen back station by station while you mark yourself, and download the ones you want to keep.</p>
+   ${items.map(x=>`<div class="rec-item"><div class="rec-meta"><b>Station ${"ABCDEFGHIJ"[x.i]} · ${esc(x.S.title)}</b><span>${x.r.when} · ${fmtT(x.r.dur)}</span></div><audio controls preload="metadata" src="${x.r.url}"></audio><div class="rec-acts"><a class="btn btn-ghost btn-sm" href="${x.r.url}" download="${x.r.name}">⬇ Download</a></div></div>`).join("")}</div>`}
+
 const MODULES=[
- {name:"My learning", lessons:[DASH_LESSON]},
+ {name:"My learning", lessons:[DASH_LESSON,START_LESSON]},
  {name:"Know the RN OSCE", lessons:INFO_LESSONS},
  {name:"Core concepts", lessons:CONCEPT_LESSONS},
  {name:"Demo videos", lessons:[VIDEO_LESSON]},
- {name:"Foundation station", lessons:[STATIONS[0]]},
- {name:"Assessment & care planning", lessons:[STATIONS[1],STATIONS[8],STATIONS[9],...MSE_STATIONS]},
- {name:"Care delivery", lessons:[STATIONS[2],STATIONS[3],STATIONS[4],STATIONS[5],STATIONS[7],STATIONS[10]]},
- {name:"Evaluation of care", lessons:[STATIONS[6]]},
- {name:"Exam simulation", lessons:[{id:"mock",code:"MC",kind:"mock",title:"Full mock circuit",summary:"All ten stations in sequence: 2 minutes reading, 8 minutes performance, no pauses."}]}
+ {name:"Stations: learn (0 to 12)", lessons:ORDERED},
+ {name:"Student practice (1 to 12)", lessons:PRACTICE},
+ {name:"Exam simulation", lessons:[{id:"mock",code:"MC",kind:"mock",title:"Full mock circuit",summary:"All ten stations in sequence: 2 minutes reading, 8 minutes performance, no pauses. Record your voice for every station."}]}
 ];
 const ALL=MODULES.flatMap(m=>m.lessons);
 STATIONS.forEach(s=>s.kind="station");
@@ -1501,6 +1575,7 @@ STATIONS[4].chart={title:"Medication chart (NIMC)",render:()=>nimcHTML()};
 
 function pagesOf(L){
   if(L.kind==="dash") return ["Overview"];
+  if(L.kind==="practice") return ["Read · 2 min","Perform & record · 8 min","Listen & mark"];
   if(L.kind==="info") return [...L.pages.map(p=>p.t),"Check yourself"];
   if(L.kind==="station") return stationKeys(L).map(k=>({brief:"Brief",instr:"Candidate instructions",guide:"Clinical guide",video:"Watch the demo",chart:L.chart&&L.chart.title,perform:"Perform",mark:"Mark yourself",scripts:"Scripts & documentation",quiz:"Quiz"})[k]);
   return ["Circuit"];
@@ -1602,7 +1677,7 @@ function seen(L){return prog[L.id]||[]}
 function lessonDone(L){return seen(L).length>=pagesOf(L).length}
 function markSeen(L,p){const s=new Set(seen(L));s.add(p);prog[L.id]=[...s];saveProg()}
 
-function enterApp(u,name){name=name||u;user=u;const d=store.get(pkey(),{prog:{},cur:{l:0,p:0}});prog=d.prog||{};const oc=d.cur||{l:1,p:0};RESUME={l:oc.l,p:oc.p||0};if(d.curId){const ix=ALL.findIndex(L=>L.id===d.curId);if(ix>=0)RESUME.l=ix}else if(d.cur){RESUME.l=oc.l<4?oc.l+1:oc.l+1+CONCEPT_LESSONS.length}cur={l:0,p:0};
+function enterApp(u,name){name=name||u;user=u;const d=store.get(pkey(),{prog:{},cur:{l:0,p:0}});prog=d.prog||{};const oc=d.cur||{l:1,p:0};RESUME={l:oc.l,p:oc.p||0};if(d.curId){const ix=ALL.findIndex(L=>L.id===d.curId);if(ix>=0)RESUME.l=ix}else{RESUME.l=1}cur={l:0,p:0};
   $("#userName").textContent=name;$("#avatar").textContent=name[0].toUpperCase();show("app");renderRail();renderLesson();toast("Signed in as "+name)}
 
 /* ---------------- rail ---------------- */
@@ -1626,9 +1701,10 @@ function renderLesson(){
   if(L.kind==="info") body= cur.p<L.pages.length? L.pages[cur.p].h : quizHTML(L.quiz);
   else if(L.kind==="station") body=stationPage(L,cur.p);
   else if(L.kind==="dash") body=dashHTML();
+  else if(L.kind==="practice") body=practicePage(L,cur.p);
   else body=mockHTML();
   $("#stageIn").innerHTML=`
-   <div class="lhead"><div class="eyebrow">${L.kind==="station"?(L.code==="S0"?"Practice station · foundation":"Practice station "+L.code.slice(1)):L.kind==="mock"?"Exam simulation":L.kind==="dash"?"Your learning":/^C\d/.test(L.code)?"Core concept · "+L.code:L.code==="VID"?"Demo videos":"Exam format · "+L.code}</div><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p><div class="chips">${chips.join("")}</div></div>
+   <div class="lhead"><div class="eyebrow">${L.kind==="station"?(L.code==="S0"?"Practice station · foundation":"Practice station "+L.code.slice(1)):L.kind==="mock"?"Exam simulation":L.code==="GO"?"Start here":L.kind==="practice"?"Student practice · exam conditions":L.kind==="dash"?"Your learning":/^C\d/.test(L.code)?"Core concept · "+L.code:L.code==="VID"?"Demo videos":"Exam format · "+L.code}</div><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p><div class="chips">${chips.join("")}</div></div>
    ${pages.length>1?`<div class="pager">${pages.map((t,i)=>`<button class="pg ${i===cur.p?"on":""} ${seen(L).includes(i)?"seen":""}" data-p="${i}"><i>${seen(L).includes(i)&&i!==cur.p?"✓":i+1}</i>${t}</button>`).join("")}</div>`:""}
    <section class="page">${body}</section>
    <div class="pfoot"><button class="btn btn-ghost" id="prevBtn" ${cur.l===0&&cur.p===0?"disabled":""}>← Previous</button><span class="count">Page ${cur.p+1} of ${pages.length}</span><button class="btn btn-primary" id="nextBtn">${cur.p<pages.length-1?"Next page →":cur.l<ALL.length-1?"Complete & next lesson →":"Finish course ✓"}</button></div>`;
@@ -1696,12 +1772,12 @@ function bindPage(L){
   const st=$("#stageIn");
   // persist textareas & checkboxes
   st.querySelectorAll("textarea.work").forEach(t=>{const k="ngn_txt_"+user+"_"+t.id;t.value=store.get(k,"");t.addEventListener("input",()=>store.set(k,t.value))});
-  st.querySelectorAll('input[type=checkbox][id]:not([data-wl]):not(#zPain):not(#zWorry)').forEach(c=>{const k="ngn_chk_"+user+"_"+c.id;c.checked=store.get(k,false);c.addEventListener("change",()=>{store.set(k,c.checked);if(c.closest("#rubric"))score(L)})});
+  st.querySelectorAll('input[type=checkbox][id]:not([data-wl]):not(#zPain):not(#zWorry):not(#mockRec):not(#recAuto)').forEach(c=>{const k="ngn_chk_"+user+"_"+c.id;c.checked=store.get(k,false);c.addEventListener("change",()=>{store.set(k,c.checked);if(c.closest("#rubric"))score(L)})});
   if($("#rubric"))score(L);
-  if(document.getElementById("recBox"))bindRec(L);
+  {const rb=document.getElementById("recBox");if(rb){const RS=ALL.find(x=>x.id===rb.dataset.sid);if(RS)bindRec(RS)}}
   st.querySelectorAll("[data-act]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.act;
     if(a==="read"){timer.set("read");timer.start();toast("Reading time started: 2 minutes")}
-    if(a==="perform"){timer.set("perform");timer.start();toast("Station started: 8 minutes");if(store.get("ngn_recauto",false)&&!recState)recStart(L)}
+    if(a==="perform"){timer.set("perform");timer.start();toast("Station started: 8 minutes");if(store.get("ngn_recauto",false)&&!recState)recStart(L.station||L)}
     if(a==="cue"){$("#cueBox").innerHTML=`<div class="cue"><h3>Examiner cue</h3><p>${L.cue}</p>${L.cueObs?`<div style="margin-top:12px" class="screen">${obsHTML(L.instr.obs||{cols:["Date","Time","RR","SpO₂","HR","BP","Temp","LOC"],rows:[]},L.cueObs)}</div>`:""}</div>`}
   }));
   st.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{const q=(L.quiz)[+b.dataset.qi],box=b.closest(".quiz-q"),fb=box.querySelector(".fb"),ok=+b.dataset.oi===q.a;
@@ -1753,19 +1829,20 @@ function mockHTML(){
   const grid=`<div class="mock-grid">${MOCK.map((s,i)=>`<div class="${i===mock.i?"cur":i<mock.i||mock.phase==="done"?"fin":""}"><b>${"ABCDEFGHIJ"[i]}</b>${s.title.split(" ")[0]}</div>`).join("")}</div>`;
   if(mock.phase==="idle") return `<h2 class="page-title">Full mock circuit</h2><p class="page-sub">About 100 minutes. Set up a quiet space, a pen and one sheet of paper per station.</p>${grid}
     <div class="block"><h3>How it runs</h3><ul class="plain"><li>Each station opens with 2 minutes of candidate instructions. The clock moves you into the room automatically.</li><li>8 minutes of performance follow, with the bell at 6:00. Reveal the cue when the patient would respond.</li><li>At 8:00 the next station's reading time begins. There are no pauses, just like the real circuit.</li><li>Mark each station afterwards from its lesson page.</li></ul></div>
+    <div class="callout rec-why"><b class="ic">🎙</b><div><b>Record your whole circuit.</b> With this on, the app records each station automatically from the start of performance time and stops when the station ends. Listen back and download each one at the end.</div></div><label class="rec-auto" style="margin-bottom:14px"><input type="checkbox" id="mockRec" ${store.get("ngn_mockrec",true)?"checked":""}> Record my voice for every station (recommended)</label>
     <button class="btn btn-primary" data-mock="start">Start circuit at station A</button>`;
-  if(mock.phase==="done") return `<h2 class="page-title">Circuit complete</h2>${grid}<div class="block"><h3>Now mark yourself</h3><p>Open each station's “Mark yourself” page and tick what you did. Be strict with critical items.</p></div><button class="btn btn-ghost" data-mock="reset">Run the circuit again</button>`;
+  if(mock.phase==="done") return `<h2 class="page-title">Circuit complete</h2>${grid}${mockRecAll()}<div class="block"><h3>Now mark yourself</h3><p>Open each station's “Mark yourself” page and tick what you did. Be strict with critical items.</p></div><button class="btn btn-ghost" data-mock="reset">Run the circuit again</button>`;
   const S=MOCK[mock.i];
   if(mock.phase==="read") return `<h2 class="page-title">Station ${"ABCDEFGHIJ"[mock.i]} · reading time</h2><p class="page-sub">Stay seated for the full two minutes.</p>${grid}${screenHTML(S,false)}<div class="screen-actions"><button class="btn btn-ghost btn-sm" data-mock="enter">Skip to the room →</button><button class="btn btn-ghost btn-sm" data-mock="stop">End circuit</button></div>`;
   return `<h2 class="page-title">Station ${"ABCDEFGHIJ"[mock.i]} · ${S.title}</h2><p class="page-sub">Perform now. Bell at 6:00.</p>${grid}
     <div id="cueBox"><div class="cue-locked"><span>Examiner cue</span><button class="btn btn-sm" style="background:var(--signal);color:#fff" data-mock="cue">Reveal</button></div></div>
     <div class="block"><h3>Tasks for this station</h3><ol style="margin:0;padding-left:22px">${S.instr.tasks.map(t=>`<li>${t}</li>`).join("")}</ol></div>
-    <textarea class="work" id="mock_${S.id}" placeholder="Work through the station aloud and note your actions…"></textarea>
+    ${store.get("ngn_mockrec",true)?recHTML(S,true):""}<textarea class="work" id="mock_${S.id}" placeholder="Work through the station aloud and note your actions…"></textarea>
     <div class="screen-actions"><button class="btn btn-ghost btn-sm" data-mock="next">Next station →</button><button class="btn btn-ghost btn-sm" data-mock="stop">End circuit</button></div>`;
 }
-function mockGo(i,phase){mock={i,phase};if(phase==="read")timer.set("read",()=>mockGo(i,"perform"));if(phase==="perform")timer.set("perform",()=>i<9?mockGo(i+1,"read"):mockGo(9,"done"));if(phase==="read"||phase==="perform")timer.start();if(phase==="done"||phase==="idle")timer.set("perform");renderLesson()}
-function bindMock(){document.querySelectorAll("[data-mock]").forEach(b=>b.onclick=()=>{const a=b.dataset.mock;
-  if(a==="start")mockGo(0,"read");if(a==="enter")mockGo(mock.i,"perform");if(a==="next")mock.i<9?mockGo(mock.i+1,"read"):mockGo(9,"done");
+function mockGo(i,phase){if(recState&&recState.tag==="mock")recStop();mock={i,phase};if(phase==="perform"&&store.get("ngn_mockrec",true)&&MOCK[i]&&recOK())setTimeout(()=>recStart(MOCK[i],{tag:"mock"}),250);if(phase==="read")timer.set("read",()=>mockGo(i,"perform"));if(phase==="perform")timer.set("perform",()=>i<9?mockGo(i+1,"read"):mockGo(9,"done"));if(phase==="read"||phase==="perform")timer.start();if(phase==="done"||phase==="idle")timer.set("perform");renderLesson()}
+function bindMock(){const mr=document.getElementById("mockRec");if(mr)mr.onchange=()=>store.set("ngn_mockrec",mr.checked);document.querySelectorAll("[data-mock]").forEach(b=>b.onclick=()=>{const a=b.dataset.mock;
+  if(a==="start"){mockPrime();mockGo(0,"read")}if(a==="enter")mockGo(mock.i,"perform");if(a==="next")mock.i<9?mockGo(mock.i+1,"read"):mockGo(9,"done");
   if(a==="stop"||a==="reset")mockGo(-1,"idle");
   if(a==="cue"){const S=MOCK[mock.i];$("#cueBox").innerHTML=`<div class="cue"><h3>Examiner cue</h3><p>${S.cue}</p></div>`}})}
 
