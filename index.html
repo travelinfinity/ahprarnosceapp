@@ -510,7 +510,7 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
     <div class="fact"><b>10</b><span>stations per OSCE</span></div>
     <div class="fact"><b>2:00</b><span>reading time outside each door</span></div>
     <div class="fact"><b>8:00</b><span>performance time, bell at 6:00</span></div>
-    <div class="fact"><b>14</b><span>practice stations with examiner cues</span></div>
+    <div class="fact"><b>13</b><span>practice stations with examiner cues</span></div>
   </div></section>
 
   <section class="section" id="how"><div class="wrap">
@@ -544,7 +544,7 @@ textarea.work:focus{outline:none;border-color:var(--teal)}
       <p style="color:var(--muted)">Full access to every lesson and station.</p>
       <ul>
         <li><span class="tick">✓</span>4 exam-format lessons from the 2026 Candidate Handbook</li>
-        <li><span class="tick">✓</span>14 practice stations with reading-station instructions, including 2 mental state examination stations and a neuro &amp; neurovascular station</li>
+        <li><span class="tick">✓</span>13 practice stations with reading-station instructions, including 2 mental state examination stations</li>
         <li><span class="tick">✓</span>4 narrated demo videos: vital signs, ISBAR handover, BLS and blood transfusion</li>
         <li><span class="tick">✓</span>Examiner cues, rubrics with critical items, model scripts</li>
         <li><span class="tick">✓</span>Full 10-station mock circuit with timed reading and performance</li>
@@ -1099,35 +1099,7 @@ const MSE_STATIONS=[
   docs:"Date/time. MSE. A: 28M, unkempt, pacing, guarded, scanning room, appears to respond to unseen stimuli. S: loud, pressured. E: mood “scared”; affect anxious, suspicious. P: reports auditory hallucinations, commanding him to leave hospital. T: form mildly tangential; content persecutory belief that IV antibiotics are poison. I: poor insight, impaired judgement. C: alert, orientated x3, attention intact. Verbally aggressive 0705, settled with de-escalation; no physical aggression. Risk: absconding, aggression, treatment refusal. T 37.2, HR 96. NIC and MO notified 0715; urgent mental health review requested; depot overdue, for MO review. — Signature, NAME (RN)",
   quiz:[{q:"Which question is essential when a patient reports hearing voices?",o:["“Are the voices male or female?”","“What are the voices telling you to do?”","“How loud are they?”","“When did you last see your family?”"],a:1,e:"Command hallucinations (telling the person to harm themselves or others, or to leave) change the risk."},
         {q:"He says “the antibiotics are poison”. Best response?",o:["“That's ridiculous, they're not poison.”","“Okay, I'll stop them for you.”","“I can see that's frightening. This is an antibiotic for your leg infection; can I show you the label?”","Ignore the comment"],a:2,e:"Acknowledge the feeling, neither argue nor collude, and offer gentle reality."},
-        {q:"Which finding points towards delirium rather than a primary psychosis?",o:["Long history of schizophrenia","Acute onset with fluctuating attention and disorientation","Persecutory beliefs","Hearing voices"],a:1,e:"Delirium is acute and fluctuating, with inattention and altered consciousness. Always look for a physical cause such as infection."}]},
-
-{ id:"s13", code:"S13", title:"Neuro obs & neurovascular assessment", domain:"Nursing assessment & care planning", skills:["Neurological assessment","Neurovascular assessment","Escalation","Documentation"],
-  summary:"Chart a full set of neuro obs (GCS, pupils, limbs, vitals) and a neurovascular check on a post-op limb, recognise a falling GCS and compartment syndrome, and escalate.",
-  brief:{why:"Neuro and neurovascular checks are charted on dedicated forms, and examiners mark both the assessment and the chart. They want an accurate GCS reported as E, V and M, every finding compared with baseline and the other limb, and immediate escalation when the GCS drops by 2 or the limb shows compartment syndrome signs.",
-   look:["Each GCS component tested in order, with a central stimulus only if needed","GCS reported as E V M and a total, compared with baseline","Pupils: size in mm, shape, direct and consensual reaction, both eyes","Limb power tested against resistance, right and left recorded separately","Vital signs taken and the trend read (rising BP, falling HR)","Neurovascular 6 Ps checked distal to the injury and compared with the other limb","Pain on passive stretch tested","Immediate escalation with ISBAR, and both charts completed"]},
-  instr:{setting:"Orthopaedic ward, Bed 12", time:"X/X · 1100", patient:{name:"Mr David CHEN",dob:"12/03/1958",ur:"447102",allergy:"Nil known"},
-   background:"Mr Chen, 68, fell at home yesterday, hit his head and fractured his right wrist. He had an ORIF of the right distal radius yesterday afternoon and has a plaster backslab with a crepe bandage. CT brain on admission showed no acute findings. Hourly neuro obs and hourly neurovascular obs of the right arm are ordered. His daughter says he seems sleepier and keeps complaining about his hand.",
-   obs:{cols:["Date","Time","RR","SpO₂","HR","BP","Temp","LOC"],rows:[["X/X","0800","16","97% RA","72","132/78","36.7","GCS 15"],["X/X","1000","16","97% RA","68","144/82","36.8","GCS 15"]]},
-   tasks:["Perform and chart a neurological assessment.","Perform and chart a neurovascular assessment of the right arm.","Respond to your findings and escalate appropriately."],
-   provided:["Neurological observation chart","Neurovascular assessment flow sheet","Pen torch","Observation equipment","Blue patient record folder"],
-   note:"The examiner will give you each finding as you perform the step."},
-  cue:"Eyes closed as you approach; he opens them when you say his name. He gives his name but thinks he is at home and that it is 2019. He obeys commands with his left hand. Pupils 3 mm, equal, brisk. BP 156/88, HR 64, RR 16, SpO₂ 96% RA, T 36.8, BGL 6.2. Right fingers pale, cool and swollen, capillary refill 3 seconds, radial pulse weak (left strong), tingling in the fingers. Pain 8/10 despite oxycodone 1 hour ago, and severe pain when you passively straighten his fingers.",
-  cueObs:["X/X","1100","16","96% RA","64","156/88","36.8","GCS 13"],
-  guide:[{h:"Glasgow Coma Scale (3–15)",items:["<b>Eyes (E1–4)</b>: spontaneously 4, to speech 3, to pain 2, none 1. Chart <b>C</b> if the eyes are closed by swelling.","<b>Verbal (V1–5)</b>: orientated 5, confused 4, inappropriate words 3, incomprehensible sounds 2, none 1. Chart <b>T</b> for an ETT or tracheostomy.","<b>Motor (M1–6)</b>: obeys 6, localises 5, flexion–withdrawal 4, abnormal flexion 3, extension 2, none 1. Record the <b>best arm</b>.","Use a central stimulus (trapezius squeeze or supraorbital pressure) to test localising; use a peripheral (nail bed) stimulus for flexion.","Report as components and total: <b>E3 V4 M6 = 13</b>."]},
-         {h:"Pupils, limbs and vital signs",items:["Pupils: size in mm against the chart scale, shape, direct and consensual reaction. <b>+</b> reacts, <b>S</b> sluggish, <b>−</b> no reaction, <b>C</b> eye closed.","Red flags: new inequality, a sluggish or fixed pupil, or a pupil that is getting bigger.","Limbs: grip and push–pull for arms, lift and push down for legs. Record R and L separately when they differ.","Cushing's response (late sign of raised ICP): rising systolic BP with a widening pulse pressure, falling heart rate, irregular breathing."]},
-         {h:"Neurovascular assessment (6 Ps)",items:["Check <b>distal to the injury</b> and always <b>compare with the other limb</b>.","<b>Pain</b> 0–10 · <b>Pallor</b> colour and capillary refill (normal &lt;2 s) · <b>Pulses</b> · <b>Paraesthesia</b> · <b>Paralysis</b> (move fingers or toes) · <b>Poikilothermia</b> (warm, cool, cold). Also chart oedema.","Pulse grading differs between charts. Always use the key on the chart in front of you.","Can't palpate? Use a Doppler and mark the site so the next nurse checks the same spot."]},
-         {h:"Compartment syndrome and escalation",items:["Early signs: pain out of proportion, not relieved by analgesia; <b>pain on passive stretch</b>; tense, swollen limb; tingling.","Late signs: pulselessness and paralysis. Do not wait for them.","Keep the limb at <b>heart level</b> (not elevated above it), loosen the bandage over the backslab per policy, notify the medical officer urgently, keep nil by mouth in case of theatre.","A GCS drop of 2 or more meets common rapid response criteria. Stay with the patient, call for help per local criteria, check BGL, increase obs to every 15 minutes."]}],
-  pitfalls:["Scoring the GCS as one number without the E, V and M components.","Using a peripheral stimulus to test localising.","Checking the injured arm without comparing it with the other arm.","Elevating the arm above the heart when compartment syndrome is suspected.","Leaving the patient to phone the doctor."],
-  scripts:[{l:"Explaining the assessment",s:"Mr Chen, I'm going to check how alert you are, look at your eyes with a small light, test the strength in your arms and legs, and check the circulation and feeling in your right hand. Is that okay?"},
-           {l:"Interpreting aloud",s:"His GCS is 13, E3 V4 M6, down from 15 at 0800. That's a drop of 2, which meets rapid response criteria. His blood pressure has risen from 132 to 156 systolic while his heart rate has fallen from 72 to 64. His right hand is pale, cool and swollen with a capillary refill of 3 seconds, a weak radial pulse, tingling, and severe pain on passive stretch. I'm concerned about raised intracranial pressure and compartment syndrome."},
-           {l:"ISBAR to the medical officer",s:"I: I'm ___, RN on the orthopaedic ward, calling about David Chen, 68, bed 12. S: His GCS has dropped from 15 to 13 and his right hand shows signs of compartment syndrome. I need you to review him now. B: He fell and hit his head yesterday and had an ORIF of the right distal radius; CT brain on admission was clear. He's in a plaster backslab. A: GCS 13, E3 V4 M6, pupils 3 mm equal and reacting. BP 156/88, HR 64, RR 16, SpO₂ 96%, T 36.8, BGL 6.2. Right hand pale, cool, capillary refill 3 seconds, weak radial pulse, tingling, pain 8/10 not relieved by oxycodone, and pain on passive stretch. I've loosened the bandage and kept his arm at heart level. R: Please come and review him now. Would you like a repeat CT brain, and will you contact the orthopaedic registrar? I'll repeat obs every 15 minutes and keep him nil by mouth."}],
-  rubric:[{t:"Hand hygiene, introduction, three identifiers (UR 447102), allergy check, consent"},{t:"Observes eye opening before speaking, then to voice; identifies E3",c:1},{t:"Asks name, place and date; identifies confusion (V4)"},{t:"Asks him to obey commands; identifies M6 and records the best arm"},{t:"States GCS as E3 V4 M6 = 13 and compares with baseline 15",c:1},{t:"Checks pupils with a pen torch: size, shape, direct and consensual reaction, both eyes"},{t:"Tests limb power against resistance and records R and L separately"},{t:"Takes vital signs and BGL; identifies rising BP and falling HR"},{t:"Inspects right hand colour and swelling and compares with the left"},{t:"Checks temperature and capillary refill on both hands"},{t:"Palpates radial pulses on both sides"},{t:"Tests sensation and movement, including pain on passive stretch",c:1},{t:"Recognises GCS drop of 2 and possible compartment syndrome",c:1},{t:"Keeps arm at heart level, loosens bandage per policy, stays with the patient and calls for help",c:1},{t:"Escalates using ISBAR"},{t:"Charts both forms accurately and documents in the progress notes"}],
-  docs:"Date/time. Neuro obs: GCS 13 (E3 V4 M6), down from 15 at 0800. Pupils 3 mm, equal, brisk. L arm and both legs normal power; R grip weak due to pain. BP 156/88 (0800 132/78), HR 64 (0800 72), RR 16, SpO₂ 96% RA, T 36.8, BGL 6.2. NV R arm: fingers pale, cool, moderate swelling, CRT 3 s, radial pulse weak (L strong), tingling, pain 8/10 not relieved by oxycodone, pain on passive finger extension. L arm NAD. Crepe bandage loosened, arm at heart level, NBM. Rapid response called 1105; MO ___ notified and attending. Obs every 15 min. — Signature, NAME (RN), designation.",
-  quiz:[{q:"A patient opens his eyes when you say his name, is confused, and obeys commands. What is his GCS?",o:["15","13 (E3 V4 M6)","12 (E3 V4 M5)","14 (E4 V4 M6)"],a:1,e:"Eyes to speech 3, confused 4, obeys commands 6: total 13."},
-        {q:"GCS was 15 at 0800 and is 13 at 1100. What should you do?",o:["Recheck in an hour","Document it and continue hourly obs","Escalate now: a drop of 2 or more meets common rapid response criteria","Wait for the pupils to change"],a:2,e:"A drop of 2 or more GCS points is a red-zone trigger on many Australian charts. Escalate immediately."},
-        {q:"Which is the earliest and most reliable sign of compartment syndrome?",o:["Absent pulse","Paralysis","Pain on passive stretch, out of proportion to the injury","Cool skin"],a:2,e:"Loss of pulse and paralysis are late signs. Severe pain, especially on passive stretch, comes first."},
-        {q:"You suspect compartment syndrome in a forearm in a backslab. Where should the arm be?",o:["Elevated well above the heart","At heart level","Hanging down","In a sling only"],a:1,e:"Elevating above the heart lowers arterial pressure and can reduce perfusion further. Keep it at heart level and loosen the bandage per policy."},
-        {q:"Why compare the injured limb with the other limb?",o:["It's quicker","Normal findings vary between people, so the other limb is the patient's own baseline","It isn't necessary","To check for allergies"],a:1,e:"The unaffected limb shows what is normal for this patient."}]}
+        {q:"Which finding points towards delirium rather than a primary psychosis?",o:["Long history of schizophrenia","Acute onset with fluctuating attention and disorientation","Persecutory beliefs","Hearing voices"],a:1,e:"Delirium is acute and fluctuating, with inattention and altered consciousness. Always look for a physical cause such as infection."}]}
 ];
 
 const MSE_DOMAINS=[["A","Appearance & behaviour"],["S","Speech"],["E","Emotion (mood & affect)"],["P","Perception"],["T","Thought (form & content)"],["I","Insight & judgement"],["C","Cognition"]];
@@ -1160,192 +1132,6 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-mse],[data
 });
 new MutationObserver(()=>{const b=document.getElementById("mseDrill");if(b&&!b.dataset.ready){b.dataset.ready=1;renderMseDrill()}}).observe(document.getElementById("stageIn"),{childList:true});
 
-/* ================= S13 NEURO OBS + NEUROVASCULAR CHARTS ================= */
-const NNV={T:['0800','0900','1000','1100','1200','1300'],NOW:3,
-  E:[[4,'Spontaneously'],[3,'To speech'],[2,'To pain'],[1,'None']],
-  V:[[5,'Orientated'],[4,'Confused'],[3,'Inappropriate words'],[2,'Incomprehensible sounds'],[1,'None']],
-  M:[[6,'Obey commands'],[5,'Localise pain'],[4,'Flexion – withdrawal'],[3,'Flexion – abnormal'],[2,'Extension to pain'],[1,'None']],
-  ARMS:['Normal power','Mild weakness','Severe weakness','Spastic flexion','Extension','No response'],
-  LEGS:['Normal power','Mild weakness','Severe weakness','Extension','No response'],
-  MARKS:['','✓','R','L'],GH:280,CW:59,
-  VC:[['0800','RA'],['0900','RA'],['1000','RA'],['1100','RA'],['1100','LA'],['1200','RA']],VNOW:[3,4]};
-NNV.blank=()=>({E:null,V:null,M:null,sys:'',dia:'',pr:'',rr:'',t:'',prs:'',prr:'',pls:'',plr:'',arms:{},legs:{}});
-NNV.norm=(sys,dia,pr,t)=>({E:4,V:5,M:6,sys,dia,pr,rr:16,t,prs:3,prr:'+',pls:3,plr:'+',arms:{0:'✓'},legs:{0:'✓'}});
-NNV.N=[NNV.norm(132,78,72,36.7),NNV.norm(138,80,70,36.7),NNV.norm(144,82,68,36.8),NNV.blank(),NNV.blank(),NNV.blank()];
-NNV.NA={E:3,V:4,M:6,sys:156,dia:88,pr:64,rr:16,t:36.8,prs:3,prr:'+',pls:3,plr:'+',arms:{0:'L',1:'R'},legs:{0:'✓'}};
-NNV.PO=['0','D','1+','2+','3+','4+','N/A'];
-NNV.VR=[['oed','Oedema',['A','SL','M','S']],['col','Colour',['F','N','P','C','J','D','M']],['tmp','Temperature',['W','CL','CD','H']],['crt','Capillary refill',['N','S','A']],['sen','Sensation',['N','T','D','A']],['mot','Motion',['F','D','A','X','I']],['pain','Pain score',['0','1','2','3','4','5','6','7','8','9','10']],
-  ['PULSES'],['bra','Brachial',NNV.PO],['rad','Radial',NNV.PO],['fem','Femoral',NNV.PO],['pop','Popliteal',NNV.PO],['pt','Posterior tibial',NNV.PO],['dp','Dorsalis pedis',NNV.PO],['ini','Initials']];
-NNV.vnorm=pain=>({oed:'SL',col:'N',tmp:'W',crt:'N',sen:'N',mot:'F',pain,bra:'3+',rad:'3+',fem:'N/A',pop:'N/A',pt:'N/A',dp:'N/A',ini:'JK'});
-NNV.vblank=()=>({fem:'N/A',pop:'N/A',pt:'N/A',dp:'N/A'});
-NNV.Vd=[NNV.vnorm('3'),NNV.vnorm('4'),NNV.vnorm('5'),NNV.vblank(),NNV.vblank(),NNV.vblank()];
-NNV.VA={3:{oed:'M',col:'P',tmp:'CL',crt:'S',sen:'T',mot:'X',pain:'8',bra:'3+',rad:'2+',fem:'N/A',pop:'N/A',pt:'N/A',dp:'N/A'},4:{oed:'A',col:'N',tmp:'W',crt:'N',sen:'N',mot:'F',pain:'0',bra:'3+',rad:'3+',fem:'N/A',pop:'N/A',pt:'N/A',dp:'N/A'}};
-NNV.y=v=>NNV.GH-((v-20)/220)*(NNV.GH-16)-8;
-NNV.gcs=d=>d.E&&d.V&&d.M?(+d.E)+(+d.V)+(+d.M):null;
-NNV.flag=(cls,ic,html)=>`<div class="callout ${cls}" style="margin:10px 0 0"><b class="ic">${ic}</b><div>${html}</div></div>`;
-
-function nnvHTML(){const N=NNV,T=N.T;
-  const gr=(l)=>`<tr class="nnv-grp"><th class="nnv-l" scope="row">${l}</th>${T.map((_,i)=>`<td class="${i===N.NOW?'now':''}"></td>`).join('')}</tr>`;
-  const ro=i=>i<N.NOW?' disabled':'',cc=i=>'nnv-c'+(i===N.NOW?' now':'');
-  const ticks=(k,list,l)=>gr(l)+list.map(([v,t])=>`<tr><th class="nnv-l" scope="row">${t}<span class="sv">${v}</span></th>${T.map((_,i)=>`<td class="${cc(i)}" data-k="${k}" data-c="${i}"><button type="button" class="nnv-b" data-nk="${k}" data-v="${v}" data-c="${i}" aria-label="${l} ${t} at ${T[i]}"${ro(i)}></button></td>`).join('')}</tr>`).join('');
-  const inp=(k,l,o)=>`<tr><th class="nnv-l" scope="row">${l}</th>${T.map((_,i)=>`<td class="${cc(i)}" data-k="${k}" data-c="${i}">${o?`<select class="nnv-i" data-nk="${k}" data-c="${i}" aria-label="${l} at ${T[i]}"${ro(i)}><option value="">–</option>${o.map(x=>`<option>${x}</option>`).join('')}</select>`:`<input class="nnv-i" inputmode="decimal" data-nk="${k}" data-c="${i}" aria-label="${l} at ${T[i]}"${ro(i)}>`}</td>`).join('')}</tr>`;
-  const limbs=(k,list,l)=>gr('Limb movement · '+l)+list.map((t,r)=>`<tr><th class="nnv-l" scope="row">${t}</th>${T.map((_,i)=>`<td class="${cc(i)}" data-k="${k}${r}" data-c="${i}"><button type="button" class="nnv-b" data-limb="${k}" data-r="${r}" data-c="${i}" aria-label="${l} ${t} at ${T[i]}"${ro(i)}></button></td>`).join('')}</tr>`).join('');
-  const sizes=[1,2,3,4,5,6,7,8],react=['+','S','−','C'];
-  const neuro=`<thead><tr><th class="nnv-l" scope="col">Time</th>${T.map((t,i)=>`<th scope="col" class="${i===N.NOW?'now':''}">${t}${i===N.NOW?'<br>now':''}</th>`).join('')}</tr></thead><tbody>
-   ${gr('Coma scale')}${ticks('E',N.E,'Eyes open')}${ticks('V',N.V,'Best verbal response')}${ticks('M',N.M,'Best motor response')}
-   <tr class="nnv-tot"><th class="nnv-l" scope="row">GCS total</th>${T.map((_,i)=>`<td class="${cc(i)}" id="nnvTot${i}">–</td>`).join('')}</tr>
-   ${gr('BP · pulse')}<tr class="nnv-graph"><th class="nnv-l" scope="row" style="padding:0"><svg width="150" height="${N.GH}" aria-hidden="true">${[240,200,160,120,80,40].map(v=>`<text x="140" y="${N.y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="JetBrains Mono,monospace">${v}</text>`).join('')}<text x="8" y="${N.GH/2-8}" font-size="12" fill="var(--ink)">Blood pressure ∨∧</text><text x="8" y="${N.GH/2+10}" font-size="12" fill="var(--ink)">Pulse ●</text></svg></th><td colspan="${T.length}" style="padding:0"><svg id="nnvGraph" width="${N.CW*T.length}" height="${N.GH}" role="img" aria-label="Blood pressure and pulse graph"></svg></td></tr>
-   ${inp('sys','Systolic BP')}${inp('dia','Diastolic BP')}${inp('pr','Pulse rate')}${inp('rr','Respiration')}${inp('t','Temperature °C')}
-   ${gr('Pupils')}${inp('prs','Right · size (mm)',sizes)}${inp('prr','Right · reaction',react)}${inp('pls','Left · size (mm)',sizes)}${inp('plr','Left · reaction',react)}
-   ${limbs('arms',N.ARMS,'Arms')}${limbs('legs',N.LEGS,'Legs')}</tbody>`;
-  const vro=i=>N.VNOW.includes(i)||i===5?'':' disabled',vcc=i=>'nnv-c'+(N.VNOW.includes(i)?' now':'');
-  const nv=`<thead><tr><th class="nnv-l" scope="col">Time</th>${N.VC.map(([t],i)=>`<th scope="col" class="${N.VNOW.includes(i)?'now':''}">${t}</th>`).join('')}</tr>
-   <tr><th class="nnv-l" scope="col">Extremity</th>${N.VC.map(([,x],i)=>`<th scope="col" class="${N.VNOW.includes(i)?'now':''}">${x}</th>`).join('')}</tr></thead><tbody>
-   ${N.VR.map(([k,l,o])=>l===undefined?`<tr class="nnv-grp"><th class="nnv-l" scope="row">Pulses</th>${N.VC.map((_,i)=>`<td class="${N.VNOW.includes(i)?'now':''}"></td>`).join('')}</tr>`:
-   `<tr><th class="nnv-l" scope="row">${l}</th>${N.VC.map((_,i)=>`<td class="${vcc(i)}" data-k="${k}" data-c="${i}">${o?`<select class="nnv-i" data-vk="${k}" data-c="${i}" aria-label="${l} ${N.VC[i].join(' ')}"${vro(i)}><option value="">–</option>${o.map(x=>`<option>${x}</option>`).join('')}</select>`:`<input class="nnv-i" maxlength="3" data-vk="${k}" data-c="${i}" aria-label="${l} ${N.VC[i].join(' ')}"${vro(i)}>`}</td>`).join('')}</tr>`).join('')}</tbody>`;
-  const label=`<div class="nnv-pl"><b>PATIENT LABEL</b>CHEN, David · M<br>UR 447102 · DOB 12/03/1958<br>Orthopaedic ward · Bed 12</div>`;
-  return `<style>
-.nnv-head{display:grid;grid-template-columns:1fr;gap:10px;border:2px solid var(--ink);border-radius:8px;padding:12px 14px;margin-bottom:12px}
-@media (min-width:560px){.nnv-head{grid-template-columns:1.1fr 1fr}}
-.nnv-head .ft{font-weight:800;font-size:17px;line-height:1.2;text-transform:uppercase}
-.nnv-pl{font:500 12.5px var(--f-mono);line-height:1.6;border-left:1px solid var(--line);padding-left:12px;min-width:0}
-.nnv-pl b{display:block;font-size:11px;letter-spacing:.08em;color:var(--muted)}
-.nnv-wrap{overflow-x:auto;border:1px solid var(--ink);border-radius:6px;background:var(--surface)}
-table.nnv{border-collapse:separate;border-spacing:0;font-size:13px;min-width:max-content}
-table.nnv th,table.nnv td{padding:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);height:30px;text-align:center;vertical-align:middle;background:var(--surface);font-weight:400}
-table.nnv .nnv-l{position:sticky;left:0;z-index:2;text-align:left;padding:0 8px;width:150px;min-width:150px;max-width:150px;border-right:2px solid var(--ink);font-size:12.5px;line-height:1.2}
-table.nnv .nnv-l .sv{font:700 11px var(--f-mono);color:var(--teal);float:right;margin-left:4px}
-table.nnv td.nnv-c{width:58px;min-width:58px}
-table.nnv tr.nnv-grp th,table.nnv tr.nnv-grp td{background:var(--sunk);font:700 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);height:24px}
-table.nnv thead th{font:700 12px var(--f-mono);height:34px;background:var(--sunk)}
-table.nnv thead th.now,table.nnv td.now{background:var(--teal-soft)}
-table.nnv thead th.now{color:var(--teal)}
-table.nnv tr.nnv-tot td,table.nnv tr.nnv-tot th{font:700 14px var(--f-mono);border-top:2px solid var(--ink)}
-.nnv-b{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:58px;height:30px;cursor:pointer;font:700 14px var(--f-mono);color:var(--ink)}
-.nnv-b .dot{width:12px;height:12px;border-radius:50%;background:currentColor}
-.nnv-i{all:unset;box-sizing:border-box;display:block;width:58px;height:30px;line-height:30px;padding:0 2px;text-align:center;font:500 13px var(--f-mono);color:var(--ink);cursor:pointer}
-select.nnv-i{appearance:none;-webkit-appearance:none;text-align-last:center}
-select.nnv-i option{color:var(--ink);background:var(--surface)}
-.nnv-b[disabled],.nnv-i[disabled]{cursor:default;color:var(--muted)}
-.nnv-b:focus-visible,.nnv-i:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
-td.nnv-bad{box-shadow:inset 0 0 0 2px var(--signal)}td.nnv-ok{box-shadow:inset 0 0 0 2px var(--good)}
-.nnv-graph svg{display:block}
-.nnv-act{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
-.nnv-keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:14px}
-.nnv-keys div{border:1px solid var(--ink);border-radius:6px;padding:8px 10px;font:500 12px var(--f-mono);line-height:1.55;min-width:0}
-.nnv-keys b{display:block;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-bottom:2px}
-.nnv-res ul{margin:6px 0 0;padding-left:20px}
-</style>
-  <h2 class="page-title">Neuro obs & neurovascular charts</h2>
-  <p class="page-sub">Two forms, one method: chart every column, compare with baseline and with the other side, then act on what the trend shows.</p>
-  <div class="callout info"><b class="ic">i</b><div>Hospitals use different versions of both charts, and pulse grading in particular differs between them. Always use the key on the chart in front of you.</div></div>
-
-  <div class="block"><h3>Neurological observation chart: step by step</h3><ol class="steps-ol">
-   <li><b>Identify the patient</b> and write the date and time at the top of a new column.</li>
-   <li><b>Coma scale</b>: tick one box in each of eyes, verbal and motor. Chart C for eyes closed by swelling and T for an ETT or tracheostomy. Record the best arm response.</li>
-   <li><b>Add the total</b> and compare it with the previous columns. A drop of 2 or more points needs immediate escalation.</li>
-   <li><b>Graph BP and pulse</b>: ∨ at systolic, ∧ at diastolic joined by a line, and a dot for pulse joined to the last one. Write RR and temperature.</li>
-   <li><b>Pupils</b>: size in mm against the scale, and reaction for each eye.</li>
-   <li><b>Limbs</b>: tick the power for arms and legs. Record R and L separately if they differ.</li></ol></div>
-
-  <div class="block"><h3>Try it: chart Mr Chen at 1100</h3><p style="color:var(--muted);margin-bottom:12px">Earlier columns were charted by the previous nurse. Fill the <b style="color:var(--teal)">1100</b> column from the examiner cue: tap a box to tick it, and type the vital signs. Scroll sideways on a phone.</p>
-   <div class="nnv-head"><div class="ft">Observation chart – Neurological / conscious state</div>${label}</div>
-   <div class="nnv-wrap"><table class="nnv" id="nnvNeuro">${neuro}</table></div>
-   <div class="nnv-act"><button class="btn btn-primary btn-sm" type="button" data-nnv="ncheck">Check my chart</button><button class="btn btn-ghost btn-sm" type="button" data-nnv="nans">Show model chart</button><button class="btn btn-ghost btn-sm" type="button" data-nnv="nclear">Clear 1100</button></div>
-   <div id="nnvNRes" class="nnv-res"></div><div id="nnvNFlags"></div>
-   <div class="nnv-keys"><div><b>Eyes</b>C = closed by swelling</div><div><b>Verbal</b>T = ETT or tracheostomy</div><div><b>Pupils</b>+ reacts · S sluggish · − no reaction · C closed</div><div><b>Limbs</b>✓ both sides · R or L if they differ</div><div><b>Graph</b>∨ systolic · ∧ diastolic · ● pulse</div></div></div>
-
-  <div class="block"><h3>Neurovascular flow sheet: step by step</h3><ol class="steps-ol">
-   <li><b>Write the extremity</b> code (RA, LA, RL, LL) for each column. Chart the affected limb and the other limb side by side.</li>
-   <li><b>Check distal to the injury</b>: oedema, colour, temperature, capillary refill, sensation and motion, using the codes in the key.</li>
-   <li><b>Pain score</b> 0–10. Rising pain, or pain on passive stretch, is the earliest warning of compartment syndrome.</li>
-   <li><b>Pulses</b>: grade every site you can reach; write N/A for sites you can't. Use a Doppler if you can't palpate.</li>
-   <li><b>Initial the column</b>, and explain any abnormal finding in the progress notes.</li></ol></div>
-
-  <div class="block"><h3>Try it: chart Mr Chen's arms at 1100</h3><p style="color:var(--muted);margin-bottom:12px">Fill the <b style="color:var(--teal)">1100 RA</b> column (affected arm) and the <b style="color:var(--teal)">1100 LA</b> column (comparison arm).</p>
-   <div class="nnv-head"><div class="ft">Neurovascular assessment flow sheet</div>${label}</div>
-   <div class="nnv-wrap"><table class="nnv" id="nnvNv">${nv}</table></div>
-   <div class="nnv-act"><button class="btn btn-primary btn-sm" type="button" data-nnv="vcheck">Check my chart</button><button class="btn btn-ghost btn-sm" type="button" data-nnv="vans">Show model chart</button><button class="btn btn-ghost btn-sm" type="button" data-nnv="vclear">Clear 1100</button></div>
-   <div id="nnvVRes" class="nnv-res"></div><div id="nnvVFlags"></div>
-   <div class="nnv-keys"><div><b>Extremity</b>RL right leg · RA right arm<br>LL left leg · LA left arm</div><div><b>Oedema</b>A absent · SL slight<br>M moderate · S severe</div><div><b>Colour</b>F flushed · N normal/pink · P pale · C cyanotic · J jaundiced · D dusky · M mottled</div><div><b>Temperature</b>W warm · CL cool<br>CD cold · H hot</div><div><b>Capillary refill</b>N normal · S sluggish<br>A absent</div><div><b>Sensation</b>N normal · T tingling<br>D decreased · A absent</div><div><b>Motion</b>F full · D decreased · A absent · X pain · I immobile</div><div><b>Pulses</b>0 absent · D Doppler · 1+ intermittent · 2+ weak · 3+ strong · 4+ bounding · N/A not accessible</div></div>
-   <div style="margin-top:14px;border:1px solid var(--line);border-radius:8px;padding:12px 14px"><b style="font-size:14px">Pain rating scale (0–10 numeric)</b>
-    <svg viewBox="0 0 360 64" style="display:block;width:100%;height:auto" role="img" aria-label="Numeric pain scale from 0 no pain to 10 worst pain"><line x1="20" y1="22" x2="340" y2="22" stroke="var(--ink)" stroke-width="2"/>${[...Array(11)].map((_,i)=>`<line x1="${20+i*32}" x2="${20+i*32}" y1="14" y2="30" stroke="var(--ink)" stroke-width="2"/><text x="${20+i*32}" y="44" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)" font-family="JetBrains Mono,monospace">${i}</text>`).join('')}<text x="20" y="60" font-size="11" fill="var(--muted)">No pain</text><text x="180" y="60" font-size="11" fill="var(--muted)" text-anchor="middle">Moderate</text><text x="340" y="60" font-size="11" fill="var(--muted)" text-anchor="end">Worst pain</text></svg></div></div>
-
-  <div class="zbox r"><h3>Escalate immediately if</h3><ol><li>GCS drops by 2 or more, or any new pupil inequality or sluggish pupil.</li><li>New limb weakness, a seizure, or rising BP with a falling heart rate.</li><li>Pain out of proportion or on passive stretch, a cool pale limb, sluggish refill, or a weak or absent pulse.</li></ol>
-   <p>Stay with the patient, call for help per your local criteria, keep a suspected compartment syndrome limb at heart level, and document both charts.</p></div>`}
-
-function nnvGraph(){const N=NNV,g=document.getElementById('nnvGraph');if(!g)return;let s='';const W=N.CW*N.T.length;
-  for(let v=20;v<=240;v+=20)s+=`<line x1="0" x2="${W}" y1="${N.y(v)}" y2="${N.y(v)}" stroke="var(--line)"/>`;
-  for(let i=1;i<N.T.length;i++)s+=`<line x1="${i*N.CW}" x2="${i*N.CW}" y1="0" y2="${N.GH}" stroke="var(--line)"/>`;
-  s+=`<rect x="${N.NOW*N.CW}" y="0" width="${N.CW}" height="${N.GH}" fill="var(--teal)" opacity=".1"/>`;const pts=[];
-  N.N.forEach((d,i)=>{const cx=i*N.CW+N.CW/2,sy=+d.sys,dy=+d.dia;
-    if(sy)s+=`<path d="M${cx-7} ${N.y(sy)-8}L${cx} ${N.y(sy)}L${cx+7} ${N.y(sy)-8}" fill="none" stroke="var(--ink)" stroke-width="2"/>`;
-    if(dy)s+=`<path d="M${cx-7} ${N.y(dy)+8}L${cx} ${N.y(dy)}L${cx+7} ${N.y(dy)+8}" fill="none" stroke="var(--ink)" stroke-width="2"/>`;
-    if(sy&&dy)s+=`<line x1="${cx}" x2="${cx}" y1="${N.y(sy)}" y2="${N.y(dy)}" stroke="var(--ink)" stroke-width="1.5"/>`;
-    if(+d.pr)pts.push([cx,N.y(+d.pr)])});
-  if(pts.length>1)s+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--signal)" stroke-width="1.5"/>`;
-  pts.forEach(([x,y])=>s+=`<circle cx="${x}" cy="${y}" r="4.5" fill="var(--signal)"/>`);g.innerHTML=s}
-function nnvRenderN(){const N=NNV,t=document.getElementById('nnvNeuro');if(!t)return;
-  N.N.forEach((d,i)=>{['E','V','M'].forEach(k=>t.querySelectorAll(`button[data-nk="${k}"][data-c="${i}"]`).forEach(b=>b.innerHTML=String(d[k])===b.dataset.v?'<span class="dot"></span>':''));
-    document.getElementById('nnvTot'+i).textContent=N.gcs(d)??'–';
-    t.querySelectorAll(`.nnv-i[data-c="${i}"]`).forEach(el=>{el.value=d[el.dataset.nk]??''});
-    ['arms','legs'].forEach(k=>t.querySelectorAll(`button[data-limb="${k}"][data-c="${i}"]`).forEach(b=>b.textContent=d[k][b.dataset.r]||''))});
-  nnvGraph();nnvNFlags()}
-function nnvNFlags(){const N=NNV,d=N.N[N.NOW],b=N.N[0],out=[],t=N.gcs(d),bt=N.gcs(b),box=document.getElementById('nnvNFlags');if(!box)return;
-  if(t!==null){if(bt-t>=2)out.push(N.flag('warn','!',`<b>GCS dropped by ${bt-t}</b> (${bt} → ${t}, E${d.E} V${d.V} M${d.M}). Escalate now per local rapid response criteria.`));
-    else if(bt-t===1)out.push(N.flag('amber','!','<b>GCS dropped by 1.</b> Tell the nurse in charge and increase obs frequency.'));
-    if(t<=8)out.push(N.flag('warn','!','<b>GCS 8 or less.</b> Protect the airway and call for emergency help.'))}
-  if(d.prs&&d.pls&&d.prs!=d.pls)out.push(N.flag('warn','!',`<b>Unequal pupils</b> (R ${d.prs} mm, L ${d.pls} mm). New inequality is a red flag for raised ICP.`));
-  if(['S','−'].includes(d.prr)||['S','−'].includes(d.plr))out.push(N.flag('warn','!','<b>Sluggish or fixed pupil.</b> Escalate immediately.'));
-  if(+d.sys&&+d.dia&&+d.pr){const pp=d.sys-d.dia,bpp=b.sys-b.dia;if(pp-bpp>=10&&b.pr-d.pr>=5)out.push(N.flag('amber','!',`<b>Watch the trend:</b> pulse pressure widening (${bpp} → ${pp}) while heart rate falls (${b.pr} → ${d.pr}). With a falling GCS this can be an early Cushing's response.`))}
-  if(Object.values(d.arms).some(v=>v==='R'||v==='L'))out.push(N.flag('amber','?','<b>Arms differ left to right.</b> Is this new focal weakness, or explained by the wrist injury and pain? Say which.'));
-  box.innerHTML=out.join('')}
-function nnvRenderV(){const t=document.getElementById('nnvNv');if(!t)return;t.querySelectorAll('.nnv-i').forEach(el=>el.value=NNV.Vd[+el.dataset.c][el.dataset.vk]??'');nnvVFlags()}
-function nnvVFlags(){const N=NNV,r=N.Vd[3],l=N.Vd[4],out=[],box=document.getElementById('nnvVFlags');if(!box)return;if(!r.col&&!r.pain&&!r.crt){box.innerHTML='';return}
-  const abn=[];if(r.col&&r.col!=='N')abn.push('colour');if(r.tmp&&r.tmp!=='W')abn.push('temperature');if(r.crt&&r.crt!=='N')abn.push('capillary refill');
-  if(r.sen&&r.sen!=='N')abn.push('sensation');if(r.mot&&r.mot!=='F')abn.push('motion');if(['M','S'].includes(r.oed))abn.push('swelling');
-  if(r.rad&&l.rad&&r.rad!==l.rad)abn.push('radial pulse differs from the left');
-  if(+r.pain>=7&&(r.mot==='X'||abn.length>=2))out.push(N.flag('warn','!',`<b>Possible compartment syndrome.</b> Pain ${r.pain}/10 with ${abn.join(', ')}. Keep the arm at heart level, loosen the bandage per policy, and notify the medical officer urgently.`));
-  else if(abn.length)out.push(N.flag('amber','!',`<b>Abnormal compared with the left arm:</b> ${abn.join(', ')}.`));
-  if(+r.pain&&+N.Vd[2].pain&&+r.pain>+N.Vd[2].pain)out.push(N.flag('amber','!',`<b>Pain is climbing:</b> ${N.Vd[0].pain} → ${N.Vd[1].pain} → ${N.Vd[2].pain} → ${r.pain}. Pain out of proportion is the earliest warning sign.`));
-  if(['0','D'].includes(r.rad))out.push(N.flag('warn','!','<b>Absent or Doppler-only pulse</b> is a late sign. Emergency escalation.'));
-  if(!out.length)out.push(N.flag('info','✓','Right arm matches the left and is within normal limits.'));
-  box.innerHTML=out.join('')}
-function nnvClear(w){const t=document.getElementById(w==='n'?'nnvNeuro':'nnvNv');if(t)t.querySelectorAll('td.nnv-bad,td.nnv-ok').forEach(td=>td.classList.remove('nnv-bad','nnv-ok'));const r=document.getElementById(w==='n'?'nnvNRes':'nnvVRes');if(r)r.innerHTML=''}
-document.addEventListener('click',e=>{const N=NNV;
-  const b=e.target.closest('#nnvNeuro button.nnv-b');
-  if(b&&!b.disabled){const d=N.N[+b.dataset.c];nnvClear('n');
-    if(b.dataset.nk){const v=+b.dataset.v;d[b.dataset.nk]=d[b.dataset.nk]===v?null:v}
-    else{const m=d[b.dataset.limb],cur=m[b.dataset.r]||'';m[b.dataset.r]=N.MARKS[(N.MARKS.indexOf(cur)+1)%N.MARKS.length];if(!m[b.dataset.r])delete m[b.dataset.r]}
-    return nnvRenderN()}
-  const a=e.target.closest('[data-nnv]');if(!a)return;const act=a.dataset.nnv;
-  if(act==='nans'){N.N[N.NOW]=JSON.parse(JSON.stringify(N.NA));nnvClear('n');nnvRenderN();document.getElementById('nnvNRes').innerHTML=N.flag('info','✓','Model chart filled for 1100. Compare it with yours, then press <b>Clear 1100</b> to try again.')}
-  if(act==='nclear'){N.N[N.NOW]=N.blank();nnvClear('n');nnvRenderN()}
-  if(act==='ncheck'){nnvClear('n');const t=document.getElementById('nnvNeuro'),d=N.N[N.NOW],A=N.NA,res=[];
-    const mark=(sel,ok)=>t.querySelectorAll(sel).forEach(td=>td.classList.add(ok?'nnv-ok':'nnv-bad'));
-    const cmp=(k,l)=>{const ok=String(d[k]??'')===String(A[k]);res.push([ok,`${l}: ${ok?'correct':`you charted ${d[k]===null||d[k]===''?'nothing':d[k]}, finding was ${A[k]}`}`]);mark(`td[data-k="${k}"][data-c="${N.NOW}"]`,ok)};
-    cmp('E','Eyes');cmp('V','Verbal');cmp('M','Motor');
-    [['sys','Systolic'],['dia','Diastolic'],['pr','Pulse'],['rr','Respirations'],['t','Temperature']].forEach(([k,l])=>{const ok=Math.abs(parseFloat(d[k])-A[k])<0.05;res.push([ok,`${l}: ${ok?'correct':`finding was ${A[k]}`}`]);mark(`td[data-k="${k}"][data-c="${N.NOW}"]`,ok)});
-    [['prs','Right pupil size'],['prr','Right pupil reaction'],['pls','Left pupil size'],['plr','Left pupil reaction']].forEach(([k,l])=>cmp(k,l));
-    ['arms','legs'].forEach(k=>{const rows=k==='arms'?N.ARMS:N.LEGS;let ok=true;rows.forEach((_,r)=>{const x=A[k][r]||'',m=d[k][r]||'',g=x===m;if(!g)ok=false;if(x||m)mark(`td[data-k="${k}${r}"][data-c="${N.NOW}"]`,g)});
-      res.push([ok,k==='arms'?(ok?'Arms: correct':'Arms: L normal power, R mild weakness (pain in the backslab arm)'):(ok?'Legs: correct':'Legs: normal power both sides (✓)')])});
-    const n=res.filter(r=>r[0]).length;
-    document.getElementById('nnvNRes').innerHTML=`<div class="fb ${n===res.length?'right':'wrong'}" style="margin-top:10px"><b>${n} of ${res.length} correct.</b>${n<res.length?`<ul>${res.filter(r=>!r[0]).map(r=>`<li>${r[1]}</li>`).join('')}</ul>`:''}</div>`}
-  if(act==='vans'){N.VNOW.forEach(i=>N.Vd[i]={...N.VA[i],ini:N.Vd[i].ini||''});nnvClear('v');nnvRenderV();document.getElementById('nnvVRes').innerHTML=N.flag('info','✓','Model chart filled for 1100. Press <b>Clear 1100</b> to try again.')}
-  if(act==='vclear'){N.VNOW.forEach(i=>N.Vd[i]=N.vblank());nnvClear('v');nnvRenderV()}
-  if(act==='vcheck'){nnvClear('v');const t=document.getElementById('nnvNv'),res=[];
-    N.VNOW.forEach(i=>Object.entries(N.VA[i]).forEach(([k,x])=>{const ok=(N.Vd[i][k]??'')===x;t.querySelector(`td[data-k="${k}"][data-c="${i}"]`).classList.add(ok?'nnv-ok':'nnv-bad');
-      if(!ok)res.push(`${N.VC[i][1]} ${N.VR.find(r=>r[0]===k)[1].toLowerCase()}: finding was ${x}`)}));
-    const total=Object.keys(N.VA[3]).length*2,n=total-res.length;if(!(N.Vd[3].ini||'').trim())res.push('Add your initials to the 1100 RA column.');
-    document.getElementById('nnvVRes').innerHTML=`<div class="fb ${res.length?'wrong':'right'}" style="margin-top:10px"><b>${n} of ${total} correct.</b>${res.length?`<ul>${res.map(r=>`<li>${r}</li>`).join('')}</ul>`:''}</div>`}
-});
-document.addEventListener('input',e=>{const el=e.target.closest('#nnvNeuro .nnv-i,#nnvNv .nnv-i');if(!el)return;
-  if(el.dataset.nk){const i=+el.dataset.c;nnvClear('n');NNV.N[i][el.dataset.nk]=el.value;document.getElementById('nnvTot'+i).textContent=NNV.gcs(NNV.N[i])??'–';nnvGraph();nnvNFlags()}
-  else{nnvClear('v');NNV.Vd[+el.dataset.c][el.dataset.vk]=el.value;nnvVFlags()}});
-document.addEventListener('change',e=>{const el=e.target.closest('#nnvNeuro select.nnv-i,#nnvNv select.nnv-i');if(!el)return;
-  if(el.dataset.nk){NNV.N[+el.dataset.c][el.dataset.nk]=el.value;nnvNFlags()}else{NNV.Vd[+el.dataset.c][el.dataset.vk]=el.value;nnvVFlags()}});
-new MutationObserver(()=>{const a=document.getElementById('nnvNeuro');if(a&&!a.dataset.ready){a.dataset.ready=1;nnvRenderN()}const v=document.getElementById('nnvNv');if(v&&!v.dataset.ready){v.dataset.ready=1;nnvRenderV()}}).observe(document.getElementById('stageIn'),{childList:true});
-
 /* demo videos (files published next to this page) */
 const VIDEOS={
   vitals:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/vitals.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/vitals.jpg",title:"Taking & charting vital signs",len:"2:27",note:"A full set of observations on the Standard Adult General Observation Chart: patient concern, SpO₂ & device, HR & rhythm, RR, BP chevrons, temperature, ACVPU, pain at rest and on movement, and initials. Every value is plotted as it is spoken."},
@@ -1361,7 +1147,7 @@ const VIDEOS={
   falls:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/falls.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/falls.jpg",title:"Falls & pressure injury prevention",len:"2:10",note:"Falls risk screening, making the room safe (bed low, brakes, call bell, frame, glasses, footwear), a skin check finding a stage 1 pressure injury, Braden scoring, the SSKIN bundle and teach-back."},
   antt:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/antt.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/antt.jpg",title:"Wound dressing using ANTT",len:"2:04",note:"Checking the wound plan, cleaning the tray, the general aseptic field and key parts, removing and assessing the wound, cleaning with 0.9% sodium chloride using non-touch technique, and documentation."},
   mse:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/mse.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/mse.jpg",title:"Mental state examination & risk",len:"2:08",note:"Setting up a safe conversation, observing appearance, behaviour and speech, asking about mood, perception and orientation, asking directly about suicidal thoughts, then keeping the person safe and escalating."},
-  neuro:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/neuro.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/neuro.jpg",title:"Neuro obs & neurovascular checks",len:"2:34",note:"GCS eyes, verbal and motor with a worked example, pupils, limb power and Cushing's response, then both charts filled in: the neuro obs chart and the neurovascular flow sheet. Ends with the 6 Ps and compartment syndrome red flags."},
+  bgl:{src:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/bgl.mp4",poster:"https://crhttpufydskghtstisg.supabase.co/storage/v1/object/public/videos/bgl.jpg",title:"Blood glucose, ketones & labs",len:"4:13",note:"Reading the BGL and ketone chart, meter quality control, a safe finger prick, recording on the BGL chart and reading the trend, hypo and high thresholds, a blood ketone check with risk bands, asking about symptoms and missed basal insulin, an ISBAR call with read-back, and interpreting the VBG, UEC and HbA1c results before documenting."},
 };
 function videoHTML(k,withHead=true){const v=VIDEOS[k];return `${withHead?`<h2 class="page-title">Watch the demo</h2><p class="page-sub">${v.title} · ${v.len}. Watch it once through, then again with the rubric open and tick what you see.</p>`:""}
   <div class="block" style="padding:16px"><div style="display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:20px;align-items:start" class="vid-row">
@@ -1371,6 +1157,7 @@ function videoHTML(k,withHead=true){const v=VIDEOS[k];return `${withHead?`<h2 cl
 const VIDEO_LESSON={id:"v1",code:"VID",kind:"info",title:"Demo video library",summary:"Animated demonstrations of core OSCE skills, with narration and the charting shown as it happens.",chips:[Object.keys(VIDEOS).length+" videos","Vertical, phone-friendly"],
   pages:Object.keys(VIDEOS).map(k=>({t:VIDEOS[k].title,h:videoHTML(k,false)})),
   quiz:[{q:"In the vital signs demo, how is blood pressure charted?",o:["A dot for systolic only","A downward V at systolic and an upward arrow at diastolic, joined by a line","Written as numbers in the box","A cross at the mean pressure"],a:1,e:"Chevrons mark systolic and diastolic; only systolic is the trigger on the NSW chart."},
+        {q:"In the BGL demo, a patient with type 1 diabetes has a BGL of 18.4 mmol/L. What does the chart order the nurse to do next?",o:["Recheck the BGL tomorrow","Check blood ketones, because the BGL is above 15","Give a sugary drink","Nothing, it is within target"],a:1,e:"Above 15 mmol/L in type 1 diabetes, check blood ketones. Ketones of 1.5 or more mean a high risk of DKA and need a doctor now. Follow your local BGL & ketone chart."},
         {q:"In the BLS demo, when do the rescuers swap compressors?",o:["Never","Only when exhausted","During the AED rhythm analysis, to keep pauses short","Before the first shock is charged"],a:2,e:"Swapping during the analysis pause keeps interruptions to compressions to a minimum."},
         {q:"In the medication demo, what is checked for a full minute before giving digoxin?",o:["Respiratory rate","Apical pulse","Blood pressure","Temperature"],a:1,e:"Digoxin slows the heart. Check the apical pulse for 60 seconds and withhold and report if it is below the limit in local policy (commonly 60)."},
         {q:"In the wound demo, which of these is a key part?",o:["The patient's wound","The tray surface","The forceps tips","The bin"],a:2,e:"Key parts are the parts of equipment that could contaminate the key site, so they are never touched."},
@@ -1782,7 +1569,6 @@ const ALL=MODULES.flatMap(m=>m.lessons);
 STATIONS.forEach(s=>s.kind="station");
 MSE_STATIONS.forEach(s=>{s.kind="station";s.chart={title:"MSE framework",render:()=>mseHTML()}});
 STATIONS[0].video="approach";STATIONS[4].video="meds";STATIONS[5].video="ivfluids";STATIONS[7].video="pain";STATIONS[8].video="resp";STATIONS[9].video="falls";STATIONS[10].video="antt";MSE_STATIONS[0].video="mse";
-{const S13=MSE_STATIONS.find(s=>s.id==="s13");if(S13){S13.chart={title:"Neuro & NV charts",render:()=>nnvHTML()};S13.video="neuro";}}
 STATIONS[1].video="vitals";STATIONS[2].video="bls";STATIONS[3].video="transfusion";STATIONS[6].video="isbar";
 STATIONS[1].chart={title:"Observation chart (SAGO)",render:()=>sagoHTML()};
 STATIONS[2].chart={title:"ARC BLS chart",render:()=>blsHTML()};
